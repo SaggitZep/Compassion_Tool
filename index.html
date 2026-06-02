@@ -1,15 +1,485 @@
-<!-- מסך 4: שלב 3 - חמלה עצמית ומזעור הלקאה -->
-<div class="screen" id="screen4">
-    <div class="step-indicator">שלב 3 מתוך 5</div>
-    <h2>להכיר באנושיות המשותפת</h2>
-    <p>קל מאוד ליפול למלכודת של ביקורת עצמית נוקשה ולחשוב שרק אתם חווים קשיים כאלה.</p>
-    
-    <div class="guidance-box">
-        <strong>תזכורת פנימית:</strong> אתגרים, תסכולים וטעויות הם חלק טבעי, בלתי נפרד ואנושי לחלוטין מעבודת החינוך וההוראה. 
-        <br><br>
-        <em>לפעמים קל יותר להיות חומלים כלפי אחרים מאשר כלפי עצמנו.</em>
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>רגע חמלה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* פאלת הצבעים המקורית והייחודית של הכלי - Quiet Luxury */
+        :root { 
+            --bg-color: #F7F5F0; 
+            --text-main: #2C302E; 
+            --text-muted: #6B706E; 
+            --accent-color: #8DA19A; 
+            --border-color: #E3DFD5; 
+            --card-bg: #FFFFFF; 
+        }
+        
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Assistant', sans-serif;
+            -webkit-tap-highlight-color: transparent; 
+        }
+        
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            /* פתרון הגובה הדינמי המוחלט למניעת חיתוך וגלילה באייפון */
+            height: 100vh;
+            height: 100svh;
+            height: 100dvh;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* מכולת הטלפון הרספונסיבית - פריסה רחבה ומלאה בתוך גבולות המובייל */
+        .phone-container {
+            width: 100%;
+            max-width: 420px;
+            height: 100%;
+            background-color: var(--bg-color);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 24px 20px 24px; /* פדינג מבוקר ומהודק למובייל */
+        }
+
+        /* במחשב בלבד - הגבלת פריסה אסתטית ומסגרת עדינה */
+        @media (min-width: 440px) {
+            .phone-container {
+                height: 92vh;
+                max-height: 780px;
+                border-radius: 24px;
+                border: 1px solid rgba(0, 0, 0, 0.03);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.02);
+            }
+            body {
+                padding: 20px;
+                background-color: #eaddcb; 
+            }
+        }
+
+        /* סרגל התקדמות עליון דק וקבוע */
+        .progress-container { 
+            width: 100%; 
+            height: 3px; 
+            background-color: var(--border-color); 
+            margin-bottom: 16px; 
+            border-radius: 2px; 
+            flex-shrink: 0;
+            display: none; /* מוסתר במסך הפתיחה */
+        }
+        
+        .progress-bar { 
+            height: 100%; 
+            width: 0%; 
+            background-color: var(--accent-color); 
+            transition: width 0.4s ease; 
+        }
+
+        /* אינדיקטור שלב טקסטואלי */
+        .step-indicator {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 400;
+            text-align: right;
+            width: 100%;
+        }
+        
+        /* אזור מעטפת המסכים המרכזי - גמיש ותופס את מקסימום הגובה ברוחב מלא */
+        .screens-wrapper { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column;
+            min-height: 0; 
+            width: 100%;
+        }
+
+        .screen { 
+            display: none; 
+            flex-direction: column; 
+            align-items: flex-start;
+            text-align: right;
+            height: 100%;
+            width: 100%;
+            opacity: 0; 
+            transition: opacity 0.3s; 
+        }
+        
+        .screen.active { 
+            display: flex; 
+            opacity: 1; 
+        }
+
+        /* טיפוגרפיה מהודקת ומיושרת ל-RTL */
+        h1 { 
+            font-size: 1.85rem; 
+            font-weight: 600;
+            margin-bottom: 8px; 
+            color: var(--text-main);
+            text-align: center;
+            width: 100%;
+        }
+        
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            line-height: 1.3;
+            text-align: right;
+            width: 100%;
+        }
+
+        p { 
+            font-size: 0.95rem; 
+            color: var(--text-muted); 
+            margin-bottom: 12px; 
+            line-height: 1.45; 
+            text-align: right;
+            width: 100%;
+        }
+
+        /* תיבת מיקוד והנחיה רכה - רוחב מלא ויישור ימין */
+        .guidance-box {
+            background-color: var(--card-bg);
+            border-right: 3px solid var(--accent-color);
+            padding: 12px;
+            border-radius: 4px 12px 12px 4px;
+            margin-bottom: 14px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: var(--text-main);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+            text-align: right;
+            width: 100%;
+        }
+
+        /* אזור הזנה - רוחב מלא ואופטימיזציה למובייל */
+        textarea {
+            width: 100%;
+            height: 90px;
+            min-height: 85px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background-color: var(--card-bg);
+            resize: none;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+            line-height: 1.4;
+            text-align: right;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            border-color: var(--accent-color);
+        }
+
+        /* --- רכיב נשימה קצבי (Soothing Rhythm Breathing) --- */
+        .breathing-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .breathing-circle {
+            width: 110px;
+            height: 110px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(141, 161, 154, 0.2);
+            /* קצב אקדמי: שאיפה 4 ש', עצירה 2 ש', נשיפה 5 ש' */
+            animation: soothePulse 11s infinite ease-in-out;
+        }
+
+        @keyframes soothePulse {
+            0% { transform: scale(0.85); }
+            36% { transform: scale(1.25); }   
+            54% { transform: scale(1.25); }   
+            100% { transform: scale(0.85); }  
+        }
+
+        .breathing-text {
+            margin-top: 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            min-height: 24px;
+            text-align: center;
+        }
+        
+        /* אזור כפתורים וניווט תחתון - מקובע ומעוגן קשיח בתחתית המכולה */
+        .footer-container { 
+            flex-shrink: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            margin-top: auto; 
+            padding-top: 10px;
+            width: 100%;
+        }
+        
+        .btn-primary { 
+            width: 100%; 
+            height: 48px; 
+            background-color: var(--text-main); 
+            color: #fff; 
+            border: none; 
+            border-radius: 26px; 
+            font-size: 0.95rem; 
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:active {
+            background-color: #404643;
+        }
+        
+        /* עיצוב הקרדיט הקבוע והמדויק - מופיע רק במסך הפתיחה */
+        .credit { 
+            font-size: 10px; 
+            color: var(--text-muted); 
+            text-align: center; 
+            line-height: 1.4; 
+            margin-top: 12px;
+            width: 100%;
+            padding-top: 8px;
+            border-top: 1px solid rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <!-- סרגל התקדמות מעוגן בטופ -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- מעטפת המסכים הדינמיים -->
+        <div class="screens-wrapper">
+            
+            <!-- מסך 1: פתיחה ומבוא -->
+            <div class="screen active" id="screen1" style="align-items: center; text-align: center;">
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
+                    <h1>רגע חמלה</h1>
+                    <p style="color: var(--accent-color); font-weight: 600; margin-bottom: 14px; text-align: center;">מרחב תמיכה פנימי בעומס</p>
+                    <p style="max-width: 290px; text-align: center;">
+                        עצירה מודעת של 2 דקות המיועדת להפחתת שיפוטיות עצמית ופיתוח גישה מכילה כלפי קשיים ואתגרים שעלו במהלך היום שלך בבית הספר.
+                        <br><br>
+                        <span style="font-size: 0.8rem;">הטקסט נשאר על המכשיר שלך בלבד ואינו נשמר בשום מקום.</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- מסך 2: שלב 1 - ויסות פיזיולוגי מקדים (Soothing Rhythm Breathing) -->
+            <div class="screen" id="screen2">
+                <div class="step-indicator">שלב 1 מתוך 5</div>
+                <h2>קצב נשימה מרגיע</h2>
+                <p>לפני שנתבונן באירועי היום, נרצה לאותת למערכת העצבית לעבור למצב של רגיעה וביטחון פנימי.</p>
+                
+                <div class="breathing-container">
+                    <div class="breathing-circle" id="breathingCircle">נשימה</div>
+                    <div class="breathing-text" id="breathingText">קחו נשימה עמוקה...</div>
+                </div>
+            </div>
+
+            <!-- מסך 3: שלב 2 - תיאור ואיוורור האתגר (ללא שיפוטיות) -->
+            <div class="screen" id="screen3">
+                <div class="step-indicator">שלב 2 מתוך 5</div>
+                <h2>להביט בקושי ובאתגר</h2>
+                <p>חשבו על רגע קשה, מתסכל או מעורר אי נוחות שחוויתם היום בעבודה מול תלמיד, קולגה או משימה.</p>
+                
+                <div class="guidance-box">
+                    <strong>מה קרה שם?</strong> נסו לתאר את הסיטואציה בצורה עובדתית ויבשה, ללא שיפוטיות או האשמה עצמית.
+                </div>
+                
+                <textarea id="input-challenge" placeholder="תארו בקצרה את האירוע או התחושה שהיוו אתגר..."></textarea>
+            </div>
+
+            <!-- מסך 4: שלב 3 - אנושיות משותפת והגשר המושגי (ברוחב מלא ויישור תקני) -->
+            <div class="screen" id="screen4">
+                <div class="step-indicator">שלב 3 מתוך 5</div>
+                <h2>להכיר באנושיות המשותפת</h2>
+                <p>קל מאוד ליפול למלכודת של ביקורת עצמית נוקשה ולחשוב שרק אתם חווים קשיים כאלה.</p>
+                
+                <div class="guidance-box">
+                    <strong>תזכורת פנימית:</strong> אתגרים, תסכולים וטעויות הם חלק טבעי, בלתי נפרד ואנושי לחלוטין מעבודת החינוך וההוראה.
+                    <br><br>
+                    <em>לפעמים קל יותר להיות חומלים כלפי אחרים מאשר כלפי עצמנו.</em>
+                </div>
+                
+                <p style="font-weight: 600; color: var(--text-main); font-size: 0.9rem;">מה הייתם אומרים לקולגה יקר/ה שהיה מספר לכם על אתגר כזה בדיוק?</p>
+                <textarea id="input-kindness" placeholder="כתבו לעצמכם מילות תמיכה והבנה, כאילו דיברתם אל חבר קרוב..."></textarea>
+            </div>
+
+            <!-- מסך 5: שלב 4 - פעולה מיטיבה ותומכת -->
+            <div class="screen" id="screen5">
+                <div class="step-indicator">שלב 4 מתוך 5</div>
+                <h2>פעולה מטיבה ותומכת</h2>
+                <p>חמלה היא לא רק הרגשה, היא גם פעולה של טיפוח עצמי שנועדה להקל על העומס המנטלי שלך.</p>
+                
+                <p style="font-weight: 600; margin-top: 10px; margin-bottom: 8px; font-size: 0.9rem;">מהו דבר קטן אחד שיכול לעשות לכם קצת טוב או להקל עליכם בהמשך הערב?</p>
+                
+                <div class="guidance-box" style="margin-bottom: 12px;">
+                    <strong>רעיונות קטנים:</strong> כוס תה בשקט מוחלט, מקלחת חמה ללא נייד, חצי שעה של האזנה למוזיקה, או החלטה מודעת לא לפתוח מיילים בית-ספריים עד מחר.
+                </div>
+                
+                <textarea id="input-action" placeholder="מה תעשו הערב למען השקט שלכם?"></textarea>
+            </div>
+
+            <!-- מסך 6: שלב 5 - מסך סיום ועגינה -->
+            <div class="screen" id="screen6" style="align-items: center; text-align: center;">
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
+                    <div class="step-indicator" style="text-align: center;">שלב 5 מתוך 5</div>
+                    <h2>נשימה עמוקה פנימה.</h2>
+                    <p style="font-size: 1rem; color: var(--text-main); margin-bottom: 14px; max-width: 300px; text-align: center;">
+                        אישרתם לעצמכם להיות אנושיים, להרגיש קושי ולהעניק לעצמכם תמיכה. 
+                    </p>
+                    <p style="font-size: 0.9rem; max-width: 280px; text-align: center;">
+                        אתם עושים עבודה משמעותית, ומותר לכם לפעמים פשוט להניח להכל ולנוח.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- אזור כפתור קבוע ומעוגן לתחתית + ניהול קרדיט חכם -->
+        <div class="footer-container">
+            <button class="btn-primary" id="actionButton" onclick="nextScreen()">להתחיל</button>
+            
+            <div class="credit" id="appCredit">
+                פיתוח, עיצוב והתאמה להקשר הישראלי: שגית ציפלוביץ &middot; 2026<br>
+                מבוסס על פרוטוקול CMT-T של Matos et al.
+            </div>
+        </div>
+
     </div>
-    
-    <p style="font-weight: 600; color: var(--text-main); font-size: 0.9rem;">מה הייתם אומרים לקולגה יקר/ה שהיה מספר לכם על אתגר כזה בדיוק?</p>
-    <textarea id="input-kindness" placeholder="כתבו לעצמכם מילות תמיכה והבנה, כאילו דיברתם אל חבר קרוב..."></textarea>
-</div>
+
+    <script>
+        let currentScreen = 1;
+        const totalScreens = 6; 
+        let breathingTimer = null;
+
+        // לוגיקת החלפת הטקסט באנימציית הנשימה (שאיפה 4 ש', עצירה 2 ש', נשיפה 5 ש')
+        function runBreathingSequence() {
+            const textEl = document.getElementById('breathingText');
+            if (!textEl) return;
+            
+            const sequence = () => {
+                textEl.innerText = 'שאיפה... למלא את הבטן';
+                
+                setTimeout(() => {
+                    textEl.innerText = 'להחזיק... בעדינות';
+                }, 4000);
+                
+                setTimeout(() => {
+                    textEl.innerText = 'נשיפה... לשחרר מתח';
+                }, 6000);
+            };
+            
+            sequence();
+            breathingTimer = setInterval(sequence, 11000);
+        }
+
+        function stopBreathingSequence() {
+            if (breathingTimer) {
+                clearInterval(breathingTimer);
+                breathingTimer = null;
+            }
+        }
+
+        function nextScreen() {
+            // הסרת מחלקת אקטיב מהמסך הנוכחי
+            document.getElementById('screen' + currentScreen).classList.remove('active');
+            
+            // במידה ויוצאים ממסך הנשימה - עוצרים את טיימר הכיתוב
+            if (currentScreen === 2) {
+                stopBreathingSequence();
+            }
+
+            // מעבר למסך הבא או חזרה להתחלה בסיום
+            if (currentScreen < totalScreens) {
+                currentScreen++;
+            } else {
+                resetApp();
+                return;
+            }
+            
+            // הפעלת המסך החדש
+            document.getElementById('screen' + currentScreen).classList.add('active');
+            
+            // במידה ונכנסים למסך הנשימה - מפעילים את רצף הטקסט
+            if (currentScreen === 2) {
+                runBreathingSequence();
+            }
+            
+            // עדכון רכיבי ממשק תומכים (פס התקדמות, כפתורים וקרדיט)
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const actionButton = document.getElementById('actionButton');
+            const appCredit = document.getElementById('appCredit');
+            
+            if (currentScreen === 1) {
+                progressContainer.style.display = 'none';
+                actionButton.innerText = 'להתחיל';
+                appCredit.style.display = 'block'; 
+            } else {
+                progressContainer.style.display = 'block';
+                appCredit.style.display = 'none'; /* הסרת הקרדיט בשלבי השאלות למניעת דחיקה במובייל */
+                
+                // חישוב התקדמות לפי שלבי ההתערבות
+                const percentage = (currentScreen - 1) * 20;
+                progressBar.style.width = percentage + '%';
+                
+                if (currentScreen === totalScreens) {
+                    actionButton.innerText = 'חזרה להתחלה';
+                } else {
+                    actionButton.innerText = 'המשך';
+                }
+            }
+        }
+
+        function resetApp() {
+            stopBreathingSequence();
+            
+            // איפוס ערכי שדות הטקסט
+            document.getElementById('input-challenge').value = '';
+            document.getElementById('input-kindness').value = '';
+            document.getElementById('input-action').value = '';
+            
+            // חזרה למסך הראשון
+            document.getElementById('screen' + currentScreen).classList.remove('active');
+            currentScreen = 1;
+            document.getElementById('screen' + currentScreen).classList.add('active');
+            
+            // איפוס האלמנטים הנלווים
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('actionButton').innerText = 'להתחיל';
+            document.getElementById('appCredit').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
