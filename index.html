@@ -205,12 +205,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
             box-shadow: 0 10px 30px rgba(141, 161, 154, 0.2);
             /* קצב אקדמי: שאיפה 4 ש', עצירה 2 ש', נשיפה 5 ש' */
             animation: soothePulse 11s infinite ease-in-out;
+        }
+
+        /* עיגול סגירה מוקטן ומותאם אישית למסך הסיום כדי למנוע גלילה */
+        .breathing-circle.circle-small {
+            width: 75px;
+            height: 75px;
+            box-shadow: 0 6px 20px rgba(141, 161, 154, 0.15);
         }
 
         @keyframes soothePulse {
@@ -221,8 +225,8 @@
         }
 
         .breathing-text {
-            margin-top: 24px;
-            font-size: 1rem;
+            margin-top: 20px;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--text-main);
             min-height: 24px;
@@ -301,7 +305,7 @@
                 <p>לפני שנתבונן באירועי היום, נרצה לאותת למערכת העצבית לעבור למצב של רגיעה וביטחון פנימי.</p>
                 
                 <div class="breathing-container">
-                    <div class="breathing-circle" id="breathingCircle">נשימה</div>
+                    <div class="breathing-circle" id="breathingCircle"></div>
                     <div class="breathing-text" id="breathingText">קחו נשימה עמוקה...</div>
                 </div>
             </div>
@@ -350,18 +354,23 @@
                 <textarea id="input-action" placeholder="מה תעשו הערב למען השקט שלכם?"></textarea>
             </div>
 
-            <!-- מסך 6: שלב 5 - מסך סיום ועגינה -->
+            <!-- מסך 6: שלב 5 - מסך סיום ועגינה עם רכיב נשימה משולב -->
             <div class="screen" id="screen6" style="align-items: center; text-align: center;">
-                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
-                    <div class="step-indicator" style="text-align: center;">שלב 5 מתוך 5</div>
-                    <h2>נשימה עמוקה פנימה.</h2>
-                    <p style="font-size: 1rem; color: var(--text-main); margin-bottom: 14px; max-width: 300px; text-align: center;">
-                        אישרתם לעצמכם להיות אנושיים, להרגיש קושי ולהעניק לעצמכם תמיכה. 
-                    </p>
-                    <p style="font-size: 0.9rem; max-width: 280px; text-align: center;">
-                        אתם עושים עבודה משמעותית, ומותר לכם לפעמים פשוט להניח להכל ולנוח.
-                    </p>
+                <div class="step-indicator" style="text-align: center;">שלב 5 מתוך 5</div>
+                <h2 style="text-align: center; margin-bottom: 6px;">נשימה עמוקה פנימה.</h2>
+                <p style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 8px; max-width: 300px; text-align: center;">
+                    אישרתם לעצמכם להיות אנושיים, להרגיש קושי ולהעניק לעצמכם תמיכה.
+                </p>
+                
+                <!-- רכיב נשימה משולב ועדין לסגירה הרמונית -->
+                <div class="breathing-container" style="margin-top: 5px; margin-bottom: 5px;">
+                    <div class="breathing-circle circle-small" id="closingBreathingCircle"></div>
+                    <div class="breathing-text" id="closingBreathingText" style="margin-top: 12px; font-size: 0.85rem;">קחו נשימה עמוקה...</div>
                 </div>
+
+                <p style="font-size: 0.85rem; max-width: 290px; text-align: center; margin-top: 4px; margin-bottom: 0;">
+                    אתם עושים עבודה משמעותית, ומותר לכם לפעמים פשוט להניח להכל ולנוח.
+                </p>
             </div>
 
         </div>
@@ -384,8 +393,8 @@
         let breathingTimer = null;
 
         // לוגיקת החלפת הטקסט באנימציית הנשימה (שאיפה 4 ש', עצירה 2 ש', נשיפה 5 ש')
-        function runBreathingSequence() {
-            const textEl = document.getElementById('breathingText');
+        function runBreathingSequence(textElementId) {
+            const textEl = document.getElementById(textElementId);
             if (!textEl) return;
             
             const sequence = () => {
@@ -415,8 +424,8 @@
             // הסרת מחלקת אקטיב מהמסך הנוכחי
             document.getElementById('screen' + currentScreen).classList.remove('active');
             
-            // במידה ויוצאים ממסך הנשימה - עוצרים את טיימר הכיתוב
-            if (currentScreen === 2) {
+            // במידה ויוצאים ממסכים עם רכיבי נשימה - עוצרים את הטיימרים
+            if (currentScreen === 2 || currentScreen === 6) {
                 stopBreathingSequence();
             }
 
@@ -431,9 +440,11 @@
             // הפעלת המסך החדש
             document.getElementById('screen' + currentScreen).classList.add('active');
             
-            // במידה ונכנסים למסך הנשימה - מפעילים את רצף הטקסט
+            // הפעלת טיימר הכיתוב בהתאם למסך הנשימה הפעיל
             if (currentScreen === 2) {
-                runBreathingSequence();
+                runBreathingSequence('breathingText');
+            } else if (currentScreen === 6) {
+                runBreathingSequence('closingBreathingText');
             }
             
             // עדכון רכיבי ממשק תומכים (פס התקדמות, כפתורים וקרדיט)
