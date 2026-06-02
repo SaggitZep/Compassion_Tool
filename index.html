@@ -272,20 +272,43 @@
             padding-top: 8px;
             border-top: 1px solid rgba(0, 0, 0, 0.03);
         }
+
+        /* אלמנט קישור המשוב המשודרג - מובלט ומותאם לפאלת הצבעים הייחודית של הכלי */
+        .feedback-link-container {
+            width: 100%;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .feedback-link {
+            display: block;
+            text-align: center;
+            color: #ffffff;
+            background-color: #72867e; /* גרסה נוכחת ומובלטת יותר של צבע האקסט המקורי של הכלי */
+            padding: 13px 16px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(141, 161, 154, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .feedback-link:active {
+            background-color: var(--text-main);
+            transform: scale(0.98);
+        }
     </style>
 </head>
 <body>
 
     <div class="phone-container">
-        <!-- סרגל התקדמות מעוגן בטופ -->
         <div class="progress-container" id="progressContainer">
             <div class="progress-bar" id="progressBar"></div>
         </div>
 
-        <!-- מעטפת המסכים הדינמיים -->
         <div class="screens-wrapper">
             
-            <!-- מסך 1: פתיחה ומבוא -->
             <div class="screen active" id="screen1" style="align-items: center; text-align: center;">
                 <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
                     <h1>רגע חמלה</h1>
@@ -298,7 +321,6 @@
                 </div>
             </div>
 
-            <!-- מסך 2: שלב 1 - ויסות פיזיולוגי מקדים (Soothing Rhythm Breathing) -->
             <div class="screen" id="screen2">
                 <div class="step-indicator">שלב 1 מתוך 5</div>
                 <h2>קצב נשימה מרגיע</h2>
@@ -310,7 +332,6 @@
                 </div>
             </div>
 
-            <!-- מסך 3: שלב 2 - תיאור ואיוורור האתגר (ללא שיפוטיות) -->
             <div class="screen" id="screen3">
                 <div class="step-indicator">שלב 2 מתוך 5</div>
                 <h2>להביט בקושי ובאתגר</h2>
@@ -323,7 +344,6 @@
                 <textarea id="input-challenge" placeholder="תארו בקצרה את האירוע או התחושה שהיוו אתגר..."></textarea>
             </div>
 
-            <!-- מסך 4: שלב 3 - אנושיות משותפת והגשר המושגי (ברוחב מלא ויישור תקני) -->
             <div class="screen" id="screen4">
                 <div class="step-indicator">שלב 3 מתוך 5</div>
                 <h2>להכיר באנושיות המשותפת</h2>
@@ -339,7 +359,6 @@
                 <textarea id="input-kindness" placeholder="כתבו לעצמכם מילות תמיכה והבנה, כאילו דיברתם אל חבר קרוב..."></textarea>
             </div>
 
-            <!-- מסך 5: שלב 4 - פעולה מיטיבה ותומכת -->
             <div class="screen" id="screen5">
                 <div class="step-indicator">שלב 4 מתוך 5</div>
                 <h2>פעולה מטיבה ותומכת</h2>
@@ -354,30 +373,33 @@
                 <textarea id="input-action" placeholder="מה תעשו הערב למען השקט שלכם?"></textarea>
             </div>
 
-            <!-- מסך 6: שלב 5 - מסך סיום ועגינה עם רכיב נשימה משולב -->
-            <div class="screen" id="screen6" style="align-items: center; text-align: center;">
+            <div class="screen" id="screen6" style="align-items: center; text-align: center; justify-content: center;">
                 <div class="step-indicator" style="text-align: center;">שלב 5 מתוך 5</div>
                 <h2 style="text-align: center; margin-bottom: 6px;">נשימה עמוקה פנימה.</h2>
-                <p style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 8px; max-width: 300px; text-align: center;">
+                <p style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 4px; max-width: 300px; text-align: center;">
                     אישרתם לעצמכם להיות אנושיים, להרגיש קושי ולהעניק לעצמכם תמיכה.
                 </p>
                 
-                <!-- רכיב נשימה משולב ועדין לסגירה הרמונית -->
                 <div class="breathing-container" style="margin-top: 5px; margin-bottom: 5px;">
                     <div class="breathing-circle circle-small" id="closingBreathingCircle"></div>
                     <div class="breathing-text" id="closingBreathingText" style="margin-top: 12px; font-size: 0.85rem;">קחו נשימה עמוקה...</div>
                 </div>
 
-                <p style="font-size: 0.85rem; max-width: 290px; text-align: center; margin-top: 4px; margin-bottom: 0;">
+                <p style="font-size: 0.85rem; max-width: 290px; text-align: center; margin-top: 4px; margin-bottom: 4px;">
                     אתם עושים עבודה משמעותית, ומותר לכם לפעמים פשוט להניח להכל ולנוח.
                 </p>
+
+                <div class="feedback-link-container">
+                    <a href="https://forms.gle/6XtRAuLPUkvy1XXE8" target="_blank" class="feedback-link">
+                        📝 נשמח לשמוע ממך: דקה קצרה למשוב והערכה
+                    </a>
+                </div>
             </div>
 
         </div>
 
-        <!-- אזור כפתור קבוע ומעוגן לתחתית + ניהול קרדיט חכם -->
         <div class="footer-container">
-            <button class="btn-primary" id="actionButton" onclick="nextScreen()">להתחיל</button>
+            <button class="btn-primary" id="actionButton" onclick="handleNavigation()">להתחיל</button>
             
             <div class="credit" id="appCredit">
                 פיתוח, עיצוב והתאמה להקשר הישראלי: שגית ציפלוביץ &middot; 2026<br>
@@ -388,11 +410,10 @@
     </div>
 
     <script>
-        let currentScreen = 1;
-        const totalScreens = 6; 
-        let breathingTimer = null;
+        let currentScreenIdx = 1;
+        const totalScreensCount = 6; 
+        let breathingTimerId = null;
 
-        // לוגיקת החלפת הטקסט באנימציית הנשימה (שאיפה 4 ש', עצירה 2 ש', נשיפה 5 ש')
         function runBreathingSequence(textElementId) {
             const textEl = document.getElementById(textElementId);
             if (!textEl) return;
@@ -410,65 +431,68 @@
             };
             
             sequence();
-            breathingTimer = setInterval(sequence, 11000);
+            breathingTimerId = setInterval(sequence, 11000);
         }
 
         function stopBreathingSequence() {
-            if (breathingTimer) {
-                clearInterval(breathingTimer);
-                breathingTimer = null;
+            if (breathingTimerId) {
+                clearInterval(breathingTimerId);
+                breathingTimerId = null;
             }
         }
 
-        function nextScreen() {
-            // הסרת מחלקת אקטיב מהמסך הנוכחי
-            document.getElementById('screen' + currentScreen).classList.remove('active');
-            
-            // במידה ויוצאים ממסכים עם רכיבי נשימה - עוצרים את הטיימרים
-            if (currentScreen === 2 || currentScreen === 6) {
+        // ניווט קשיח, ישיר ובטוח לחלוטין ללא תלות במשתנים גלובליים פגיעים בדפדפן
+        function handleNavigation() {
+            if (currentScreenIdx === 2 || currentScreenIdx === 6) {
                 stopBreathingSequence();
             }
 
-            // מעבר למסך הבא או חזרה להתחלה בסיום
-            if (currentScreen < totalScreens) {
-                currentScreen++;
+            if (currentScreenIdx < totalScreensCount) {
+                currentScreenIdx++;
+                applyScreenState(currentScreenIdx);
             } else {
                 resetApp();
-                return;
+            }
+        }
+
+        function applyScreenState(screenNumber) {
+            // העברת מסכים מוחלטת
+            for (let i = 1; i <= 6; i++) {
+                const scr = document.getElementById('screen' + i);
+                if (scr) scr.classList.remove('active');
             }
             
-            // הפעלת המסך החדש
-            document.getElementById('screen' + currentScreen).classList.add('active');
-            
-            // הפעלת טיימר הכיתוב בהתאם למסך הנשימה הפעיל
-            if (currentScreen === 2) {
+            const target = document.getElementById('screen' + screenNumber);
+            if (target) target.classList.add('active');
+
+            // הפעלת נשימות במסכים הרלוונטיים
+            if (screenNumber === 2) {
                 runBreathingSequence('breathingText');
-            } else if (currentScreen === 6) {
+            } else if (screenNumber === 6) {
                 runBreathingSequence('closingBreathingText');
             }
-            
-            // עדכון רכיבי ממשק תומכים (פס התקדמות, כפתורים וקרדיט)
+
+            // עדכון הממשק החיצוני
             const progressContainer = document.getElementById('progressContainer');
             const progressBar = document.getElementById('progressBar');
             const actionButton = document.getElementById('actionButton');
             const appCredit = document.getElementById('appCredit');
-            
-            if (currentScreen === 1) {
-                progressContainer.style.display = 'none';
-                actionButton.innerText = 'להתחיל';
-                appCredit.style.display = 'block'; 
+
+            if (screenNumber === 1) {
+                if (progressContainer) progressContainer.style.display = 'none';
+                if (actionButton) actionButton.innerText = 'להתחיל';
+                if (appCredit) appCredit.style.display = 'block'; 
             } else {
-                progressContainer.style.display = 'block';
-                appCredit.style.display = 'none'; /* הסרת הקרדיט בשלבי השאלות למניעת דחיקה במובייל */
+                if (progressContainer) progressContainer.style.display = 'block';
+                if (appCredit) appCredit.style.display = 'none';
+                if (progressBar) progressBar.style.width = ((screenNumber - 1) * 20) + '%';
                 
-                // חישוב התקדמות לפי שלבי ההתערבות
-                const percentage = (currentScreen - 1) * 20;
-                progressBar.style.width = percentage + '%';
-                
-                if (currentScreen === totalScreens) {
-                    actionButton.innerText = 'חזרה להתחלה';
-                } else {
-                    actionButton.innerText = 'המשך';
+                if (actionButton) {
+                    if (screenNumber === totalScreensCount) {
+                        actionButton.innerText = 'חזרה להתחלה';
+                    } else {
+                        actionButton.innerText = 'המשך';
+                    }
                 }
             }
         }
@@ -476,20 +500,15 @@
         function resetApp() {
             stopBreathingSequence();
             
-            // איפוס ערכי שדות הטקסט
-            document.getElementById('input-challenge').value = '';
-            document.getElementById('input-kindness').value = '';
-            document.getElementById('input-action').value = '';
+            const ch = document.getElementById('input-challenge');
+            const kin = document.getElementById('input-kindness');
+            const act = document.getElementById('input-action');
+            if (ch) ch.value = '';
+            if (kin) kin.value = '';
+            if (act) act.value = '';
             
-            // חזרה למסך הראשון
-            document.getElementById('screen' + currentScreen).classList.remove('active');
-            currentScreen = 1;
-            document.getElementById('screen' + currentScreen).classList.add('active');
-            
-            // איפוס האלמנטים הנלווים
-            document.getElementById('progressContainer').style.display = 'none';
-            document.getElementById('actionButton').innerText = 'להתחיל';
-            document.getElementById('appCredit').style.display = 'block';
+            currentScreenIdx = 1;
+            applyScreenState(1);
         }
     </script>
 </body>
