@@ -6,84 +6,357 @@
     <title>רגע חמלה</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-color: #F7F5F0; --text-main: #2C302E; --text-muted: #6B706E; --accent-color: #8DA19A; --border-color: #E3DFD5; --card-bg: #FFFFFF; }
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Assistant', sans-serif; background-color: var(--bg-color); color: var(--text-main); height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 24px; overflow: hidden; }
-        .progress-container { width: 100%; height: 3px; background-color: var(--border-color); margin-top: 16px; border-radius: 2px; }
-        .progress-bar { height: 100%; width: 20%; background-color: var(--accent-color); transition: width 0.4s ease; }
-        .screens-wrapper { flex-grow: 1; display: flex; align-items: center; justify-content: center; position: relative; }
-        .screen { position: absolute; width: 100%; display: none; flex-direction: column; align-items: center; text-align: center; opacity: 0; transition: opacity 0.4s; }
-        .screen.active { display: flex; opacity: 1; }
-        h1 { font-size: 24px; margin-bottom: 12px; }
-        p { font-size: 16px; color: var(--text-muted); margin-bottom: 24px; max-width: 290px; line-height: 1.6; }
-        .breathing-circle { width: 120px; height: 120px; background-color: var(--accent-color); border-radius: 50%; opacity: 0.25; animation: breathe 10s infinite ease-in-out; margin-bottom: 32px; }
-        @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.25; } 50% { transform: scale(1.35); opacity: 0.5; } }
-        .btn-primary { width: 100%; max-width: 320px; height: 52px; background-color: var(--text-main); color: #fff; border: none; border-radius: 26px; font-size: 16px; cursor: pointer; }
-        .btn-primary:disabled { background-color: var(--border-color); }
-        .options-list { width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 10px; }
-        .option-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 14px; border-radius: 14px; text-align: right; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-size: 15px; }
-        .option-card.selected { border-color: var(--accent-color); background: rgba(141, 161, 154, 0.05); }
-        .statement-builder { width: 100%; max-width: 320px; border: 1px dashed var(--accent-color); padding: 14px; border-radius: 12px; margin-bottom: 16px; text-align: right; line-height: 1.5; }
-        .dynamic-part { color: var(--accent-color); font-weight: 600; }
-        .footer-container { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-bottom: 16px; }
-        .credit { font-size: 10px; color: #A0A5A3; text-align: center; }
+        /* פאלת הצבעים המקורית והייחודית של הכלי */
+        :root { 
+            --bg-color: #F7F5F0; 
+            --text-main: #2C302E; 
+            --text-muted: #6B706E; 
+            --accent-color: #8DA19A; 
+            --border-color: #E3DFD5; 
+            --card-bg: #FFFFFF; 
+        }
+        
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Assistant', sans-serif;
+            -webkit-tap-highlight-color: transparent; 
+        }
+        
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            /* פתרון הגובה הדינמי המוחלט למניעת חיתוך וגלילה באייפון */
+            height: 100vh;
+            height: 100svh;
+            height: 100dvh;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* מכולת הטלפון הקשיחה */
+        .phone-container {
+            width: 100%;
+            max-width: 420px;
+            height: 100%;
+            background-color: var(--bg-color);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 24px 20px 24px; /* פדינג מבוקר ומהודק למובייל */
+        }
+
+        /* במחשב בלבד - הגבלת פריסה אסתטית */
+        @media (min-width: 440px) {
+            .phone-container {
+                height: 92vh;
+                max-height: 780px;
+                border-radius: 24px;
+                border: 1px solid rgba(0, 0, 0, 0.03);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.02);
+            }
+            body {
+                padding: 20px;
+                background-color: #eaddcb; /* רקע ייחודי מותאם למחשב */
+            }
+        }
+
+        /* סרגל התקדמות עליון דק וקבוע */
+        .progress-container { 
+            width: 100%; 
+            height: 3px; 
+            background-color: var(--border-color); 
+            margin-bottom: 16px; 
+            border-radius: 2px; 
+            flex-shrink: 0;
+            display: none; /* מוסתר בהתחלה */
+        }
+        
+        .progress-bar { 
+            height: 100%; 
+            width: 0%; 
+            background-color: var(--accent-color); 
+            transition: width 0.4s ease; 
+        }
+
+        /* אינדיקטור שלב */
+        .step-indicator {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 400;
+        }
+        
+        /* אזור מעטפת המסכים המרכזי - גמיש ותופס את מקסימום הגובה */
+        .screens-wrapper { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column;
+            min-height: 0; /* מונע זליגה של תתי אלמנטים */
+        }
+
+        .screen { 
+            display: none; 
+            flex-direction: column; 
+            height: 100%;
+            opacity: 0; 
+            transition: opacity 0.3s; 
+        }
+        
+        .screen.active { 
+            display: flex; 
+            opacity: 1; 
+        }
+
+        /* טיפוגרפיה מהודקת ומלונטשת למניעת דחיפת רכיבים */
+        h1 { 
+            font-size: 1.85rem; 
+            font-weight: 600;
+            margin-bottom: 8px; 
+            color: var(--text-main);
+        }
+        
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        p { 
+            font-size: 0.95rem; 
+            color: var(--text-muted); 
+            margin-bottom: 12px; 
+            line-height: 1.45; 
+        }
+
+        /* תיבת מיקוד והנחיה רכה */
+        .guidance-box {
+            background-color: var(--card-bg);
+            border-right: 3px solid var(--accent-color);
+            padding: 10px 12px;
+            border-radius: 4px 12px 12px 4px;
+            margin-bottom: 14px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: var(--text-main);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+        }
+
+        /* אזור הזנה ייעודי עם אופטימיזציה למקלדות צפות */
+        textarea {
+            width: 100%;
+            height: 85px;
+            min-height: 80px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background-color: var(--card-bg);
+            resize: none;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            outline: none;
+            line-height: 1.4;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            border-color: var(--accent-color);
+        }
+        
+        /* אזור כפתורים וניווט תחתון - מקובע ומעוגן קשיח */
+        .footer-container { 
+            flex-shrink: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            margin-top: auto; 
+            padding-top: 10px;
+        }
+        
+        .btn-primary { 
+            width: 100%; 
+            height: 48px; 
+            background-color: var(--text-main); 
+            color: #fff; 
+            border: none; 
+            border-radius: 26px; 
+            font-size: 0.95rem; 
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:active {
+            background-color: #404643;
+        }
+        
+        /* עיצוב הקרדיט הקבוע והמדויק - מופיע רק במסך הפתיחה */
+        .credit { 
+            font-size: 10px; 
+            color: var(--text-muted); 
+            text-align: center; 
+            line-height: 1.4; 
+            margin-top: 12px;
+            width: 100%;
+            padding-top: 8px;
+            border-top: 1px solid rgba(0, 0, 0, 0.03);
+        }
     </style>
 </head>
 <body>
-    <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
-    <div class="screens-wrapper">
-        <div class="screen active" id="screen1">
-            <h1>רגע חמלה</h1>
-            <p>לפעמים רגע אחד ממשיך איתנו גם אחרי שהוא נגמר.<br>שיחה, שיעור, הערה או תחושת החמצה.<br>כאן אפשר לעצור לרגע, לנשום, ולפגוש את עצמנו קצת אחרת.</p>
+
+    <div class="phone-container">
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
-        <div class="screen" id="screen2">
-            <div class="breathing-circle"></div>
-            <h1>ניקח רגע לעצמנו</h1>
-            <p>ננסה לנשום עם הקצב של העיגול... שאיפה... ונשיפה אטית.</p>
+
+        <div class="screens-wrapper">
+            
+            <div class="screen active" id="screen1">
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                    <h1>רגע חמלה</h1>
+                    <p style="color: var(--accent-color); font-weight: 600; margin-bottom: 14px;">מרחב תמיכה פנימי בעומס</p>
+                    <p style="max-width: 290px;">
+                        עצירה מודעת של 2 דקות המיועדת להפחתת שיפוטיות עצמית ופיתוח גישה מכילה כלפי קשיים ואתגרים שעלו במהלך היום שלך בבית הספר.
+                        <br><br>
+                        <span style="font-size: 0.8rem;">הטקסט נשאר על המכשיר שלך בלבד ואינו נשמר בשום מקום.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="screen" id="screen2">
+                <div class="step-indicator">שלב 1 מתוך 4</div>
+                <h2>להביט בקושי ובאתגר</h2>
+                <p>חשבו על רגע קשה, מתסכל או מעורר אי נוחות שחוויתם היום בעבודה מול תלמיד, קולגה או משימה.</p>
+                
+                <div class="guidance-box">
+                    <strong>מה קרה שם?</strong> נסו לתאר את הסיטואציה בצורה עובדתית ויבשה, ללא שיפוטיות או האשמה עצמית.
+                </div>
+                
+                <textarea id="input-challenge" placeholder="תארו בקצרה את האירוע או התחושה שהיוו אתגר..."></textarea>
+            </div>
+
+            <div class="screen" id="screen3">
+                <div class="step-indicator">שלב 2 מתוך 4</div>
+                <h2>להכיר באנושיות המשותפת</h2>
+                <p>קל מאוד ליפול למלכודת של ביקורת עצמית נוקשה ולחשוב שרק אתם חווים קשיים כאלה.</p>
+                
+                <div class="guidance-box">
+                    <strong>תזכורת פנימית:</strong> אתגרים, תסכולים וטעויות הם חלק טבעי, בלתי נפרד ואנושי לחלוטין מעבודת החינוך וההוראה. כולם עוברים את זה.
+                </div>
+                
+                <p style="font-weight: 600; color: var(--text-main); font-size: 0.9rem;">מה הייתם אומרים לקולגה יקר/ה שהיה מספר לכם על אתגר כזה בדיוק?</p>
+                <textarea id="input-kindness" placeholder="כתבו לעצמכם מילות תמיכה והבנה, כאילו דיברתם אל חבר קרוב..."></textarea>
+            </div>
+
+            <div class="screen" id="screen4">
+                <div class="step-indicator">שלב 3 מתוך 4</div>
+                <h2>פעולה מטיבה ותומכת</h2>
+                <p>חמלה היא לא רק הרגשה, היא גם פעולה של טיפוח עצמי שנועדה להקל על העומס המנטלי שלך.</p>
+                
+                <p style="font-weight: 600; margin-top: 10px; margin-bottom: 8px; font-size: 0.9rem;">מהו דבר קטן אחד שיכול לעשות לכם קצת טוב או להקל עליכם בהמשך הערב?</p>
+                
+                <div class="guidance-box" style="margin-bottom: 12px;">
+                    <strong>רעיונות קטנים:</strong> כוס תה בשקט מוחלט, מקלחת חמה ללא נייד, חצי שעה של האזנה למוזיקה, או החלטה מודעת לא לפתוח מיילים בית-ספריים עד מחר בבוקר.
+                </div>
+                
+                <textarea id="input-action" placeholder="מה תעשו הערב למען השקט שלכם?"></textarea>
+            </div>
+
+            <div class="screen" id="screen5">
+                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                    <div class="step-indicator">שלב 4 מתוך 4</div>
+                    <h2>נשימה עמוקה פנימה.</h2>
+                    <p style="font-size: 1rem; color: var(--text-main); margin-bottom: 14px; max-width: 300px;">
+                        אישרתם לעצמכם להיות אנושיים, להרגיש קושי ולהעניק לעצמכם תמיכה. 
+                    </p>
+                    <p style="font-size: 0.9rem; max-width: 280px;">
+                        אתם עושים עבודה משמעותית, ומותר לכם לפעמים פשוט להניח להכל ולנוח.
+                    </p>
+                </div>
+            </div>
+
         </div>
-        <div class="screen" id="screen3">
-            <h1>נפגוש את הקול המבקר</h1>
-            <div class="options-list">
-                <div class="option-card" onclick="selectOption(this)"><span>"למה הגבנו ככה? שוב איבדנו שליטה"</span></div>
-                <div class="option-card" onclick="selectOption(this)"><span>"שוב לא היינו מספיק טובים בזה"</span></div>
-                <div class="option-card" onclick="selectOption(this)"><span>"כולם סביבנו מסתדרים, ורק לנו קשה"</span></div>
+
+        <div class="footer-container">
+            <button class="btn-primary" id="actionButton" onclick="nextScreen()">להתחיל</button>
+            
+            <div class="credit" id="appCredit">
+                פיתוח, עיצוב והתאמה להקשר הישראלי: שגית ציפלוביץ &middot; 2026<br>
+                מבוסס על פרוטוקול CMT-T של Matos et al.
             </div>
         </div>
-        <div class="screen" id="screen4">
-            <h1>ננסח את האמת שלנו</h1>
-            <div class="statement-builder">ברגעים כאלה, מותר לנו להזכיר לעצמנו ש... <span class="dynamic-part" id="dynamicText">__________</span></div>
-            <div class="options-list">
-                <div class="option-card" onclick="buildStatement(this, 'זה קשה עכשיו, ואנחנו לא לבד בזה.')"><span>"...זה קשה עכשיו, ואנחנו לא לבד בזה"</span></div>
-                <div class="option-card" onclick="buildStatement(this, 'עשינו הכי טוב שיכולנו באותו רגע.')"><span>"...עשינו הכי טוב שיכולנו"</span></div>
-                <div class="option-card" onclick="buildStatement(this, 'רגע אחד קשה לא מספר את כל הסיפור עלינו.')"><span>"...רגע אחד לא מספר את כל הסיפור"</span></div>
-            </div>
-        </div>
-        <div class="screen" id="screen5">
-            <div class="breathing-circle"></div>
-            <h1>נחזור אל היום שלנו</h1>
-            <p>הקול החומל שמור איתנו. נשימה אחת אחרונה, וחוזרים לעשייה מתוך יציבות.</p>
-        </div>
-    </div>
-    <div class="footer-container">
-        <button class="btn-primary" id="actionButton" onclick="nextScreen()">להתחיל</button>
-        <div class="credit">פיתוח, עיצוב והתאמה להקשר הישראלי: שגית ציפלוביץ · 2026<br>מבוסס על CMT-T של Matos et al.</div>
+
     </div>
 
     <script>
-        let current = 1;
-        const total = 5;
-        const btn = document.getElementById('actionButton');
-        function selectOption(el) { el.parentNode.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected')); el.classList.add('selected'); btn.disabled = false; }
-        function buildStatement(el, text) { el.parentNode.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected')); el.classList.add('selected'); document.getElementById('dynamicText').innerText = text; btn.disabled = false; }
+        let currentScreen = 1;
+        const totalScreens = 5;
+
         function nextScreen() {
-            if (current < total) {
-                document.getElementById(`screen${current}`).classList.remove('active');
-                current++;
-                document.getElementById(`screen${current}`).classList.add('active');
-                document.getElementById('progressBar').style.width = (current / total) * 100 + '%';
-                btn.innerText = (current === total) ? "סיום" : "המשך";
-                btn.disabled = (current === 3 || current === 4);
-            } else { window.location.reload(); }
+            // הסרת מחלקת אקטיב מהמסך הנוכחי
+            document.getElementById('screen' + currentScreen).classList.remove('active');
+            
+            // מעבר למסך הבא או חזרה להתחלה בסיום
+            if (currentScreen < totalScreens) {
+                currentScreen++;
+            } else {
+                resetApp();
+                return;
+            }
+            
+            // הפעלת המסך החדש
+            document.getElementById('screen' + currentScreen).classList.add('active');
+            
+            // עדכון רכיבי ממשק תומכים (פס התקדמות, כפתורים וקרדיט)
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const actionButton = document.getElementById('actionButton');
+            const appCredit = document.getElementById('appCredit');
+            
+            if (currentScreen === 1) {
+                progressContainer.style.display = 'none';
+                actionButton.innerText = 'להתחיל';
+                appCredit.style.display = 'block'; // מציג קרדיט רק במסך הבית
+            } else {
+                progressContainer.style.display = 'block';
+                appCredit.style.display = 'none'; // מעלים קרדיט במסכי השאלות לטובת חיסכון במקום
+                
+                // חישוב התקדמות לפי שלבי השאלות הפנימיים (שלבים 1 עד 4)
+                const percentage = (currentScreen - 1) * 25;
+                progressBar.style.width = percentage + '%';
+                
+                if (currentScreen === totalScreens) {
+                    actionButton.innerText = 'חזרה להתחלה';
+                } else {
+                    actionButton.innerText = 'המשך';
+                }
+            }
+        }
+
+        function resetApp() {
+            // איפוס ערכי שדות הטקסט
+            document.getElementById('input-challenge').value = '';
+            document.getElementById('input-kindness').value = '';
+            document.getElementById('input-action').value = '';
+            
+            // חזרה למסך הראשון
+            document.getElementById('screen' + currentScreen).classList.remove('active');
+            currentScreen = 1;
+            document.getElementById('screen' + currentScreen).classList.add('active');
+            
+            // איפוס האלמנטים הנלווים
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('actionButton').innerText = 'להתחיל';
+            document.getElementById('appCredit').style.display = 'block';
         }
     </script>
 </body>
