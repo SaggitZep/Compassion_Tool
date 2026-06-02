@@ -63,7 +63,7 @@
             }
             body {
                 padding: 20px;
-                background-color: #eaddcb; /* רקע ייחודי מותאם למחשב */
+                background-color: #eaddcb; 
             }
         }
 
@@ -98,7 +98,7 @@
             flex: 1; 
             display: flex; 
             flex-direction: column;
-            min-height: 0; /* מונע זליגה של תתי אלמנטים */
+            min-height: 0; 
         }
 
         .screen { 
@@ -170,6 +170,47 @@
         textarea:focus {
             border-color: var(--accent-color);
         }
+
+        /* --- רכיב נשימה קצבי (Soothing Rhythm Breathing) --- */
+        .breathing-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .breathing-circle {
+            width: 110px;
+            height: 110px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(141, 161, 154, 0.2);
+            /* שילוב האנימציה המובנית לפי קצב אקדמי מוכח: שאיפה 4 ש', עצירה 2 ש', נשיפה 5 ש' */
+            animation: soothePulse 11s infinite ease-in-out;
+        }
+
+        @keyframes soothePulse {
+            0% { transform: scale(0.85); }
+            36% { transform: scale(1.25); }   /* שאיפה - 4 שניות (36% מתוך 11) */
+            54% { transform: scale(1.25); }   /* עצירה והחזקה - 2 שניות (18% מתוך 11) */
+            100% { transform: scale(0.85); }  /* נשיפה ושחרור - 5 שניות (45% מתוך 11) */
+        }
+
+        .breathing-text {
+            margin-top: 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            min-height: 24px;
+        }
         
         /* אזור כפתורים וניווט תחתון - מקובע ומעוגן קשיח */
         .footer-container { 
@@ -214,12 +255,15 @@
 <body>
 
     <div class="phone-container">
+        <!-- סרגל התקדמות מעוגן בטופ -->
         <div class="progress-container" id="progressContainer">
             <div class="progress-bar" id="progressBar"></div>
         </div>
 
+        <!-- מעטפת המסכים הדינמיים -->
         <div class="screens-wrapper">
             
+            <!-- מסך 1: פתיחה ומבוא -->
             <div class="screen active" id="screen1">
                 <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
                     <h1>רגע חמלה</h1>
@@ -232,8 +276,21 @@
                 </div>
             </div>
 
+            <!-- מסך 2: שלב 1 - ויסות פיזיולוגי מקדים (Soothing Rhythm Breathing) -->
             <div class="screen" id="screen2">
-                <div class="step-indicator">שלב 1 מתוך 4</div>
+                <div class="step-indicator">שלב 1 מתוך 5</div>
+                <h2>קצב נשימה מרגיע</h2>
+                <p>לפני שנתבונן באירועי היום, נרצה לאותת למערכת העצבית לעבור למצב של רגיעה וביטחון פנימי.</p>
+                
+                <div class="breathing-container">
+                    <div class="breathing-circle" id="breathingCircle">נשימה</div>
+                    <div class="breathing-text" id="breathingText">קחו נשימה עמוקה...</div>
+                </div>
+            </div>
+
+            <!-- מסך 3: שלב 2 - תיאור ואיוורור האתגר -->
+            <div class="screen" id="screen3">
+                <div class="step-indicator">שלב 2 מתוך 5</div>
                 <h2>להביט בקושי ובאתגר</h2>
                 <p>חשבו על רגע קשה, מתסכל או מעורר אי נוחות שחוויתם היום בעבודה מול תלמיד, קולגה או משימה.</p>
                 
@@ -244,8 +301,9 @@
                 <textarea id="input-challenge" placeholder="תארו בקצרה את האירוע או התחושה שהיוו אתגר..."></textarea>
             </div>
 
-            <div class="screen" id="screen3">
-                <div class="step-indicator">שלב 2 מתוך 4</div>
+            <!-- מסך 4: שלב 3 - חמלה עצמית ומזעור הלקאה -->
+            <div class="screen" id="screen4">
+                <div class="step-indicator">שלב 3 מתוך 5</div>
                 <h2>להכיר באנושיות המשותפת</h2>
                 <p>קל מאוד ליפול למלכודת של ביקורת עצמית נוקשה ולחשוב שרק אתם חווים קשיים כאלה.</p>
                 
@@ -257,23 +315,25 @@
                 <textarea id="input-kindness" placeholder="כתבו לעצמכם מילות תמיכה והבנה, כאילו דיברתם אל חבר קרוב..."></textarea>
             </div>
 
-            <div class="screen" id="screen4">
-                <div class="step-indicator">שלב 3 מתוך 4</div>
+            <!-- מסך 5: שלב 4 - התנהגות מנחמת ומטיבה -->
+            <div class="screen" id="screen5">
+                <div class="step-indicator">שלב 4 מתוך 5</div>
                 <h2>פעולה מטיבה ותומכת</h2>
                 <p>חמלה היא לא רק הרגשה, היא גם פעולה של טיפוח עצמי שנועדה להקל על העומס המנטלי שלך.</p>
                 
                 <p style="font-weight: 600; margin-top: 10px; margin-bottom: 8px; font-size: 0.9rem;">מהו דבר קטן אחד שיכול לעשות לכם קצת טוב או להקל עליכם בהמשך הערב?</p>
                 
                 <div class="guidance-box" style="margin-bottom: 12px;">
-                    <strong>רעיונות קטנים:</strong> כוס תה בשקט מוחלט, מקלחת חמה ללא נייד, חצי שעה של האזנה למוזיקה, או החלטה מודעת לא לפתוח מיילים בית-ספריים עד מחר בבוקר.
+                    <strong>רעיונות קטנים:</strong> כוס תה בשקט מוחלט, מקלחת חמה ללא נייד, חצי שעה של האזנה למוזיקה, או החלטה מודעת לא לפתוח מיילים עד מחר.
                 </div>
                 
                 <textarea id="input-action" placeholder="מה תעשו הערב למען השקט שלכם?"></textarea>
             </div>
 
-            <div class="screen" id="screen5">
+            <!-- מסך 6: שלב 5 - סגירה ונשימה -->
+            <div class="screen" id="screen6">
                 <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-                    <div class="step-indicator">שלב 4 מתוך 4</div>
+                    <div class="step-indicator">שלב 5 מתוך 5</div>
                     <h2>נשימה עמוקה פנימה.</h2>
                     <p style="font-size: 1rem; color: var(--text-main); margin-bottom: 14px; max-width: 300px;">
                         אישרתם לעצמכם להיות אנושיים, להרגיש קושי ולהעניק לעצמכם תמיכה. 
@@ -286,6 +346,7 @@
 
         </div>
 
+        <!-- אזור כפתור קבוע ומעוגן לתחתית + ניהול קרדיט חכם -->
         <div class="footer-container">
             <button class="btn-primary" id="actionButton" onclick="nextScreen()">להתחיל</button>
             
@@ -299,12 +360,46 @@
 
     <script>
         let currentScreen = 1;
-        const totalScreens = 5;
+        const totalScreens = 6; // עודכן ל-6 מסכים בעקבות הוספת הנשימה
+        let breathingTimer = null;
+
+        // לוגיקת החלפת הטקסט באנימציית הנשימה (4 ש' שאיפה, 2 ש' עצירה, 5 ש' נשיפה)
+        function runBreathingSequence() {
+            const textEl = document.getElementById('breathingText');
+            if (!textEl) return;
+            
+            const sequence = () => {
+                textEl.innerText = 'שאיפה... למלא את הבטן';
+                
+                setTimeout(() => {
+                    textEl.innerText = 'להחזיק... בעדינות';
+                }, 4000);
+                
+                setTimeout(() => {
+                    textEl.innerText = 'נשיפה... לשחרר מתח';
+                }, 6000);
+            };
+            
+            sequence();
+            breathingTimer = setInterval(sequence, 11000);
+        }
+
+        function stopBreathingSequence() {
+            if (breathingTimer) {
+                clearInterval(breathingTimer);
+                breathingTimer = null;
+            }
+        }
 
         function nextScreen() {
             // הסרת מחלקת אקטיב מהמסך הנוכחי
             document.getElementById('screen' + currentScreen).classList.remove('active');
             
+            // במידה ויוצאים ממסך הנשימה - עוצרים את הטיימרים
+            if (currentScreen === 2) {
+                stopBreathingSequence();
+            }
+
             // מעבר למסך הבא או חזרה להתחלה בסיום
             if (currentScreen < totalScreens) {
                 currentScreen++;
@@ -316,7 +411,12 @@
             // הפעלת המסך החדש
             document.getElementById('screen' + currentScreen).classList.add('active');
             
-            // עדכון רכיבי ממשק תומכים (פס התקדמות, כפתורים וקרדיט)
+            // במידה ונכנסים למסך הנשימה - מפעילים את רצף הטקסט
+            if (currentScreen === 2) {
+                runBreathingSequence();
+            }
+            
+            // עדכון רכיבי ממשק תומכים
             const progressContainer = document.getElementById('progressContainer');
             const progressBar = document.getElementById('progressBar');
             const actionButton = document.getElementById('actionButton');
@@ -325,13 +425,13 @@
             if (currentScreen === 1) {
                 progressContainer.style.display = 'none';
                 actionButton.innerText = 'להתחיל';
-                appCredit.style.display = 'block'; // מציג קרדיט רק במסך הבית
+                appCredit.style.display = 'block'; 
             } else {
                 progressContainer.style.display = 'block';
-                appCredit.style.display = 'none'; // מעלים קרדיט במסכי השאלות לטובת חיסכון במקום
+                appCredit.style.display = 'none'; 
                 
-                // חישוב התקדמות לפי שלבי השאלות הפנימיים (שלבים 1 עד 4)
-                const percentage = (currentScreen - 1) * 25;
+                // חישוב התקדמות לפי 5 שלבים קונקרטיים
+                const percentage = (currentScreen - 1) * 20;
                 progressBar.style.width = percentage + '%';
                 
                 if (currentScreen === totalScreens) {
@@ -343,6 +443,8 @@
         }
 
         function resetApp() {
+            stopBreathingSequence();
+            
             // איפוס ערכי שדות הטקסט
             document.getElementById('input-challenge').value = '';
             document.getElementById('input-kindness').value = '';
