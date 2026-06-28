@@ -448,7 +448,365 @@
       .home-credit { font-size: .58rem; }
       button { padding: 10px; font-size: .92rem; }
     }
-  </style>
+  
+/* ===== Release 1.0 UX polish ===== */
+
+/* Mobile should feel like an app, not a floating web card */
+@media (max-width: 600px) {
+  body {
+    background: var(--card-cream) !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+  }
+
+  .poster-container {
+    width: 100vw !important;
+    max-width: none !important;
+    height: 100svh !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Desktop remains a soft card */
+@media (min-width: 601px) {
+  .poster-container {
+    width: 92%;
+    height: 94svh;
+  }
+}
+
+/* Global vertical rhythm */
+.screen {
+  padding: 24px 22px 20px;
+}
+
+.content-card {
+  margin: auto 0 !important;
+  padding: clamp(18px, 3svh, 24px) 18px clamp(16px, 2.6svh, 22px) !important;
+}
+
+.step-indicator {
+  margin-bottom: clamp(12px, 2svh, 18px) !important;
+}
+
+h2 {
+  margin-bottom: clamp(10px, 1.6svh, 14px) !important;
+}
+
+h2 + p {
+  margin-bottom: clamp(12px, 2svh, 18px) !important;
+}
+
+.field-label {
+  margin-top: clamp(10px, 1.7svh, 14px) !important;
+  margin-bottom: 6px !important;
+}
+
+.helper-text {
+  margin-bottom: clamp(10px, 1.6svh, 14px) !important;
+}
+
+textarea {
+  height: clamp(104px, 18svh, 136px) !important;
+  min-height: 96px !important;
+  margin-bottom: clamp(12px, 1.7svh, 16px) !important;
+}
+
+.soft-divider {
+  margin: clamp(22px, 3.3svh, 30px) 0 clamp(16px, 2.6svh, 22px) !important;
+}
+
+/* Home screen balance */
+#home {
+  justify-content: center;
+}
+
+#home .home-spacer {
+  flex: 0 0 clamp(22px, 5svh, 54px);
+}
+
+#home h1 {
+  margin-bottom: clamp(30px, 5.2svh, 44px) !important;
+}
+
+#home .home-main {
+  margin-bottom: clamp(24px, 4svh, 34px) !important;
+}
+
+#home .home-invitation {
+  margin-bottom: clamp(30px, 5svh, 42px) !important;
+}
+
+#home button {
+  margin-bottom: 14px;
+}
+
+#home .home-footer {
+  padding-top: 0;
+}
+
+#home .home-credit {
+  font-size: .72rem !important;
+  line-height: 1.32 !important;
+  margin-top: 9px !important;
+  padding-top: 9px !important;
+}
+
+/* Breathing screen: raise and strengthen the visual anchor */
+#breathing {
+  justify-content: flex-start;
+}
+
+#breathing .breathing-container {
+  min-height: 0 !important;
+  flex: 1;
+  justify-content: center;
+  padding-bottom: clamp(36px, 7svh, 72px);
+}
+
+#breathing .breathing-circle {
+  width: 134px;
+  height: 134px;
+}
+
+#breathing .breathing-text {
+  margin-top: 20px;
+}
+
+/* Writing screens: make internal reveals smoother and less cramped */
+.reveal-section.visible {
+  animation: revealIn .42s var(--ease-smooth) forwards;
+}
+
+.secondary-reveal {
+  margin-top: 2px;
+}
+
+/* Summary screen: compact but not dense */
+#summary {
+  justify-content: center;
+}
+
+#summary .summary-showcase {
+  padding: clamp(14px, 2.4svh, 18px);
+  margin: clamp(14px, 2.2svh, 18px) 0 clamp(12px, 2svh, 16px);
+}
+
+#summary .summary-showcase-title {
+  margin-bottom: 8px;
+}
+
+#summary .summary-showcase .closing-text {
+  margin-bottom: 10px !important;
+}
+
+#summary .field-label.center-text {
+  margin-top: 8px !important;
+  margin-bottom: 10px !important;
+  line-height: 1.35;
+}
+
+#summary .quote-note {
+  min-height: 56px;
+  padding: 11px 13px;
+}
+
+#summary > .closing-text {
+  margin-bottom: 10px;
+}
+
+#summary .feedback-intro {
+  margin-top: 10px;
+  margin-bottom: 9px;
+}
+
+#summary .feedback-link {
+  padding: 13px 14px;
+}
+
+/* Small phones and Safari visible viewport */
+@media (max-height: 760px) {
+  .screen {
+    padding: 18px 18px 14px !important;
+  }
+
+  #home .home-spacer {
+    flex-basis: 14px;
+  }
+
+  #home h1 {
+    font-size: 2.05rem !important;
+    margin-bottom: 22px !important;
+  }
+
+  #home .home-main {
+    font-size: .98rem !important;
+    line-height: 1.38 !important;
+    margin-bottom: 18px !important;
+  }
+
+  #home .home-invitation {
+    margin-bottom: 20px !important;
+  }
+
+  #home .home-invitation p {
+    font-size: .88rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 4px !important;
+  }
+
+  #home button {
+    padding: 11px !important;
+    margin-bottom: 10px !important;
+  }
+
+  #home .home-footer {
+    font-size: .68rem !important;
+  }
+
+  #home .home-credit {
+    font-size: .64rem !important;
+    line-height: 1.22 !important;
+  }
+
+  h2 {
+    font-size: 1.16rem !important;
+  }
+
+  p {
+    font-size: .88rem !important;
+    line-height: 1.34 !important;
+  }
+
+  .intro-note {
+    font-size: .95rem !important;
+  }
+
+  .content-card {
+    padding: 14px 13px 12px !important;
+  }
+
+  .step-indicator {
+    font-size: .8rem !important;
+    margin-bottom: 9px !important;
+  }
+
+  .field-label {
+    font-size: .9rem !important;
+    margin-top: 7px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .helper-text {
+    font-size: .72rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 6px !important;
+  }
+
+  textarea {
+    min-height: 74px !important;
+    height: 78px !important;
+    padding: 10px 12px !important;
+    font-size: .88rem !important;
+    margin-bottom: 9px !important;
+  }
+
+  .secondary-reveal {
+    padding: 9px !important;
+    font-size: .88rem !important;
+  }
+
+  .soft-divider {
+    margin: 12px 0 10px !important;
+  }
+
+  #breathing .breathing-container {
+    padding-bottom: 52px;
+  }
+
+  #breathing .breathing-circle {
+    width: 126px;
+    height: 126px;
+  }
+
+  #summary .summary-showcase {
+    padding: 11px !important;
+    margin: 10px 0 10px !important;
+  }
+
+  #summary .summary-showcase-title {
+    font-size: .94rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  #summary .closing-text,
+  #summary .feedback-intro {
+    font-size: .78rem !important;
+    line-height: 1.25 !important;
+  }
+
+  #summary .quote-note {
+    min-height: 44px !important;
+    font-size: .8rem !important;
+    line-height: 1.24 !important;
+    padding: 9px 10px !important;
+  }
+
+  #summary .feedback-link {
+    padding: 10px 12px !important;
+    font-size: .9rem !important;
+  }
+}
+
+@media (max-height: 640px) {
+  .screen {
+    padding: 12px 16px 10px !important;
+  }
+
+  #home h1 {
+    font-size: 1.78rem !important;
+    margin-bottom: 14px !important;
+  }
+
+  #home .home-main {
+    font-size: .84rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  #home .home-invitation {
+    margin-bottom: 12px !important;
+  }
+
+  #home .home-invitation p {
+    font-size: .78rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  #home .home-footer,
+  #home .home-credit {
+    font-size: .56rem !important;
+  }
+
+  button,
+  .feedback-link {
+    padding: 9px !important;
+    font-size: .86rem !important;
+  }
+
+  #breathing .breathing-circle {
+    width: 112px;
+    height: 112px;
+  }
+
+  #breathing .breathing-container {
+    padding-bottom: 42px;
+  }
+}
+
+</style>
 </head>
 <body>
 <div class="poster-container" id="app">
