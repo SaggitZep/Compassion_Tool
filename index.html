@@ -10,17 +10,17 @@
 
   <style>
     :root {
-      --card-cream: #fdfcf8;
       --bg-sage: #e4e9e0;
+      --card-cream: #fdfcf8;
       --primary: #5f746d;
       --primary-dark: #294732;
       --primary-soft: #eef4ef;
       --text-body: #4a4a4a;
       --text-muted: #85827d;
-      --border-soft: rgba(0,0,0,.065);
+      --border-soft: rgba(0,0,0,0.055);
       --shadow-soft: 0 30px 60px rgba(0,0,0,.06), 0 12px 24px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.02);
       --shadow-card: 0 14px 30px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03), 0 1px 3px rgba(0,0,0,.015);
-      --shadow-inner: inset 0 3px 6px rgba(0,0,0,.012), inset 0 1px 3px rgba(0,0,0,.01);
+      --shadow-inner: inset 0 3px 6px rgba(0,0,0,.015), inset 0 1px 3px rgba(0,0,0,.01);
       --ease-smooth: cubic-bezier(.2,.8,.2,1);
       --ease-spring: cubic-bezier(.25,.8,.15,1.15);
     }
@@ -57,9 +57,8 @@
       border: 1px solid rgba(255,255,255,.85);
       box-shadow: var(--shadow-soft);
       background:
-        radial-gradient(circle at 15% 12%, rgba(255,255,255,.72) 0%, rgba(255,255,255,0) 28%),
-        radial-gradient(circle at 88% 18%, rgba(95,116,109,.13) 0%, rgba(95,116,109,0) 30%),
-        radial-gradient(circle at 10% 92%, rgba(95,116,109,.07) 0%, rgba(95,116,109,0) 28%),
+        radial-gradient(circle at 16% 10%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 28%),
+        radial-gradient(circle at 88% 18%, rgba(95,116,109,.14) 0%, rgba(95,116,109,0) 30%),
         var(--card-cream);
     }
 
@@ -112,7 +111,7 @@
       width: 100%;
       height: 5px;
       display: none;
-      background: rgba(0,0,0,.025);
+      background: rgba(0,0,0,.02);
     }
 
     .progress-bar {
@@ -120,7 +119,7 @@
       height: 100%;
       background: var(--primary);
       border-radius: 0 4px 4px 0;
-      transition: width .55s var(--ease-smooth);
+      transition: width .6s var(--ease-smooth);
     }
 
     @keyframes fadeInSlideUp {
@@ -143,7 +142,7 @@
       overflow-y: auto;
       scrollbar-width: none;
       flex-direction: column;
-      padding: 28px 22px 22px;
+      padding: 24px 22px 20px;
     }
 
     .screen::-webkit-scrollbar {
@@ -152,29 +151,26 @@
 
     .screen.active {
       display: flex;
-      animation: fadeInSlideUp .45s var(--ease-smooth) forwards;
-    }
-
-    h1, h2, p {
-      text-align: center;
+      animation: fadeInSlideUp .5s var(--ease-smooth) forwards;
     }
 
     h1 {
       color: var(--primary-dark);
-      font-size: clamp(2.25rem, 8vw, 2.62rem);
+      font-size: clamp(2.2rem, 8vw, 2.55rem);
       font-weight: 800;
-      letter-spacing: -.7px;
-      line-height: 1.08;
-      margin-bottom: 34px;
+      letter-spacing: -.6px;
+      line-height: 1.1;
+      margin-bottom: 30px;
+      text-align: center;
     }
 
     h2 {
       color: var(--primary);
       font-size: 1.34rem;
       font-weight: 800;
-      line-height: 1.26;
+      line-height: 1.25;
       letter-spacing: -.35px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     p {
@@ -194,7 +190,7 @@
       font-weight: 800;
       letter-spacing: -.2px;
       cursor: pointer;
-      transition: all .25s var(--ease-spring);
+      transition: all .3s var(--ease-spring);
       touch-action: manipulation;
     }
 
@@ -211,8 +207,8 @@
 
     textarea {
       width: 100%;
-      height: 108px;
-      min-height: 108px;
+      min-height: 104px;
+      height: clamp(104px, 18svh, 132px);
       padding: 14px 16px;
       border: 1px solid var(--border-soft);
       border-radius: 18px;
@@ -224,8 +220,8 @@
       font-size: .95rem;
       line-height: 1.5;
       color: var(--text-body);
-      margin: 0;
-      transition: border-color .25s ease, box-shadow .25s ease, background-color .25s ease;
+      margin-bottom: 14px;
+      transition: border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
     }
 
     textarea:focus {
@@ -238,101 +234,95 @@
       color: #aaa;
     }
 
-    .step-indicator {
-      color: #999;
-      font-size: .88rem;
-      font-weight: 600;
-      margin-bottom: 18px;
-      letter-spacing: -.2px;
-      text-align: center;
+    .btn-container {
+      margin-top: auto;
+      width: 100%;
+      padding-top: 14px;
     }
 
-    .btn-container {
-      width: 100%;
-      margin-top: auto;
-      padding-top: 34px;
+    .step-indicator {
+      color: #999;
+      font-size: .9rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      letter-spacing: -.2px;
     }
 
     .center-text {
       text-align: center;
     }
 
-    /* HOME */
+    /* Home */
     #home {
       overflow: hidden;
+      text-align: center;
       align-items: center;
-      justify-content: flex-start;
-      padding-top: clamp(108px, 17svh, 158px);
-      padding-bottom: 28px;
+      justify-content: center;
+      padding-top: 26px;
+      padding-bottom: 22px;
+    }
+
+    .home-top-space {
+      flex: .55 1 64px;
+      min-height: 34px;
     }
 
     .home-main {
       max-width: 330px;
-      font-size: 1.1rem;
-      line-height: 1.52;
+      color: var(--text-body);
+      font-size: 1.08rem;
       font-weight: 500;
-      margin-bottom: 30px;
+      line-height: 1.5;
+      margin-bottom: 22px;
     }
 
     .home-invitation {
       width: 100%;
       max-width: 330px;
       color: var(--primary);
-      margin-bottom: 36px;
+      margin-bottom: 26px;
     }
 
     .home-invitation p {
       color: var(--primary);
-      font-size: 1rem;
-      line-height: 1.35;
-      margin-bottom: 6px;
+      text-align: center;
+      margin-bottom: 5px;
+      line-height: 1.3;
     }
 
     .home-invitation strong {
       font-weight: 800;
     }
 
-    #home button {
-      margin-bottom: 18px;
-    }
-
     .home-footer {
       width: 100%;
+      margin-top: auto;
       color: var(--text-muted);
       text-align: center;
-      font-size: .86rem;
-      line-height: 1.44;
-      margin-top: 0;
+      font-size: .74rem;
+      line-height: 1.35;
+      padding-bottom: 2px;
     }
 
     .home-footer p {
-      margin-bottom: 18px;
+      margin-bottom: 8px;
     }
 
     .home-credit {
       border-top: 1px solid rgba(0,0,0,.06);
-      padding-top: 12px;
-      font-size: .78rem;
-      line-height: 1.36;
-      color: rgba(133,130,125,.92);
+      padding-top: 8px;
+      font-size: .68rem;
+      line-height: 1.28;
+      color: rgba(133,130,125,.9);
     }
 
-    /* BREATHING */
-    #breathing {
-      justify-content: flex-start;
-      padding-top: 34px;
-    }
-
+    /* Breathing */
     .intro-note {
       color: var(--text-muted);
       font-size: 1.04rem;
       font-weight: 500;
-      margin: 2px 0 14px;
+      margin: 4px 0 14px;
       line-height: 1.42;
-    }
-
-    #breathing h2 {
-      margin-bottom: 0;
     }
 
     .breathing-container {
@@ -342,7 +332,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding-bottom: clamp(54px, 10svh, 86px);
+      padding-bottom: clamp(34px, 7svh, 72px);
     }
 
     .breathing-circle {
@@ -387,20 +377,14 @@
       font-weight: 600;
     }
 
-    /* WRITING */
-    #event,
-    #need {
-      justify-content: flex-start;
-      padding-top: clamp(84px, 13svh, 118px);
-    }
-
+    /* Writing screens */
     .content-card {
       width: 100%;
-      margin: 0;
-      padding: 24px 18px 20px;
+      margin: auto 0;
+      padding: clamp(18px, 3svh, 24px) 18px clamp(16px, 2.6svh, 22px);
       border-radius: 24px;
-      background: rgba(255,255,255,.74);
-      border: 1px solid rgba(255,255,255,.82);
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(255,255,255,.8);
       box-shadow: var(--shadow-card);
     }
 
@@ -409,8 +393,7 @@
       font-size: 1.02rem;
       font-weight: 800;
       line-height: 1.35;
-      margin: 20px 0 6px;
-      text-align: center;
+      margin: 10px 0 6px;
     }
 
     .helper-text {
@@ -418,7 +401,6 @@
       font-size: .84rem;
       line-height: 1.42;
       margin-bottom: 12px;
-      text-align: center;
     }
 
     .secondary-reveal {
@@ -428,7 +410,7 @@
       box-shadow: none;
       padding: 12px;
       font-size: .95rem;
-      margin-top: 14px;
+      margin-top: 2px;
     }
 
     .secondary-reveal.hidden {
@@ -449,81 +431,63 @@
     .soft-divider {
       width: 100%;
       height: 1px;
-      margin: 28px 0 24px;
+      margin: 22px 0 18px;
       background: linear-gradient(to left, transparent, rgba(95,116,109,.24), transparent);
     }
 
-    .reveal-section h2 {
-      margin-bottom: 12px;
-    }
-
-    /* SUMMARY */
+    /* Summary */
     #summary {
       justify-content: flex-start;
-      padding-top: clamp(54px, 8svh, 82px);
-    }
-
-    #summary .step-indicator {
-      margin-bottom: 24px;
+      padding-top: 18px;
     }
 
     #summary h2 {
-      margin-bottom: 18px;
+      margin-bottom: 8px;
     }
 
     .closing-text {
-      max-width: 330px;
-      margin: 0 auto 0;
+      max-width: 315px;
+      margin-left: auto;
+      margin-right: auto;
       text-align: center;
-      font-size: .96rem;
-      line-height: 1.55;
-    }
-
-    #summary > .closing-text:first-of-type {
-      margin-bottom: 34px;
+      font-size: .9rem;
+      line-height: 1.38;
     }
 
     .summary-showcase {
       width: 100%;
       text-align: center;
       background: var(--primary-soft);
-      border: 1px solid rgba(255,255,255,.78);
-      border-radius: 22px;
-      padding: 20px 18px;
-      margin: 0 0 32px;
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 20px;
+      padding: 12px 14px;
+      margin: 12px 0;
       box-shadow: 0 8px 24px rgba(0,0,0,.02);
     }
 
     .summary-showcase-title {
       color: var(--primary);
-      font-size: 1.14rem;
+      font-size: 1.08rem;
       font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .summary-showcase .closing-text {
-      font-size: .94rem;
-      line-height: 1.5;
-      margin-bottom: 22px;
+      margin-bottom: 6px;
     }
 
     #summary .field-label {
-      margin: 0 0 14px;
-      font-size: 1.03rem;
-      line-height: 1.42;
+      font-size: 1rem;
+      text-align: center;
+      margin: 6px 0 8px;
     }
 
     .quote-note {
-      min-height: 58px;
-      padding: 13px 15px;
+      min-height: 46px;
+      padding: 10px 12px;
       border-radius: 14px;
       border-right: 4px solid rgba(95,116,109,.35);
       background: #fff;
       box-shadow: 0 4px 12px rgba(0,0,0,.018);
       color: var(--text-body);
       text-align: right;
-      font-size: .92rem;
-      line-height: 1.38;
+      line-height: 1.32;
       white-space: pre-wrap;
     }
 
@@ -532,16 +496,12 @@
       color: #aaa;
     }
 
-    #summary > .closing-text:nth-of-type(2) {
-      margin-bottom: 30px;
-    }
-
     .feedback-intro {
-      max-width: 330px;
-      margin: 0 auto 14px;
+      max-width: 320px;
+      margin: 8px auto;
       color: var(--text-muted);
-      font-size: .9rem;
-      line-height: 1.45;
+      font-size: .86rem;
+      line-height: 1.32;
       text-align: center;
     }
 
@@ -554,11 +514,11 @@
       text-decoration: none;
       text-align: center;
       border-radius: 16px;
-      padding: 14px;
-      font-size: 1rem;
+      padding: 12px 14px;
+      font-size: .96rem;
     }
 
-    /* MOBILE APP SURFACE */
+    /* Mobile app surface */
     @media (max-width: 600px) {
       body {
         background: var(--card-cream);
@@ -577,86 +537,54 @@
       }
     }
 
-    /* IPHONE SAFARI VISIBLE VIEWPORT */
+    /* Safari visible viewport / smaller phones */
     @media (max-height: 760px) {
       .screen {
         padding: 18px 18px 14px;
       }
 
       #home {
-        padding-top: 92px;
-        padding-bottom: 18px;
+        padding-top: 22px;
+        padding-bottom: 14px;
+      }
+
+      .home-top-space {
+        flex-basis: 18px;
+        min-height: 12px;
       }
 
       h1 {
-        font-size: 2.08rem;
-        margin-bottom: 28px;
-      }
-
-      .home-main {
-        font-size: 1rem;
-        line-height: 1.42;
+        font-size: 2.05rem;
         margin-bottom: 22px;
       }
 
+      .home-main {
+        font-size: .98rem;
+        line-height: 1.38;
+        margin-bottom: 18px;
+      }
+
       .home-invitation {
-        margin-bottom: 26px;
+        margin-bottom: 20px;
       }
 
       .home-invitation p {
-        font-size: .91rem;
-        line-height: 1.25;
+        font-size: .88rem;
+        line-height: 1.2;
         margin-bottom: 4px;
       }
 
       #home button {
-        padding: 12px;
-        margin-bottom: 16px;
+        padding: 11px;
       }
 
       .home-footer {
-        font-size: .76rem;
-        line-height: 1.36;
-      }
-
-      .home-footer p {
-        margin-bottom: 14px;
+        font-size: .68rem;
       }
 
       .home-credit {
-        font-size: .69rem;
-        line-height: 1.3;
-        padding-top: 9px;
-      }
-
-      #breathing {
-        padding-top: 28px;
-      }
-
-      #breathing .step-indicator {
-        margin-bottom: 14px;
-      }
-
-      .intro-note {
-        font-size: .95rem;
-      }
-
-      #breathing .breathing-container {
-        padding-bottom: 66px;
-      }
-
-      .breathing-circle {
-        width: 126px;
-        height: 126px;
-      }
-
-      #event,
-      #need {
-        padding-top: 70px;
-      }
-
-      .content-card {
-        padding: 18px 14px 16px;
+        font-size: .64rem;
+        line-height: 1.22;
       }
 
       h2 {
@@ -670,127 +598,114 @@
 
       .step-indicator {
         font-size: .8rem;
+        margin-bottom: 9px;
+      }
+
+      .intro-note {
+        font-size: .95rem;
+      }
+
+      .content-card {
+        padding: 14px 13px 12px;
       }
 
       .field-label {
         font-size: .9rem;
-        margin-top: 16px;
-        margin-bottom: 5px;
+        margin-top: 7px;
+        margin-bottom: 4px;
       }
 
       .helper-text {
         font-size: .72rem;
         line-height: 1.25;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
       }
 
       textarea {
-        min-height: 86px;
-        height: 86px;
+        min-height: 74px;
+        height: 78px;
         padding: 10px 12px;
         font-size: .88rem;
+        margin-bottom: 9px;
       }
 
       .secondary-reveal {
         padding: 9px;
         font-size: .88rem;
-        margin-top: 12px;
       }
 
       .soft-divider {
-        margin: 24px 0 20px;
+        margin: 12px 0 10px;
       }
 
-      #event .btn-container,
-      #need .btn-container {
-        padding-top: 26px;
+      .breathing-circle {
+        width: 126px;
+        height: 126px;
+      }
+
+      .breathing-container {
+        padding-bottom: 52px;
       }
 
       #summary {
-        padding-top: 40px;
-      }
-
-      #summary .step-indicator {
-        margin-bottom: 20px;
-      }
-
-      #summary h2 {
-        font-size: 1.22rem;
-        margin-bottom: 14px;
-      }
-
-      #summary > .closing-text:first-of-type {
-        font-size: .86rem;
-        line-height: 1.42;
-        margin-bottom: 26px;
+        padding-top: 14px;
       }
 
       .summary-showcase {
-        padding: 16px 14px;
-        margin-bottom: 24px;
+        padding: 10px 12px;
+        margin: 10px 0;
       }
 
       .summary-showcase-title {
-        font-size: 1rem;
-        margin-bottom: 10px;
+        font-size: .94rem;
       }
 
-      .summary-showcase .closing-text {
-        font-size: .84rem;
-        line-height: 1.36;
-        margin-bottom: 16px;
-      }
-
-      #summary .field-label {
-        font-size: .9rem;
-        margin-bottom: 10px;
+      .closing-text,
+      .feedback-intro {
+        font-size: .78rem;
+        line-height: 1.25;
       }
 
       .quote-note {
-        min-height: 50px;
-        padding: 11px 12px;
-        font-size: .82rem;
+        min-height: 42px;
+        padding: 9px 10px;
+        font-size: .8rem;
+        line-height: 1.24;
       }
 
-      #summary > .closing-text:nth-of-type(2) {
-        margin-bottom: 22px;
-      }
-
-      .feedback-intro {
-        font-size: .82rem;
-        line-height: 1.34;
-        margin-bottom: 10px;
+      .feedback-link {
+        padding: 10px 12px;
+        font-size: .9rem;
       }
     }
 
     @media (max-height: 640px) {
-      #home {
-        padding-top: 58px;
+      .screen {
+        padding: 12px 16px 10px;
       }
 
       h1 {
-        margin-bottom: 18px;
-      }
-
-      .home-main {
+        font-size: 1.78rem;
         margin-bottom: 14px;
       }
 
-      .home-invitation {
-        margin-bottom: 18px;
+      .home-main {
+        font-size: .84rem;
+        margin-bottom: 10px;
       }
 
-      #home button {
+      .home-invitation {
         margin-bottom: 12px;
       }
 
-      #event,
-      #need {
-        padding-top: 44px;
+      .home-invitation p {
+        font-size: .78rem;
+        margin-bottom: 2px;
       }
 
-      #summary {
-        padding-top: 24px;
+      .home-footer,
+      .home-credit {
+        font-size: .56rem;
       }
 
       button,
@@ -798,8 +713,659 @@
         padding: 9px;
         font-size: .86rem;
       }
+
+      .breathing-circle {
+        width: 112px;
+        height: 112px;
+      }
+
+      .breathing-container {
+        padding-bottom: 42px;
+      }
     }
-  </style>
+  
+/* ===== Release 1.3 product-grid spacing pass ===== */
+
+/* Universal rhythm */
+.screen {
+  --space-xs: 8px;
+  --space-sm: 14px;
+  --space-md: 24px;
+  --space-lg: 36px;
+  --space-xl: 52px;
+}
+
+/* Home: move privacy close to the start decision, make footer readable */
+#home {
+  justify-content: flex-start !important;
+  padding-top: clamp(110px, 17svh, 160px) !important;
+  padding-bottom: 24px !important;
+}
+
+#home .home-top-space {
+  display: none !important;
+}
+
+#home h1 {
+  margin-bottom: 34px !important;
+}
+
+#home .home-main {
+  font-size: 1.1rem !important;
+  line-height: 1.55 !important;
+  margin-bottom: 28px !important;
+}
+
+#home .home-invitation {
+  margin-bottom: 34px !important;
+}
+
+#home .home-invitation p {
+  font-size: 1rem !important;
+  line-height: 1.35 !important;
+  margin-bottom: 6px !important;
+}
+
+#home button {
+  margin-bottom: 18px !important;
+}
+
+#home .home-footer {
+  margin-top: 0 !important;
+  font-size: .86rem !important;
+  line-height: 1.45 !important;
+  padding-bottom: 0 !important;
+}
+
+#home .home-footer p {
+  margin-bottom: 18px !important;
+}
+
+#home .home-credit {
+  font-size: .78rem !important;
+  line-height: 1.38 !important;
+  padding-top: 12px !important;
+}
+
+/* Breathing: reduce the empty gap above the ball */
+#breathing {
+  padding-top: 34px !important;
+}
+
+#breathing .step-indicator {
+  margin-bottom: 16px !important;
+}
+
+#breathing .intro-note {
+  margin-bottom: 16px !important;
+}
+
+#breathing h2 {
+  margin-bottom: 0 !important;
+}
+
+#breathing .breathing-container {
+  justify-content: center !important;
+  padding-bottom: clamp(54px, 10svh, 86px) !important;
+}
+
+/* Writing screens: stable grid and clearer separation */
+#event,
+#need {
+  justify-content: flex-start !important;
+  padding-top: clamp(84px, 13svh, 118px) !important;
+}
+
+#event .content-card,
+#need .content-card {
+  margin: 0 !important;
+  padding: 24px 18px 20px !important;
+}
+
+#event .btn-container,
+#need .btn-container {
+  padding-top: 30px !important;
+}
+
+#event textarea,
+#need textarea {
+  min-height: 104px !important;
+  height: 112px !important;
+}
+
+#event .reveal-section textarea,
+#need .reveal-section textarea {
+  min-height: 104px !important;
+  height: 112px !important;
+}
+
+#event .soft-divider,
+#need .soft-divider {
+  margin: 26px 0 22px !important;
+}
+
+/* Summary: make it feel intentional and spacious, not compressed */
+#summary {
+  justify-content: flex-start !important;
+  padding-top: clamp(54px, 8svh, 82px) !important;
+}
+
+#summary .step-indicator {
+  margin-bottom: 26px !important;
+}
+
+#summary h2 {
+  margin-bottom: 18px !important;
+}
+
+#summary > .closing-text:first-of-type {
+  font-size: .96rem !important;
+  line-height: 1.55 !important;
+  margin-bottom: 34px !important;
+}
+
+#summary .summary-showcase {
+  padding: 20px 18px !important;
+  margin: 0 0 32px !important;
+}
+
+#summary .summary-showcase-title {
+  font-size: 1.14rem !important;
+  margin-bottom: 14px !important;
+}
+
+#summary .summary-showcase .closing-text {
+  font-size: .94rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 22px !important;
+}
+
+#summary .field-label {
+  font-size: 1.03rem !important;
+  line-height: 1.42 !important;
+  margin: 0 0 14px !important;
+}
+
+#summary .quote-note {
+  min-height: 58px !important;
+  padding: 13px 15px !important;
+  font-size: .92rem !important;
+  line-height: 1.38 !important;
+}
+
+#summary > .closing-text:nth-of-type(2) {
+  margin-bottom: 30px !important;
+}
+
+#summary .feedback-intro {
+  font-size: .9rem !important;
+  line-height: 1.45 !important;
+  margin-bottom: 14px !important;
+}
+
+#summary .feedback-link {
+  padding: 14px !important;
+  font-size: 1rem !important;
+}
+
+/* iPhone Safari visible viewport */
+@media (max-height: 760px) {
+  #home {
+    padding-top: 92px !important;
+    padding-bottom: 18px !important;
+  }
+
+  #home h1 {
+    font-size: 2.08rem !important;
+    margin-bottom: 28px !important;
+  }
+
+  #home .home-main {
+    font-size: 1rem !important;
+    line-height: 1.42 !important;
+    margin-bottom: 22px !important;
+  }
+
+  #home .home-invitation {
+    margin-bottom: 26px !important;
+  }
+
+  #home .home-invitation p {
+    font-size: .91rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 4px !important;
+  }
+
+  #home button {
+    padding: 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  #home .home-footer {
+    font-size: .76rem !important;
+    line-height: 1.36 !important;
+  }
+
+  #home .home-footer p {
+    margin-bottom: 14px !important;
+  }
+
+  #home .home-credit {
+    font-size: .69rem !important;
+    line-height: 1.3 !important;
+    padding-top: 9px !important;
+  }
+
+  #breathing {
+    padding-top: 28px !important;
+  }
+
+  #breathing .breathing-container {
+    padding-bottom: 66px !important;
+  }
+
+  #event,
+  #need {
+    padding-top: 70px !important;
+  }
+
+  #event .content-card,
+  #need .content-card {
+    padding: 18px 14px 16px !important;
+  }
+
+  #event textarea,
+  #need textarea,
+  #event .reveal-section textarea,
+  #need .reveal-section textarea {
+    min-height: 82px !important;
+    height: 86px !important;
+  }
+
+  #event .btn-container,
+  #need .btn-container {
+    padding-top: 26px !important;
+  }
+
+  #summary {
+    padding-top: 40px !important;
+  }
+
+  #summary .step-indicator {
+    margin-bottom: 20px !important;
+  }
+
+  #summary h2 {
+    font-size: 1.22rem !important;
+    margin-bottom: 14px !important;
+  }
+
+  #summary > .closing-text:first-of-type {
+    font-size: .86rem !important;
+    line-height: 1.42 !important;
+    margin-bottom: 26px !important;
+  }
+
+  #summary .summary-showcase {
+    padding: 16px 14px !important;
+    margin-bottom: 24px !important;
+  }
+
+  #summary .summary-showcase-title {
+    font-size: 1rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  #summary .summary-showcase .closing-text {
+    font-size: .84rem !important;
+    line-height: 1.36 !important;
+    margin-bottom: 16px !important;
+  }
+
+  #summary .field-label {
+    font-size: .9rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  #summary .quote-note {
+    min-height: 50px !important;
+    padding: 11px 12px !important;
+    font-size: .82rem !important;
+  }
+
+  #summary > .closing-text:nth-of-type(2) {
+    margin-bottom: 22px !important;
+  }
+
+  #summary .feedback-intro {
+    font-size: .82rem !important;
+    line-height: 1.34 !important;
+    margin-bottom: 10px !important;
+  }
+}
+
+/* Very small visible heights */
+@media (max-height: 640px) {
+  #home {
+    padding-top: 58px !important;
+  }
+
+  #home h1 {
+    margin-bottom: 18px !important;
+  }
+
+  #home .home-main {
+    margin-bottom: 14px !important;
+  }
+
+  #home .home-invitation {
+    margin-bottom: 18px !important;
+  }
+
+  #home button {
+    margin-bottom: 12px !important;
+  }
+
+  #event,
+  #need {
+    padding-top: 44px !important;
+  }
+
+  #summary {
+    padding-top: 24px !important;
+  }
+}
+
+
+/* ===== FINAL VISIBLE RELEASE PASS 2.1 ===== */
+
+/* Home screen: move from "floating middle block" to clear launch composition */
+#home {
+  justify-content: flex-start !important;
+  padding: 118px 22px 24px !important;
+}
+
+#home h1 {
+  font-size: 2.55rem !important;
+  margin-bottom: 32px !important;
+}
+
+#home .home-main {
+  font-size: 1.12rem !important;
+  line-height: 1.55 !important;
+  margin-bottom: 30px !important;
+}
+
+#home .home-invitation {
+  margin-bottom: 34px !important;
+}
+
+#home .home-invitation p {
+  font-size: 1rem !important;
+  line-height: 1.36 !important;
+  margin-bottom: 6px !important;
+}
+
+#home button {
+  margin-bottom: 18px !important;
+}
+
+#home .home-footer {
+  width: 100% !important;
+  margin-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#home .privacy-note {
+  display: block !important;
+  width: 100% !important;
+  max-width: 340px !important;
+  margin: 0 auto 18px !important;
+  padding: 13px 16px !important;
+  border: 1px solid rgba(95,116,109,.18) !important;
+  border-radius: 18px !important;
+  background: rgba(255,255,255,.58) !important;
+  box-shadow: 0 8px 22px rgba(0,0,0,.028) !important;
+  color: #6f7772 !important;
+  font-size: .88rem !important;
+  line-height: 1.4 !important;
+  font-weight: 600 !important;
+}
+
+#home .privacy-note::before {
+  content: "🔒 ";
+  font-size: .95rem;
+}
+
+#home .home-credit {
+  max-width: 340px !important;
+  margin: 0 auto !important;
+  padding-top: 12px !important;
+  font-size: .78rem !important;
+  line-height: 1.42 !important;
+  color: rgba(112,112,112,.92) !important;
+}
+
+/* Breathing screen: one cohesive vertical composition */
+#breathing {
+  padding-top: 38px !important;
+}
+
+#breathing .step-indicator {
+  margin-bottom: 18px !important;
+}
+
+#breathing .intro-note {
+  margin-bottom: 18px !important;
+}
+
+#breathing h2 {
+  margin-bottom: 0 !important;
+}
+
+#breathing .breathing-container {
+  justify-content: center !important;
+  padding-bottom: 82px !important;
+}
+
+#breathing .breathing-circle {
+  width: 140px !important;
+  height: 140px !important;
+}
+
+/* Writing screens: wider card, stable rhythm, no compressed feel */
+#event,
+#need {
+  padding: 80px 18px 18px !important;
+}
+
+#event .content-card,
+#need .content-card {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 22px 18px 18px !important;
+  border-radius: 26px !important;
+}
+
+#event textarea,
+#need textarea,
+#event .reveal-section textarea,
+#need .reveal-section textarea {
+  min-height: 100px !important;
+  height: 104px !important;
+}
+
+#event .btn-container,
+#need .btn-container {
+  padding-top: 34px !important;
+}
+
+#event .soft-divider,
+#need .soft-divider {
+  margin: 28px 0 24px !important;
+}
+
+/* Summary screen: deliberately airy, using the available screen */
+#summary {
+  padding: 52px 22px 22px !important;
+  justify-content: flex-start !important;
+}
+
+#summary .step-indicator {
+  margin-bottom: 22px !important;
+}
+
+#summary h2 {
+  margin-bottom: 18px !important;
+}
+
+#summary > .closing-text:first-of-type {
+  font-size: .96rem !important;
+  line-height: 1.56 !important;
+  margin-bottom: 30px !important;
+}
+
+#summary .summary-showcase {
+  padding: 20px 18px !important;
+  margin: 0 0 28px !important;
+  border-radius: 24px !important;
+}
+
+#summary .summary-showcase-title {
+  font-size: 1.16rem !important;
+  margin-bottom: 14px !important;
+}
+
+#summary .summary-showcase .closing-text {
+  font-size: .94rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 20px !important;
+}
+
+#summary .field-label {
+  font-size: 1.04rem !important;
+  line-height: 1.42 !important;
+  margin: 0 0 14px !important;
+}
+
+#summary .quote-note {
+  min-height: 58px !important;
+  padding: 13px 15px !important;
+  font-size: .92rem !important;
+  line-height: 1.38 !important;
+}
+
+#summary > .closing-text:nth-of-type(2) {
+  margin-bottom: 28px !important;
+}
+
+#summary .feedback-intro {
+  font-size: .9rem !important;
+  line-height: 1.45 !important;
+  margin-bottom: 14px !important;
+}
+
+#summary .feedback-link {
+  padding: 14px !important;
+  font-size: 1rem !important;
+}
+
+/* iPhone Safari visible viewport */
+@media (max-height: 760px) {
+  #home {
+    padding-top: 82px !important;
+    padding-bottom: 18px !important;
+  }
+
+  #home h1 {
+    font-size: 2.2rem !important;
+    margin-bottom: 26px !important;
+  }
+
+  #home .home-main {
+    font-size: 1rem !important;
+    line-height: 1.43 !important;
+    margin-bottom: 22px !important;
+  }
+
+  #home .home-invitation {
+    margin-bottom: 26px !important;
+  }
+
+  #home .home-invitation p {
+    font-size: .91rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 4px !important;
+  }
+
+  #home button {
+    margin-bottom: 14px !important;
+    padding: 12px !important;
+  }
+
+  #home .privacy-note {
+    font-size: .78rem !important;
+    line-height: 1.32 !important;
+    padding: 10px 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  #home .home-credit {
+    font-size: .69rem !important;
+    line-height: 1.3 !important;
+    padding-top: 8px !important;
+  }
+
+  #breathing {
+    padding-top: 28px !important;
+  }
+
+  #breathing .breathing-container {
+    padding-bottom: 70px !important;
+  }
+
+  #breathing .breathing-circle {
+    width: 128px !important;
+    height: 128px !important;
+  }
+
+  #event,
+  #need {
+    padding: 66px 18px 18px !important;
+  }
+
+  #event .content-card,
+  #need .content-card {
+    padding: 18px 14px 16px !important;
+  }
+
+  #event textarea,
+  #need textarea,
+  #event .reveal-section textarea,
+  #need .reveal-section textarea {
+    min-height: 86px !important;
+    height: 88px !important;
+  }
+
+  #summary {
+    padding-top: 36px !important;
+  }
+
+  #summary > .closing-text:first-of-type {
+    margin-bottom: 22px !important;
+  }
+
+  #summary .summary-showcase {
+    padding: 16px 14px !important;
+    margin-bottom: 22px !important;
+  }
+
+  #summary .quote-note {
+    min-height: 50px !important;
+  }
+}
+
+</style>
 </head>
 
 <body>
@@ -813,6 +1379,8 @@
     </div>
 
     <div class="screen active" id="home">
+      <div class="home-top-space"></div>
+
       <h1>רגע חמלה</h1>
 
       <p class="home-main">
@@ -830,7 +1398,7 @@
       <button type="button" onclick="startTool()">מתחילים</button>
 
       <div class="home-footer">
-        <p>כל מה שנכתב כאן נשאר על המסך בלבד ואינו נשמר.</p>
+        <p class="privacy-note">כל מה שנכתב כאן נשאר על המסך בלבד ואינו נשמר.</p>
         <div class="home-credit">
           פיתוח והתאמה להקשר הישראלי: שגית ציפלוביץ · 2026<br>
           מבוסס על פרוטוקול CMT-T של Matos et al.
@@ -904,14 +1472,14 @@
     </div>
 
     <div class="screen" id="summary">
-      <div class="step-indicator">שלב 4 מתוך 4</div>
-      <h2>תודה שהקדשתם לעצמכם רגע.</h2>
+      <div class="step-indicator center-text">שלב 4 מתוך 4</div>
+      <h2 class="center-text">תודה שהקדשתם לעצמכם רגע.</h2>
       <p class="closing-text">לפעמים כמה דקות של עצירה יכולות לשנות את הדרך שבה אנחנו ממשיכים את היום.</p>
 
       <div class="summary-showcase">
         <div class="summary-showcase-title">רגע חמלה</div>
         <p class="closing-text">הרגע הזה הוא הזדמנות לעצור, להקשיב לעצמכם ולפגוש גם את הקושי במעט יותר חמלה.</p>
-        <p class="field-label">קראו את מה שכתבתם, ותנו לעצמכם לקבל את המילים האלה.</p>
+        <p class="field-label center-text">קראו את מה שכתבתם, ותנו לעצמכם לקבל את המילים האלה.</p>
         <div class="quote-note" id="supportReview"></div>
       </div>
 
