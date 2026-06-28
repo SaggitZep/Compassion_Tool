@@ -535,313 +535,221 @@
       .home-credit { font-size: .58rem; }
       button { min-height: 40px; padding: 10px; font-size: .92rem; }
     }
+  
 
-    /* Release layout pass: spacing and sizing only */
-    .screen {
-      padding-block-start: 28px;
-      padding-block-end: 22px;
-    }
+    /* Release mobile layout correction: layout/spacing only */
+    @media (hover: none), (max-width: 520px) {
+      :root {
+        --space-screen-block: clamp(20px, 3.2svh, 30px);
+        --space-screen-inline: 22px;
+      }
 
-    .screen.is-active:not(.screen--home) {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .screen:not(.screen--home) > .content-card {
-      flex: 1 1 auto;
-      min-height: 0;
-      margin-block: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .screen:not(.screen--home) > .button-stack {
-      flex: 0 0 auto;
-      margin-block-start: 0;
-      padding-block-start: 16px;
-    }
-
-    .content-card > textarea,
-    .reveal-section textarea {
-      flex: 0 0 auto;
-    }
-
-    .content-card > .button--secondary {
-      margin-block-start: auto;
-    }
-
-    .content-card:has(.reveal-section.is-visible) > .button--secondary {
-      margin-block-start: 0;
-    }
-
-    .content-card:has(.reveal-section.is-visible) {
-      justify-content: flex-start;
-    }
-
-    p {
-      font-size: 1.04rem;
-      line-height: 1.58;
-    }
-
-    .field-label {
-      font-size: 1.11rem;
-      line-height: 1.35;
-    }
-
-    .helper-text {
-      font-size: .92rem;
-      line-height: 1.44;
-    }
-
-    textarea {
-      font-size: 1.03rem;
-      line-height: 1.52;
-    }
-
-    .step-indicator {
-      font-size: .97rem;
-    }
-
-    .intro-note {
-      font-size: 1.12rem;
-    }
-
-    .closing-text {
-      font-size: 1.02rem;
-    }
-
-    .feedback-intro {
-      font-size: .95rem;
-    }
-
-    #breathing {
-      --breathing-safe-gap: 46px;
-    }
-
-    #breathing .intro-note {
-      margin-block-end: 10px;
-    }
-
-    #breathing h2 {
-      margin-block-end: 8px;
-    }
-
-    .breathing {
-      flex: 1 1 auto;
-      min-height: 0;
-      justify-content: center;
-      padding-block: 6px 8px;
-    }
-
-    .breathing__text {
-      min-height: 2.7em;
-      margin-block-start: var(--breathing-safe-gap);
-      font-size: 1.06rem;
-      line-height: 1.32;
-    }
-
-    @media (max-height: 760px) {
       .screen {
-        padding-block-start: 22px;
-        padding-block-end: 16px;
+        padding-block: var(--space-screen-block) clamp(18px, 2.6svh, 24px);
       }
 
       p {
-        font-size: .98rem;
-        line-height: 1.48;
+        font-size: 1.04rem;
+        line-height: 1.56;
       }
 
       .field-label {
-        font-size: 1rem;
-      }
-
-      .helper-text {
-        font-size: .82rem;
+        font-size: 1.1rem;
         line-height: 1.34;
       }
 
+      .helper-text {
+        font-size: .92rem;
+        line-height: 1.42;
+      }
+
       textarea {
-        font-size: .95rem;
+        font-size: 1.03rem;
+        line-height: 1.5;
       }
 
       .step-indicator {
-        font-size: .9rem;
+        font-size: .96rem;
       }
 
       .intro-note {
-        font-size: 1rem;
+        font-size: 1.12rem;
       }
 
-      .closing-text,
+      .closing-text {
+        font-size: 1.02rem;
+      }
+
       .feedback-intro {
-        font-size: .88rem;
-        line-height: 1.34;
+        font-size: .95rem;
       }
 
-      #breathing {
-        --breathing-safe-gap: 40px;
+      .screen--home {
+        justify-content: flex-start;
       }
 
-      .breathing {
-        min-height: 0;
-        padding-block: 4px 6px;
+      .home-spacer {
+        flex: 0 1 clamp(58px, 11svh, 104px);
+        min-height: clamp(58px, 11svh, 104px);
       }
 
-      .breathing__text {
-        font-size: .98rem;
-      }
-    }
-
-    @media (max-height: 640px) {
-      .screen {
-        padding-block-start: 16px;
-        padding-block-end: 12px;
+      .home-footer {
+        margin-block-start: auto;
       }
 
-      p {
-        font-size: .9rem;
+      #breathing.is-active {
+        display: grid;
+        grid-template-rows: auto auto auto minmax(0, 1fr) auto;
       }
 
-      .field-label {
-        font-size: .94rem;
+      #breathing .step-indicator {
+        margin-block-end: clamp(8px, 1.5svh, 14px);
       }
 
-      .helper-text {
-        font-size: .76rem;
+      #breathing .intro-note {
+        margin-block: 0 clamp(8px, 1.4svh, 12px);
       }
 
-      textarea {
-        font-size: .88rem;
-      }
-
-      #breathing {
-        --breathing-safe-gap: 34px;
-      }
-
-      .breathing__text {
-        font-size: .92rem;
-      }
-    }
-
-
-    /* Final acceptance fix: layout use + no duplicate continue buttons */
-    .screen:not(.screen--home):not(#breathing) {
-      gap: clamp(12px, 2svh, 18px);
-    }
-
-    .screen:not(.screen--home):not(#breathing) > .content-card {
-      flex: 1 1 auto;
-      min-height: 0;
-      margin-block: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .screen:has(> .content-card > .button--secondary:not(.is-hidden)) > .button-stack {
-      display: none;
-    }
-
-    .content-card > .button--secondary:not(.is-hidden) {
-      margin-block-start: auto;
-    }
-
-    .content-card > textarea {
-      flex: 1 1 auto;
-      min-height: clamp(118px, 22svh, 168px);
-      height: auto;
-    }
-
-    .content-card:has(.reveal-section.is-visible) {
-      justify-content: flex-start;
-    }
-
-    .content-card:has(.reveal-section.is-visible) > textarea {
-      flex: 0 0 clamp(84px, 13svh, 116px);
-      min-height: clamp(84px, 13svh, 116px);
-      height: clamp(84px, 13svh, 116px);
-    }
-
-    .reveal-section.is-visible {
-      flex: 1 1 auto;
-      min-height: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .reveal-section.is-visible textarea {
-      flex: 1 1 auto;
-      min-height: clamp(96px, 18svh, 150px);
-      height: auto;
-    }
-
-    #summary {
-      gap: clamp(12px, 2svh, 18px);
-    }
-
-    #summary .summary-card {
-      flex: 1 1 auto;
-      min-height: 0;
-      margin-block: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #summary .quote-note {
-      flex: 1 1 auto;
-      min-height: clamp(108px, 24svh, 190px);
-    }
-
-    #summary .feedback-link {
-      margin-block-start: auto;
-    }
-
-    #breathing .breathing {
-      justify-content: center;
-      gap: clamp(38px, 6svh, 56px);
-      padding-block: clamp(8px, 2svh, 18px);
-    }
-
-    #breathing .breathing__text {
-      margin-block-start: 0;
-    }
-
-    @media (max-height: 760px) {
-      .content-card > textarea {
-        min-height: clamp(92px, 19svh, 132px);
-      }
-
-      .content-card:has(.reveal-section.is-visible) > textarea {
-        flex-basis: clamp(70px, 12svh, 96px);
-        min-height: clamp(70px, 12svh, 96px);
-        height: clamp(70px, 12svh, 96px);
-      }
-
-      .reveal-section.is-visible textarea {
-        min-height: clamp(76px, 15svh, 116px);
+      #breathing h2 {
+        margin-block-end: 0;
       }
 
       #breathing .breathing {
-        gap: clamp(34px, 5.5svh, 48px);
-      }
-    }
-
-    @media (max-height: 640px) {
-      .content-card > textarea {
-        min-height: clamp(70px, 16svh, 104px);
+        min-height: 0;
+        padding-block: clamp(10px, 2svh, 18px) clamp(6px, 1.4svh, 12px);
+        justify-content: center;
+        gap: clamp(48px, 6.2svh, 58px);
       }
 
-      .content-card:has(.reveal-section.is-visible) > textarea {
-        flex-basis: clamp(60px, 10svh, 78px);
-        min-height: clamp(60px, 10svh, 78px);
-        height: clamp(60px, 10svh, 78px);
+      #breathing .breathing__text {
+        margin-block-start: 0;
+        min-height: 2.7em;
+        font-size: 1.06rem;
+        line-height: 1.32;
+      }
+
+      #event.is-active,
+      #need.is-active {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        row-gap: clamp(12px, 2svh, 18px);
+      }
+
+      #event > .content-card,
+      #need > .content-card {
+        height: 100%;
+        min-height: 0;
+        margin-block: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #event > .button-stack,
+      #need > .button-stack {
+        margin-block-start: 0;
+        padding-block-start: 0;
+      }
+
+      #event:has(> .content-card > .button--secondary:not(.is-hidden)) > .button-stack,
+      #need:has(> .content-card > .button--secondary:not(.is-hidden)) > .button-stack {
+        display: none;
+      }
+
+      #event .content-card > .button--secondary:not(.is-hidden),
+      #need .content-card > .button--secondary:not(.is-hidden) {
+        margin-block-start: auto;
+      }
+
+      #event .content-card > textarea,
+      #need .content-card > textarea {
+        flex: 1 1 auto;
+        min-height: clamp(124px, 24svh, 178px);
+        height: auto;
+      }
+
+      #event .content-card:has(.reveal-section.is-visible),
+      #need .content-card:has(.reveal-section.is-visible) {
+        justify-content: flex-start;
+      }
+
+      #event .content-card:has(.reveal-section.is-visible) > textarea,
+      #need .content-card:has(.reveal-section.is-visible) > textarea {
+        flex: 0 0 clamp(78px, 12svh, 108px);
+        min-height: clamp(78px, 12svh, 108px);
+        height: clamp(78px, 12svh, 108px);
+      }
+
+      .reveal-section.is-visible {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
       }
 
       .reveal-section.is-visible textarea {
-        min-height: clamp(64px, 13svh, 92px);
+        flex: 1 1 auto;
+        min-height: clamp(108px, 19svh, 158px);
+        height: auto;
+      }
+
+      #summary.is-active {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #summary .summary-card {
+        flex: 1 1 auto;
+        min-height: 0;
+        margin-block: clamp(14px, 2.2svh, 20px);
+        display: flex;
+        flex-direction: column;
       }
 
       #summary .quote-note {
-        min-height: clamp(74px, 18svh, 120px);
+        flex: 1 1 auto;
+        min-height: clamp(150px, 28svh, 230px);
+      }
+
+      #summary .feedback-link {
+        margin-block-start: auto;
+      }
+    }
+
+    @media (hover: none) and (max-height: 760px), (max-width: 520px) and (max-height: 760px) {
+      p { font-size: .98rem; line-height: 1.48; }
+      .field-label { font-size: 1rem; }
+      .helper-text { font-size: .82rem; line-height: 1.34; }
+      textarea { font-size: .95rem; }
+      .intro-note { font-size: 1rem; }
+      .closing-text, .feedback-intro { font-size: .88rem; line-height: 1.34; }
+
+      .home-spacer {
+        flex-basis: clamp(42px, 8svh, 76px);
+        min-height: clamp(42px, 8svh, 76px);
+      }
+
+      #breathing .breathing {
+        gap: clamp(42px, 5.8svh, 52px);
+      }
+
+      #event .content-card > textarea,
+      #need .content-card > textarea {
+        min-height: clamp(96px, 20svh, 136px);
+      }
+
+      #event .content-card:has(.reveal-section.is-visible) > textarea,
+      #need .content-card:has(.reveal-section.is-visible) > textarea {
+        flex-basis: clamp(68px, 11svh, 92px);
+        min-height: clamp(68px, 11svh, 92px);
+        height: clamp(68px, 11svh, 92px);
+      }
+
+      .reveal-section.is-visible textarea {
+        min-height: clamp(82px, 16svh, 124px);
+      }
+
+      #summary .quote-note {
+        min-height: clamp(100px, 22svh, 160px);
       }
     }
 
