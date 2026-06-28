@@ -14,10 +14,8 @@
   <style>
     :root {
       color-scheme: light;
-
       --color-bg: #e4e9e0;
       --color-surface: #fdfcf8;
-      --color-surface-soft: rgba(255, 255, 255, .72);
       --color-input: #faf9f7;
       --color-primary: #5f746d;
       --color-primary-deep: #294732;
@@ -26,6 +24,7 @@
       --color-primary-border: rgba(95, 116, 109, .16);
       --color-text: #4a4a4a;
       --color-muted: #85827d;
+      --color-muted-strong: #74716c;
       --color-placeholder: #aaa;
       --color-border: rgba(0, 0, 0, .055);
       --color-white-border: rgba(255, 255, 255, .82);
@@ -36,29 +35,19 @@
       --shadow-primary: 0 8px 20px rgba(95, 116, 109, .18);
 
       --radius-shell: 36px;
-      --radius-card: 24px;
       --radius-field: 18px;
       --radius-pill: 999px;
-
       --shell-width: min(92vw, 414px);
       --shell-height: min(94svh, 844px);
-      --space-screen-block: 24px;
-      --space-screen-inline: 22px;
-
+      --screen-pad-x: clamp(22px, 6vw, 32px);
+      --screen-pad-y: clamp(24px, 4.2svh, 40px);
       --ease-smooth: cubic-bezier(.2, .8, .2, 1);
       --ease-spring: cubic-bezier(.25, .8, .15, 1.15);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-
-    * {
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
+    * { margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html { height: 100%; }
-
     body {
       min-height: 100svh;
       width: 100vw;
@@ -76,7 +65,7 @@
 
     button {
       width: 100%;
-      min-height: 50px;
+      min-height: 54px;
       border: 0;
       border-radius: var(--radius-pill);
       background: var(--color-primary);
@@ -86,62 +75,49 @@
       letter-spacing: -.2px;
       cursor: pointer;
       box-shadow: var(--shadow-primary);
-      transition: transform .3s var(--ease-spring), box-shadow .3s var(--ease-spring), background-color .3s ease;
+      transition: transform .3s var(--ease-spring), box-shadow .3s var(--ease-spring), background-color .3s ease, opacity .24s ease;
       touch-action: manipulation;
     }
-
     button:active { transform: scale(.96); box-shadow: 0 4px 10px rgba(95, 116, 109, .18); }
     button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 3px solid rgba(95, 116, 109, .28); outline-offset: 3px; }
 
     textarea {
       width: 100%;
-      min-height: 128px;
-      height: clamp(128px, 21svh, 170px);
-      margin-block-end: 14px;
-      padding: 14px 16px;
+      min-height: clamp(118px, 16svh, 148px);
+      padding: 16px 17px;
       resize: none;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-field);
       background: var(--color-input);
       color: var(--color-text);
       font-size: 1.03rem;
-      line-height: 1.52;
+      line-height: 1.55;
       box-shadow: var(--shadow-inner);
       transition: border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
     }
-
     textarea:focus {
       border-color: transparent;
       background: #fff;
       box-shadow: 0 0 0 3px var(--color-primary-soft), var(--shadow-card);
       outline: none;
     }
-
     textarea::placeholder { color: #b0b0b0; }
 
     h1 {
-      margin-block-end: 34px;
       color: var(--color-primary-deep);
-      font-size: clamp(2.2rem, 8vw, 2.55rem);
+      font-size: clamp(2.55rem, 9vw, 3rem);
       font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -.6px;
+      line-height: 1.08;
+      letter-spacing: -.7px;
     }
-
     h2 {
-      margin-block-end: 12px;
       color: var(--color-primary);
-      font-size: 1.36rem;
+      font-size: clamp(1.48rem, 5.4vw, 1.72rem);
       font-weight: 800;
       line-height: 1.25;
       letter-spacing: -.35px;
     }
-
-    p {
-      margin-block-end: 14px;
-      font-size: 1.04rem;
-      line-height: 1.58;
-    }
+    p { font-size: 1.05rem; line-height: 1.58; }
 
     .app-shell {
       position: relative;
@@ -159,479 +135,199 @@
         var(--color-surface);
       box-shadow: var(--shadow-shell);
     }
-
     .decor { position: absolute; pointer-events: none; z-index: -1; }
-    .decor--top {
-      inset-block-start: -56px;
-      inset-inline-end: -54px;
-      width: 190px;
-      height: 190px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(232, 238, 226, .95) 0%, rgba(253, 252, 248, 0) 70%);
-      filter: blur(10px);
-    }
+    .decor--top { inset-block-start: -56px; inset-inline-end: -54px; width: 190px; height: 190px; border-radius: 50%; background: radial-gradient(circle, rgba(232, 238, 226, .95) 0%, rgba(253, 252, 248, 0) 70%); filter: blur(10px); }
+    .decor--bottom { inset-block-end: -64px; inset-inline-start: -60px; width: 210px; height: 210px; border-radius: 50%; background: radial-gradient(circle, rgba(232, 238, 226, .72) 0%, rgba(253, 252, 248, 0) 72%); filter: blur(10px); }
+    .decor--leaf { inset-block-start: 18px; inset-inline-start: -24px; width: 170px; height: 170px; background: radial-gradient(ellipse at 30% 28%, rgba(95, 116, 109, .10) 0 11%, transparent 12%), radial-gradient(ellipse at 62% 38%, rgba(95, 116, 109, .08) 0 10%, transparent 11%), radial-gradient(ellipse at 44% 68%, rgba(95, 116, 109, .07) 0 11%, transparent 12%); filter: blur(9px); transform: rotate(-18deg); }
 
-    .decor--bottom {
-      inset-block-end: -64px;
-      inset-inline-start: -60px;
-      width: 210px;
-      height: 210px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(232, 238, 226, .72) 0%, rgba(253, 252, 248, 0) 72%);
-      filter: blur(10px);
-    }
-
-    .decor--leaf {
-      inset-block-start: 18px;
-      inset-inline-start: -24px;
-      width: 170px;
-      height: 170px;
-      background:
-        radial-gradient(ellipse at 30% 28%, rgba(95, 116, 109, .10) 0 11%, transparent 12%),
-        radial-gradient(ellipse at 62% 38%, rgba(95, 116, 109, .08) 0 10%, transparent 11%),
-        radial-gradient(ellipse at 44% 68%, rgba(95, 116, 109, .07) 0 11%, transparent 12%);
-      filter: blur(9px);
-      transform: rotate(-18deg);
-    }
-
-    .progress {
-      position: absolute;
-      inset-block-start: 0;
-      inset-inline: 0;
-      z-index: 5;
-      height: 5px;
-      overflow: hidden;
-      background: rgba(0, 0, 0, .02);
-      opacity: 0;
-      transition: opacity .24s ease;
-    }
-
+    .progress { position: absolute; inset-block-start: 0; inset-inline: 0; z-index: 5; height: 5px; overflow: hidden; background: rgba(0, 0, 0, .02); opacity: 0; transition: opacity .24s ease; }
     .progress.is-visible { opacity: 1; }
-
-    .progress__bar {
-      width: 0;
-      height: 100%;
-      border-radius: 0 4px 4px 0;
-      background: var(--color-primary);
-      transition: width .6s var(--ease-smooth);
-    }
+    .progress__bar { width: 0; height: 100%; border-radius: 0 4px 4px 0; background: var(--color-primary); transition: width .6s var(--ease-smooth); }
 
     .screen {
       display: none;
       position: relative;
       z-index: 1;
-      flex-direction: column;
       width: 100%;
       height: 100%;
-      padding: var(--space-screen-block) var(--space-screen-inline) 20px;
+      padding: var(--screen-pad-y) var(--screen-pad-x) calc(var(--screen-pad-y) - 4px);
       overflow-x: hidden;
       overflow-y: auto;
       scrollbar-width: none;
     }
-
     .screen::-webkit-scrollbar { display: none; }
-    .screen.is-active { display: flex; animation: fade-in-up .5s var(--ease-smooth) both; }
+    .screen.is-active { display: grid; animation: fade-in-up .5s var(--ease-smooth) both; }
+
     .screen--home {
-      display: none;
-      grid-template-rows: minmax(34px, .75fr) auto auto auto auto minmax(18px, .55fr) auto;
+      grid-template-rows: minmax(18px, .55fr) auto minmax(24px, .36fr) auto minmax(20px, .28fr) auto minmax(22px, .5fr) auto;
       align-items: center;
-      overflow: hidden;
       text-align: center;
+      overflow: hidden;
     }
-
-    .screen--home.is-active { display: grid; animation: fade-in-up .5s var(--ease-smooth) both; }
-
-    .home-main {
-      max-width: 330px;
-      margin-block-end: 28px;
-      font-size: 1.08rem;
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    .home-invitation {
-      width: 100%;
-      max-width: 330px;
-      margin-block-end: 30px;
-      color: var(--color-primary);
-      font-size: .98rem;
-      line-height: 1.38;
-    }
-
+    .home-title { grid-row: 2; }
+    .home-copy { grid-row: 4; }
+    .home-action { grid-row: 6; }
+    .home-footer { grid-row: 8; width: 100%; color: var(--color-muted-strong); font-size: .88rem; line-height: 1.35; text-align: center; }
+    .home-main { max-width: 330px; margin: 0 auto clamp(20px, 3svh, 28px); font-size: 1.13rem; font-weight: 500; line-height: 1.5; }
+    .home-invitation { width: 100%; max-width: 330px; margin: 0 auto; color: var(--color-primary); font-size: 1.04rem; line-height: 1.38; }
     .home-invitation p { margin-block-end: 6px; color: var(--color-primary); text-align: center; }
     .home-invitation strong { font-weight: 800; }
-    .home-spacer { min-height: 0; }
+    .home-credit { margin-block-start: 9px; padding-block-start: 9px; border-block-start: 1px solid rgba(0, 0, 0, .06); color: rgba(133, 130, 125, .88); font-size: .72rem; line-height: 1.28; }
 
-    .home-footer {
-      width: 100%;
-      margin-block-start: auto;
-      padding-block-start: 10px;
-      color: var(--color-muted);
-      font-size: .72rem;
-      line-height: 1.35;
-      text-align: center;
-    }
+    .screen--flow { grid-template-rows: auto minmax(18px, .28fr) minmax(0, 1fr) minmax(18px, .22fr) auto; }
+    .screen-head { grid-row: 1; }
+    .screen-body { grid-row: 3; display: flex; flex-direction: column; justify-content: space-evenly; min-height: 0; }
+    .screen-bottom { grid-row: 5; }
 
-
-
-    .home-privacy { color: #74716d; }
-
-    .home-credit {
-      margin-block-start: 8px;
-      padding-block-start: 8px;
-      border-block-start: 1px solid rgba(0, 0, 0, .06);
-      color: rgba(133, 130, 125, .86);
-      font-size: .67rem;
-      line-height: 1.28;
-    }
-
-    .step-indicator {
-      margin-block-end: 16px;
-      color: #999;
-      font-size: .9rem;
-      font-weight: 600;
-      letter-spacing: -.2px;
-    }
-
-    .intro-note {
-      margin: 4px 0 14px;
-      color: var(--color-muted);
-      font-size: 1.04rem;
-      font-weight: 500;
-      line-height: 1.42;
-    }
-
-    .flow-section {
-      width: 100%;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: clamp(18px, 2.8svh, 30px);
-      min-height: 0;
-      margin-block-start: 0;
-      padding-block: clamp(10px, 1.8svh, 20px) clamp(12px, 2svh, 22px);
-    }
-
-    #event,
-    #need,
-    #summary {
-      overflow-y: auto;
-    }
-
-    #summary {
-      justify-content: flex-start;
-    }
-
-    #summary .summary-section {
-      margin-block: clamp(18px, 3svh, 30px) clamp(18px, 3svh, 30px);
-    }
-
-    #summary .feedback-link {
-      margin-block-start: auto;
-    }
-
-    .field-label {
-      margin: 4px 0 6px;
-      color: var(--color-primary);
-      font-size: 1.1rem;
-      font-weight: 800;
-      line-height: 1.35;
-    }
-
-    .helper-text {
-      margin-block-end: 10px;
-      color: var(--color-muted);
-      font-size: .93rem;
-      line-height: 1.45;
-    }
-
-    .button-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-      margin-block-start: auto;
-      padding-block-start: 14px;
-    }
-
-    .button--secondary {
-      min-height: 46px;
-      margin-block-end: 2px;
-      padding: 12px;
-      border: 1px solid var(--color-primary-border);
-      background: var(--color-primary-soft);
-      color: var(--color-primary);
-      box-shadow: none;
-      font-size: 1rem;
-    }
-
-    .button--secondary.is-hidden { display: none; }
+    .step-indicator { margin-block-end: 18px; color: #999; font-size: .98rem; font-weight: 600; letter-spacing: -.2px; }
+    .intro-note { margin: 0 0 12px; color: var(--color-muted); font-size: 1.08rem; font-weight: 500; line-height: 1.42; }
+    .lead-text { margin: 0; color: var(--color-text); font-size: 1.08rem; line-height: 1.58; }
+    .field-group { display: flex; flex-direction: column; gap: 10px; }
+    .field-label { color: var(--color-primary); font-size: 1.13rem; font-weight: 800; line-height: 1.35; }
+    .helper-text { color: var(--color-muted); font-size: .96rem; line-height: 1.45; }
+    .button-stack { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .button--secondary { min-height: 48px; padding: 12px; border: 1px solid var(--color-primary-border); background: var(--color-primary-soft); color: var(--color-primary); box-shadow: none; font-size: 1rem; }
     .is-hidden { display: none !important; }
 
-    .reveal-section {
-      display: none;
-      opacity: 0;
-      transform: translateY(10px);
-    }
+    .reveal-section { display: none; opacity: 0; transform: translateY(10px); }
+    .reveal-section.is-visible { display: flex; flex-direction: column; gap: 10px; animation: reveal-in .36s var(--ease-smooth) forwards; }
+    .soft-divider { width: 100%; height: 1px; margin: 6px 0 2px; background: linear-gradient(to left, transparent, rgba(95, 116, 109, .24), transparent); }
 
-    .reveal-section.is-visible { display: block; animation: reveal-in .36s var(--ease-smooth) forwards; }
-
-    .soft-divider {
-      width: 100%;
-      height: 1px;
-      margin: 22px 0 18px;
-      background: linear-gradient(to left, transparent, rgba(95, 116, 109, .24), transparent);
-    }
-
-    .breathing {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(56px, 6.5svh, 68px);
-      min-height: 320px;
-      padding-block: 0 12px;
-    }
-
-    .breathing__circle {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #a7bbb2 0%, #8da19a 100%);
-      box-shadow: 0 10px 30px rgba(95, 116, 109, .22), inset 0 -4px 12px rgba(0, 0, 0, .05);
-      animation: breathe 11s infinite ease-in-out;
-    }
-
-    .breathing__circle::after {
-      content: "";
-      position: absolute;
-      inset: -18px;
-      z-index: -1;
-      border-radius: inherit;
-      background: radial-gradient(circle, rgba(141, 161, 154, .18), rgba(141, 161, 154, 0) 68%);
-      animation: breathe-halo 11s infinite ease-in-out;
-    }
-
+    .screen--breathing { grid-template-rows: auto minmax(8px, .18fr) minmax(320px, 1fr) minmax(18px, .2fr) auto; }
+    .breathing { grid-row: 3; display: grid; grid-template-rows: minmax(18px, .22fr) auto 28px auto minmax(18px, .25fr); justify-items: center; align-items: center; min-height: 0; }
+    .breathing__circle-wrap { grid-row: 2; display: grid; place-items: center; width: 190px; height: 190px; }
+    .breathing__circle { position: relative; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #a7bbb2 0%, #8da19a 100%); box-shadow: 0 10px 30px rgba(95, 116, 109, .22), inset 0 -4px 12px rgba(0, 0, 0, .05); animation: breathe 11s infinite ease-in-out; }
+    .breathing__circle::after { content: ""; position: absolute; inset: -18px; z-index: -1; border-radius: inherit; background: radial-gradient(circle, rgba(141, 161, 154, .18), rgba(141, 161, 154, 0) 68%); animation: breathe-halo 11s infinite ease-in-out; }
     .breathing__circle.is-guided { animation: breathe 11s ease-in-out 4 forwards; }
     .breathing__circle.is-paused { animation: none; transform: scale(.85); }
     .breathing__circle.is-paused::after { animation: none; transform: scale(.85); opacity: .45; }
+    .breathing__text { grid-row: 4; min-height: 58px; color: var(--color-text); font-size: 1.04rem; font-weight: 600; line-height: 1.35; text-align: center; }
+    .breathing__anchor { display: block; }
+    .breathing__phase { display: block; margin-block-start: 4px; color: var(--color-muted); font-weight: 500; }
 
-    .breathing__text {
-      min-height: 48px;
-      margin-block-start: 0;
-      color: var(--color-text);
-      font-size: 1.06rem;
-      font-weight: 600;
-      text-align: center;
-    }
-
-    .summary-section {
-      width: 100%;
-      margin-block: 18px 16px;
-      text-align: center;
-    }
-
-    .summary-section__title {
-      margin-block-end: 6px;
-      color: var(--color-primary);
-      font-size: 1.1rem;
-      font-weight: 800;
-    }
-
-    .quote-note {
-      min-height: 58px;
-      margin-block-start: 10px;
-      padding: 12px 14px;
-      border-inline-start: 4px solid rgba(95, 116, 109, .35);
-      border-radius: 14px;
-      background: #fff;
-      color: var(--color-text);
-      line-height: 1.45;
-      text-align: start;
-      white-space: pre-wrap;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, .018);
-    }
-
+    .summary-body { justify-content: center; gap: clamp(18px, 3svh, 28px); text-align: center; }
+    .summary-title { color: var(--color-primary); font-size: 1.12rem; font-weight: 800; }
+    .summary-slow { color: var(--color-muted); font-size: .98rem; font-weight: 600; }
+    .quote-note { min-height: clamp(120px, 17svh, 160px); padding: 16px 18px; border-inline-start: 4px solid rgba(95, 116, 109, .35); border-radius: 14px; background: #fff; color: var(--color-text); font-size: 1.03rem; line-height: 1.5; text-align: start; white-space: pre-wrap; box-shadow: 0 4px 12px rgba(0, 0, 0, .018); }
     .quote-note:empty::before { content: "המילים שכתבתם יופיעו כאן."; color: var(--color-placeholder); }
-
+    .closing-text { max-width: 330px; margin-inline: auto; font-size: 1rem; line-height: 1.5; text-align: center; }
+    .feedback-intro { max-width: 330px; margin: 0 auto 10px; color: var(--color-muted); font-size: .92rem; line-height: 1.42; text-align: center; }
+    .feedback-link { display: block; padding: 14px; border: 1px solid rgba(0, 0, 0, .02); border-radius: 16px; background: #fff; color: var(--color-primary); box-shadow: var(--shadow-card); font-size: 1rem; font-weight: 800; letter-spacing: -.2px; text-align: center; text-decoration: none; transition: transform .3s var(--ease-spring); }
+    .feedback-link:active { transform: scale(.97); }
     .center { text-align: center; }
 
-    .closing-text {
-      max-width: 315px;
-      margin-inline: auto;
-      font-size: 1.02rem;
-      line-height: 1.5;
-      text-align: center;
-    }
-
-    .feedback-intro {
-      max-width: 320px;
-      margin: 12px auto 10px;
-      color: var(--color-muted);
-      font-size: .96rem;
-      line-height: 1.42;
-      text-align: center;
-    }
-
-    .feedback-link {
-      display: block;
-      padding: 14px;
-      border: 1px solid rgba(0, 0, 0, .02);
-      border-radius: 16px;
-      background: #fff;
-      color: var(--color-primary);
-      box-shadow: var(--shadow-card);
-      font-size: 1rem;
-      font-weight: 800;
-      letter-spacing: -.2px;
-      text-align: center;
-      text-decoration: none;
-      transition: transform .3s var(--ease-spring);
-    }
-
-    .feedback-link:active { transform: scale(.97); }
-
-    @keyframes fade-in-up {
-      from { opacity: 0; transform: translateY(16px) scale(.99); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes reveal-in {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes breathe {
-      0% { transform: scale(.85); }
-      36% { transform: scale(1.25); }
-      54% { transform: scale(1.25); }
-      100% { transform: scale(.85); }
-    }
-
-    @keyframes breathe-halo {
-      0% { transform: scale(.85); opacity: .45; }
-      36% { transform: scale(1.22); opacity: .72; }
-      54% { transform: scale(1.22); opacity: .72; }
-      100% { transform: scale(.85); opacity: .45; }
-    }
+    @keyframes fade-in-up { from { opacity: 0; transform: translateY(16px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes reveal-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes breathe { 0% { transform: scale(.85); } 36% { transform: scale(1.25); } 54% { transform: scale(1.25); } 100% { transform: scale(.85); } }
+    @keyframes breathe-halo { 0% { transform: scale(.85); opacity: .45; } 36% { transform: scale(1.22); opacity: .72; } 54% { transform: scale(1.22); opacity: .72; } 100% { transform: scale(.85); opacity: .45; } }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-      }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
     }
 
     @media (max-height: 760px) {
-      :root { --space-screen-block: 20px; --space-screen-inline: 20px; }
-      .screen { padding-block-end: 16px; }
-      h1 { margin-block-end: 24px; font-size: 2.1rem; }
-      h2 { font-size: 1.22rem; }
-      p { font-size: .96rem; line-height: 1.45; }
-      .home-main { margin-block-end: 22px; font-size: 1rem; line-height: 1.42; }
-      .home-invitation { margin-block-end: 22px; }
-      .home-invitation p { margin-block-end: 4px; font-size: .92rem; line-height: 1.25; }
-      .home-footer { margin-block-start: auto; font-size: .66rem; }
-      .screen--home { grid-template-rows: minmax(24px, .55fr) auto auto auto auto minmax(14px, .35fr) auto; }
-      .home-credit { font-size: .64rem; line-height: 1.22; }
-      textarea { min-height: 108px; height: clamp(108px, 18svh, 132px); margin-block-end: 10px; padding: 12px 14px; font-size: .96rem; }
-      .field-label { margin-block-start: 7px; margin-block-end: 4px; font-size: 1rem; }
-      .helper-text { margin-block-end: 6px; font-size: .82rem; line-height: 1.32; }
-      .soft-divider { margin: 12px 0 10px; }
+      :root { --screen-pad-x: 22px; --screen-pad-y: 20px; }
+      button { min-height: 48px; font-size: 1rem; }
+      h1 { font-size: 2.35rem; }
+      h2 { font-size: 1.36rem; }
+      p { font-size: .98rem; line-height: 1.45; }
+      .screen--home { grid-template-rows: minmax(10px, .45fr) auto minmax(14px, .25fr) auto minmax(16px, .22fr) auto minmax(12px, .34fr) auto; }
+      .home-main { margin-block-end: 16px; font-size: 1rem; line-height: 1.42; }
+      .home-invitation { font-size: .96rem; line-height: 1.25; }
+      .home-invitation p { margin-block-end: 4px; }
+      .home-footer { font-size: .78rem; }
+      .home-credit { font-size: .66rem; line-height: 1.22; }
+      .step-indicator { margin-block-end: 12px; font-size: .88rem; }
+      .intro-note { font-size: .96rem; margin-block-end: 8px; }
+      .lead-text { font-size: .98rem; }
+      .field-label { font-size: 1rem; }
+      .helper-text { font-size: .86rem; line-height: 1.34; }
+      textarea { min-height: 86px; padding: 12px 14px; font-size: .94rem; }
+      .screen--flow { grid-template-rows: auto minmax(10px, .2fr) minmax(0, 1fr) minmax(12px, .18fr) auto; }
+      .screen-body { justify-content: space-evenly; }
+      .soft-divider { margin: 2px 0 0; }
       .button--secondary { min-height: 42px; padding: 10px; font-size: .94rem; }
-      .breathing { min-height: 300px; gap: 54px; padding-block: 0 10px; }
-      .flow-section { gap: 16px; padding-block: 6px 10px; }
-      .summary-section { margin-block: auto 10px; }
-      .closing-text, .feedback-intro { font-size: .86rem; line-height: 1.34; }
-      .quote-note { min-height: 46px; padding: 10px 12px; font-size: .9rem; }
-      button, .feedback-link { min-height: 44px; padding: 12px; font-size: 1rem; }
+      .screen--breathing { grid-template-rows: auto minmax(4px, .1fr) minmax(260px, 1fr) minmax(12px, .14fr) auto; }
+      .breathing { grid-template-rows: minmax(6px, .14fr) auto 22px auto minmax(6px, .14fr); }
+      .breathing__circle-wrap { width: 174px; height: 174px; }
+      .breathing__text { min-height: 48px; font-size: .98rem; }
+      .quote-note { min-height: 88px; padding: 12px 14px; font-size: .92rem; }
+      .summary-body { gap: 12px; }
+      .feedback-intro { font-size: .82rem; }
+      .feedback-link { padding: 12px; font-size: .95rem; }
     }
 
     @media (max-height: 640px) {
-      :root { --space-screen-block: 14px; --space-screen-inline: 18px; }
-      .screen { padding-block-end: 12px; }
-      h1 { margin-block-end: 16px; font-size: 1.85rem; }
-      .home-main { margin-block-end: 14px; font-size: .9rem; }
-      .home-invitation { margin-block-end: 14px; }
-      .home-invitation p { margin-block-end: 3px; font-size: .84rem; line-height: 1.18; }
-      .home-footer { margin-block-start: auto; font-size: .6rem; }
-      .screen--home { grid-template-rows: minmax(14px, .35fr) auto auto auto auto minmax(8px, .25fr) auto; }
+      :root { --screen-pad-x: 18px; --screen-pad-y: 14px; }
+      button { min-height: 40px; padding: 9px; font-size: .92rem; }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.18rem; }
+      p { font-size: .88rem; }
+      .home-main { margin-block-end: 10px; font-size: .88rem; }
+      .home-invitation { font-size: .84rem; }
+      .home-footer { font-size: .64rem; }
       .home-credit { font-size: .58rem; }
-      button { min-height: 40px; padding: 10px; font-size: .94rem; }
-      .flow-section { gap: 12px; padding-block: 2px 6px; }
-      .breathing { gap: 48px; min-height: 250px; }
+      .field-label { font-size: .92rem; }
+      .helper-text { font-size: .76rem; }
+      textarea { min-height: 70px; font-size: .86rem; }
+      .breathing__circle-wrap { width: 150px; height: 150px; }
+      .breathing__circle { width: 104px; height: 104px; }
+      .breathing__text { min-height: 42px; font-size: .9rem; }
     }
   </style>
 </head>
-
 <body>
   <main class="app-shell" id="app" aria-live="polite">
     <span class="decor decor--top" aria-hidden="true"></span>
     <span class="decor decor--bottom" aria-hidden="true"></span>
     <span class="decor decor--leaf" aria-hidden="true"></span>
 
-    <div class="progress" data-progress aria-hidden="true">
-      <div class="progress__bar" data-progress-bar></div>
-    </div>
+    <div class="progress" data-progress aria-hidden="true"><div class="progress__bar" data-progress-bar></div></div>
 
     <section class="screen screen--home is-active" id="home" data-screen aria-labelledby="home-title">
-      <div class="home-spacer" aria-hidden="true"></div>
-      <h1 id="home-title">רגע חמלה</h1>
-      <p class="home-main">לפעמים גם מי שדואג לאחרים,<br>צריך לעצור לרגע.</p>
-
-      <div class="home-invitation">
-        <p>קחו לעצמכם שתי דקות.</p>
-        <p><strong>לנשום.</strong></p>
-        <p><strong>להניח קצת את העומס.</strong></p>
-        <p><strong>ולהמשיך הלאה עם קצת יותר מרחב.</strong></p>
-      </div>
-
-      <button type="button" data-next="breathing">מתחילים</button>
-
-      <footer class="home-footer">
-        <p class="home-privacy">כל מה שנכתב כאן נשאר על המסך בלבד ואינו נשמר.</p>
-        <div class="home-credit">
-          פיתוח והתאמה להקשר הישראלי: שגית ציפלוביץ · 2026<br>
-          מבוסס על פרוטוקול CMT-T של Matos et al.
+      <h1 class="home-title" id="home-title">רגע חמלה</h1>
+      <div class="home-copy">
+        <p class="home-main">לפעמים גם מי שדואג לאחרים,<br>צריך לעצור לרגע.</p>
+        <div class="home-invitation">
+          <p>קחו לעצמכם שתי דקות.</p>
+          <p><strong>לנשום.</strong></p>
+          <p><strong>להניח קצת את העומס.</strong></p>
+          <p><strong>ולהמשיך הלאה עם קצת יותר מרחב.</strong></p>
         </div>
+      </div>
+      <div class="home-action"><button type="button" data-next="breathing">מתחילים</button></div>
+      <footer class="home-footer">
+        <p>כל מה שנכתב כאן נשאר על המסך בלבד ואינו נשמר.</p>
+        <div class="home-credit">פיתוח והתאמה להקשר הישראלי: שגית ציפלוביץ · 2026<br>מבוסס על פרוטוקול CMT-T של Matos et al.</div>
       </footer>
     </section>
 
-    <section class="screen" id="breathing" data-screen aria-labelledby="breathing-title">
-      <div class="step-indicator">שלב 1 מתוך 4</div>
-      <p class="intro-note">לכולנו יש רגעים מורכבים.</p>
-      <h2 id="breathing-title">לפני שממשיכים, בואו ניקח רגע לנשום.</h2>
-
+    <section class="screen screen--flow screen--breathing" id="breathing" data-screen aria-labelledby="breathing-title">
+      <header class="screen-head">
+        <div class="step-indicator">שלב 1 מתוך 4</div>
+        <p class="intro-note">לכולנו יש רגעים מורכבים.</p>
+        <h2 id="breathing-title">לפני שממשיכים, בואו ניקח רגע לנשום.</h2>
+      </header>
       <div class="breathing" aria-live="polite">
-        <div class="breathing__circle" data-breathing-circle aria-hidden="true"></div>
-        <div class="breathing__text">
-          <div>נשמו עם הכדור.</div>
-          <div data-breathing-text style="margin-top:4px;min-height:1.2em;"></div>
-        </div>
+        <div class="breathing__circle-wrap"><div class="breathing__circle" data-breathing-circle aria-hidden="true"></div></div>
+        <div class="breathing__text"><span class="breathing__anchor">נשמו עם הכדור.</span><span class="breathing__phase" data-breathing-phase></span></div>
       </div>
-
-      <div class="button-stack">
-        <button type="button" data-next="event">המשך</button>
-      </div>
+      <div class="button-stack screen-bottom"><button type="button" data-next="event">המשך</button></div>
     </section>
 
-    <section class="screen" id="event" data-screen aria-labelledby="event-title">
-      <div class="flow-section">
+    <section class="screen screen--flow" id="event" data-screen aria-labelledby="event-title">
+      <header class="screen-head">
         <div class="step-indicator">שלב 2 מתוך 4</div>
         <h2 id="event-title">בואו נחזור לרגע אחד מהיום.</h2>
-        <p>חשבו על סיטואציה שלא הייתה פשוטה עבורכם.</p>
-
-        <label class="field-label" for="challengeText">מה קרה?</label>
-        <p class="helper-text" id="challengeHelp">כתבו רק מה קרה בפועל, בלי לנתח או לשפוט.</p>
-        <textarea id="challengeText" aria-describedby="challengeHelp" placeholder="כתבו כאן בקצרה..."></textarea>
-
-        <button class="button--secondary" type="button" data-reveal="feelingsSection">המשך</button>
-
+      </header>
+      <div class="screen-body">
+        <p class="lead-text">חשבו על סיטואציה שלא הייתה פשוטה עבורכם.</p>
+        <div class="field-group">
+          <label class="field-label" for="challengeText">מה קרה?</label>
+          <p class="helper-text" id="challengeHelp">כתבו רק מה קרה בפועל, בלי לנתח או לשפוט.</p>
+          <textarea id="challengeText" aria-describedby="challengeHelp" placeholder="כתבו כאן בקצרה..."></textarea>
+          <button class="button--secondary" type="button" data-reveal="feelingsSection" data-unlocks="eventNext">המשך</button>
+        </div>
         <div class="reveal-section" id="feelingsSection" data-reveal-section>
           <div class="soft-divider" aria-hidden="true"></div>
           <h2>מה עבר עליכם באותו רגע?</h2>
@@ -640,74 +336,65 @@
           <textarea id="feelingsText" aria-describedby="feelingsHelp" placeholder="כתבו כאן..."></textarea>
         </div>
       </div>
-
-      <div class="button-stack">
-        <button class="is-hidden" type="button" data-next="need" data-continue-after="feelingsSection">המשך</button>
-      </div>
+      <div class="button-stack screen-bottom"><button class="is-hidden" id="eventNext" type="button" data-next="need">המשך</button></div>
     </section>
 
-    <section class="screen" id="need" data-screen aria-labelledby="need-title">
-      <div class="flow-section">
+    <section class="screen screen--flow" id="need" data-screen aria-labelledby="need-title">
+      <header class="screen-head">
         <div class="step-indicator">שלב 3 מתוך 4</div>
         <h2 id="need-title">מה הייתם צריכים באותו רגע?</h2>
-        <label class="field-label" for="needText">מה היה חסר לכם באותו רגע?</label>
-        <p class="helper-text" id="needHelp">אפשר לכתוב מילה טובה, עידוד, הבנה, תמיכה או כל משפט שהיה נותן לכם קצת אוויר.</p>
-        <textarea id="needText" aria-describedby="needHelp" placeholder="כתבו כאן..."></textarea>
-
-        <button class="button--secondary" type="button" data-reveal="supportSection">המשך</button>
-
+      </header>
+      <div class="screen-body">
+        <div class="field-group">
+          <label class="field-label" for="needText">מה היה חסר לכם באותו רגע?</label>
+          <p class="helper-text" id="needHelp">אפשר לכתוב מילה טובה, עידוד, הבנה, תמיכה או כל משפט שהיה נותן לכם קצת אוויר.</p>
+          <textarea id="needText" aria-describedby="needHelp" placeholder="כתבו כאן..."></textarea>
+          <button class="button--secondary" type="button" data-reveal="supportSection" data-unlocks="needNext">המשך</button>
+        </div>
         <div class="reveal-section" id="supportSection" data-reveal-section>
           <div class="soft-divider" aria-hidden="true"></div>
           <h2>אם אדם קרוב היה לצדכם...</h2>
           <label class="field-label" for="supportText">אילו מילים הייתם רוצים לשמוע באותו רגע?</label>
-          
           <textarea id="supportText" placeholder="כתבו כאן את המילים שהייתם רוצים לשמוע..."></textarea>
         </div>
       </div>
-
-      <div class="button-stack">
-        <button class="is-hidden" type="button" data-summary data-continue-after="supportSection">לסיום</button>
-      </div>
+      <div class="button-stack screen-bottom"><button class="is-hidden" id="needNext" type="button" data-summary>לסיום</button></div>
     </section>
 
-    <section class="screen" id="summary" data-screen aria-labelledby="summary-title">
-      <div class="step-indicator center">שלב 4 מתוך 4</div>
-      <h2 class="center" id="summary-title">תודה שהקדשתם לעצמכם רגע.</h2>
-
-      <div class="summary-section">
-        <div class="summary-section__title">המילים שלכם</div>
-        <p class="helper-text center">קראו אותן לאט.</p>
+    <section class="screen screen--flow" id="summary" data-screen aria-labelledby="summary-title">
+      <header class="screen-head center">
+        <div class="step-indicator">שלב 4 מתוך 4</div>
+        <h2 id="summary-title">תודה שהקדשתם לעצמכם רגע.</h2>
+      </header>
+      <div class="screen-body summary-body">
+        <div>
+          <div class="summary-title">המילים שלכם</div>
+          <div class="summary-slow">קראו אותן לאט.</div>
+        </div>
         <div class="quote-note" data-support-review aria-label="המילים שלכם"></div>
+        <p class="closing-text">אפשר לחזור למילים האלה בכל פעם שתרגישו צורך.</p>
       </div>
-
-      <p class="closing-text">אפשר לחזור למילים האלה בכל פעם שתרגישו צורך.</p>
-
-      <p class="feedback-intro">אשמח לשמוע איך הייתה החוויה שלכם.<br>המשוב שלכם יעזור לי להמשיך ולדייק את הכלי.</p>
-      <a href="https://forms.gle/6XtRAuLPUkvy1XXE8" target="_blank" rel="noopener noreferrer" class="feedback-link">איך היה?</a>
+      <div class="screen-bottom">
+        <p class="feedback-intro">אשמח לשמוע איך הייתה החוויה שלכם.<br>המשוב שלכם יעזור לי להמשיך ולדייק את הכלי.</p>
+        <a href="https://forms.gle/6XtRAuLPUkvy1XXE8" target="_blank" rel="noopener noreferrer" class="feedback-link">איך היה?</a>
+      </div>
     </section>
   </main>
 
   <script>
     (() => {
       "use strict";
-
       const screensOrder = ["home", "breathing", "event", "need", "summary"];
-      const state = {
-        activeScreen: "home",
-        breathingIntervalId: null,
-        breathingTimeoutIds: []
-      };
-
+      const state = { activeScreen: "home", breathingIntervalId: null, breathingTimeoutIds: [] };
       const dom = {
         screens: [...document.querySelectorAll("[data-screen]")],
         progress: document.querySelector("[data-progress]"),
         progressBar: document.querySelector("[data-progress-bar]"),
         breathingCircle: document.querySelector("[data-breathing-circle]"),
-        breathingText: document.querySelector("[data-breathing-text]"),
+        breathingPhase: document.querySelector("[data-breathing-phase]"),
         supportText: document.querySelector("#supportText"),
         supportReview: document.querySelector("[data-support-review]")
       };
-
       const activeClass = "is-active";
       const visibleClass = "is-visible";
       const hiddenClass = "is-hidden";
@@ -720,123 +407,94 @@
         state.breathingTimeoutIds.push(id);
         return id;
       }
-
       function clearBreathingTimers() {
-        if (state.breathingIntervalId !== null) {
-          window.clearInterval(state.breathingIntervalId);
-          state.breathingIntervalId = null;
-        }
-
+        if (state.breathingIntervalId !== null) { window.clearInterval(state.breathingIntervalId); state.breathingIntervalId = null; }
         state.breathingTimeoutIds.forEach(timeoutId => window.clearTimeout(timeoutId));
         state.breathingTimeoutIds = [];
       }
-
       function resetBreathingCircle() {
         if (!dom.breathingCircle) return;
         dom.breathingCircle.classList.remove("is-guided", "is-paused");
         void dom.breathingCircle.offsetWidth;
       }
-
       function stopBreathing({ reset = true } = {}) {
         clearBreathingTimers();
+        if (dom.breathingPhase) dom.breathingPhase.textContent = "";
         if (reset) resetBreathingCircle();
       }
-
       function updateProgress(screenId) {
         if (!dom.progress || !dom.progressBar) return;
-
         if (screenId === "home") {
           dom.progress.classList.remove(visibleClass);
           dom.progressBar.style.width = "0%";
           return;
         }
-
         const stepIndex = Math.max(1, screensOrder.indexOf(screenId));
-        const progressValue = Math.min(100, (stepIndex / 4) * 100);
         dom.progress.classList.add(visibleClass);
-        dom.progressBar.style.width = `${progressValue}%`;
+        dom.progressBar.style.width = `${Math.min(100, (stepIndex / 4) * 100)}%`;
       }
-
       function focusScreenHeading(screen) {
         const heading = screen.querySelector("h1, h2");
         if (!heading) return;
-
         heading.setAttribute("tabindex", "-1");
         heading.focus({ preventScroll: true });
         heading.addEventListener("blur", () => heading.removeAttribute("tabindex"), { once: true });
       }
-
       function showScreen(screenId) {
         const nextScreen = document.getElementById(screenId);
         if (!nextScreen) return;
-
         dom.screens.forEach(screen => screen.classList.remove(activeClass));
         nextScreen.classList.add(activeClass);
         nextScreen.scrollTop = 0;
         state.activeScreen = screenId;
-
         updateProgress(screenId);
         focusScreenHeading(nextScreen);
-
-        if (screenId === "breathing") {
-          runBreathingGuide();
-        } else {
-          stopBreathing();
-        }
+        if (screenId === "breathing") runBreathingGuide(); else stopBreathing();
       }
-
       function runBreathingGuide() {
-        if (!dom.breathingText || !dom.breathingCircle) return;
-
+        if (!dom.breathingPhase || !dom.breathingCircle) return;
         stopBreathing();
-        dom.breathingText.textContent = "";
+        dom.breathingPhase.textContent = "";
         dom.breathingCircle.classList.add("is-paused");
-
         setTimeoutTracked(() => {
           if (state.activeScreen !== "breathing") return;
           dom.breathingCircle.classList.remove("is-paused");
           dom.breathingCircle.classList.add("is-guided");
+          let cycleCount = 0;
+          const sequence = () => {
+            if (state.activeScreen !== "breathing") return;
+            if (cycleCount >= 4) { dom.breathingPhase.textContent = "אפשר להמשיך כשתרצו."; clearBreathingTimers(); return; }
+            dom.breathingPhase.textContent = "שאיפה...";
+            setTimeoutTracked(() => { if (state.activeScreen === "breathing") dom.breathingPhase.textContent = "להחזיק..."; }, 4000);
+            setTimeoutTracked(() => { if (state.activeScreen === "breathing") dom.breathingPhase.textContent = "נשיפה..."; }, 6000);
+            cycleCount += 1;
+          };
+          sequence();
+          state.breathingIntervalId = window.setInterval(sequence, 11000);
         }, 250);
-
       }
-
       function revealSection(button) {
-        const sectionId = button.dataset.reveal;
-        const section = document.getElementById(sectionId);
+        const section = document.getElementById(button.dataset.reveal);
         if (!section) return;
-
         section.classList.add(visibleClass);
         button.classList.add(hiddenClass);
-
-        const continuationButton = document.querySelector(`[data-continue-after="${sectionId}"]`);
-        if (continuationButton) continuationButton.classList.remove(hiddenClass);
-
+        const unlockId = button.dataset.unlocks;
+        if (unlockId) document.getElementById(unlockId)?.classList.remove(hiddenClass);
         const focusTarget = section.querySelector("textarea, h2");
         if (focusTarget) focusTarget.focus({ preventScroll: false });
       }
-
       function showSummary() {
         const text = dom.supportText?.value.trim() || "";
         if (dom.supportReview) dom.supportReview.textContent = text;
         showScreen("summary");
       }
-
       function handleClick(event) {
         const nextButton = event.target.closest("[data-next]");
-        if (nextButton) {
-          showScreen(nextButton.dataset.next);
-          return;
-        }
-
+        if (nextButton) { showScreen(nextButton.dataset.next); return; }
         const revealButton = event.target.closest("[data-reveal]");
-        if (revealButton) {
-          revealSection(revealButton);
-          return;
-        }
-
+        if (revealButton) { revealSection(revealButton); return; }
         if (event.target.closest("[data-summary]")) showSummary();
       }
-
       document.addEventListener("click", handleClick);
       window.addEventListener("pagehide", () => stopBreathing());
     })();
