@@ -491,15 +491,6 @@
       100% { transform: scale(.85); opacity: .45; }
     }
 
-
-
-    /* Release layout fix: prevent skip by never showing the lower continue button
-       while the in-card reveal button is still visible. */
-    #event:has(> .content-card > .button--secondary:not(.is-hidden)) > .button-stack,
-    #need:has(> .content-card > .button--secondary:not(.is-hidden)) > .button-stack {
-      display: none;
-    }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: .01ms !important;
@@ -544,33 +535,6 @@
       .home-credit { font-size: .58rem; }
       button { min-height: 40px; padding: 10px; font-size: .92rem; }
     }
-
-    /* Release layout fix: on phones, the app shell itself uses almost the full
-       available browser viewport. No visual language, text, color, or flow changes. */
-    @media (hover: none), (max-width: 520px) {
-      :root {
-        --shell-width: min(94vw, 430px);
-        --shell-height: calc(100svh - 8px);
-      }
-
-      body {
-        min-height: 100svh;
-        padding-block: 4px;
-      }
-
-      .app-shell {
-        max-height: calc(100svh - 8px);
-      }
-    }
-
-    @supports (height: 100dvh) {
-      @media (hover: none), (max-width: 520px) {
-        :root { --shell-height: calc(100dvh - 8px); }
-        body { min-height: 100dvh; }
-        .app-shell { max-height: calc(100dvh - 8px); }
-      }
-    }
-
   </style>
 </head>
 
