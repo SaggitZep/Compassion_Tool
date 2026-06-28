@@ -231,7 +231,7 @@
 
     .screen::-webkit-scrollbar { display: none; }
     .screen.is-active { display: flex; animation: fade-in-up .5s var(--ease-smooth) both; }
-    .screen--home { align-items: center; overflow: hidden; text-align: center; }
+    .screen--home { align-items: center; justify-content: flex-start; overflow: hidden; text-align: center; }
 
     .home-main {
       max-width: 330px;
@@ -252,7 +252,7 @@
 
     .home-invitation p { margin-block-end: 6px; color: var(--color-primary); text-align: center; }
     .home-invitation strong { font-weight: 800; }
-    .home-spacer { flex: 1; min-height: 18px; }
+    .home-spacer { flex: 0 0 clamp(130px, 19svh, 180px); min-height: 0; }
 
     .home-footer {
       width: 100%;
@@ -358,6 +358,7 @@
     }
 
     .button--secondary.is-hidden { display: none; }
+    .is-hidden { display: none !important; }
 
     .reveal-section {
       display: none;
@@ -527,6 +528,7 @@
       .home-invitation { margin-block-end: 22px; }
       .home-invitation p { margin-block-end: 4px; font-size: .92rem; line-height: 1.25; }
       .home-footer { font-size: .66rem; }
+      .home-spacer { flex-basis: clamp(90px, 14svh, 130px); }
       .home-credit { font-size: .64rem; line-height: 1.22; }
       textarea { min-height: 74px; height: 78px; margin-block-end: 10px; padding: 10px 12px; font-size: .94rem; }
       .field-label { margin-block-start: 7px; margin-block-end: 4px; font-size: 1rem; }
@@ -549,6 +551,7 @@
       .home-invitation { margin-block-end: 14px; }
       .home-invitation p { margin-block-end: 3px; font-size: .84rem; line-height: 1.18; }
       .home-footer { font-size: .6rem; }
+      .home-spacer { flex-basis: clamp(56px, 10svh, 92px); }
       .home-credit { font-size: .58rem; }
       button { min-height: 40px; padding: 10px; font-size: .94rem; }
       .flow-section { justify-content: space-between; padding-block: 0 6px; }
@@ -630,7 +633,7 @@
       </div>
 
       <div class="button-stack">
-        <button type="button" data-next="need">המשך</button>
+        <button class="is-hidden" type="button" data-next="need" data-continue-after="feelingsSection">המשך</button>
       </div>
     </section>
 
@@ -654,7 +657,7 @@
       </div>
 
       <div class="button-stack">
-        <button type="button" data-summary>לסיום</button>
+        <button class="is-hidden" type="button" data-summary data-continue-after="supportSection">לסיום</button>
       </div>
     </section>
 
@@ -795,6 +798,9 @@
 
         section.classList.add(visibleClass);
         button.classList.add(hiddenClass);
+
+        const continuationButton = document.querySelector(`[data-continue-after="${sectionId}"]`);
+        if (continuationButton) continuationButton.classList.remove(hiddenClass);
 
         const focusTarget = section.querySelector("textarea, h2");
         if (focusTarget) focusTarget.focus({ preventScroll: false });
