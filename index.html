@@ -81,7 +81,7 @@
       border-radius: var(--radius-pill);
       background: var(--color-primary);
       color: #fff;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-weight: 800;
       letter-spacing: -.2px;
       cursor: pointer;
@@ -95,16 +95,16 @@
 
     textarea {
       width: 100%;
-      min-height: 106px;
-      height: clamp(96px, 17svh, 128px);
-      margin-block-end: 14px;
-      padding: 14px 16px;
+      flex: 1;
+      min-height: 100px;
+      margin-block-end: 16px;
+      padding: 16px;
       resize: none;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-field);
       background: var(--color-input);
       color: var(--color-text);
-      font-size: .95rem;
+      font-size: 1.05rem;
       line-height: 1.5;
       box-shadow: var(--shadow-inner);
       transition: border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
@@ -120,26 +120,26 @@
     textarea::placeholder { color: #b0b0b0; }
 
     h1 {
-      margin-block-end: 34px;
+      margin-block-end: 38px;
       color: var(--color-primary-deep);
-      font-size: clamp(2.2rem, 8vw, 2.55rem);
+      font-size: clamp(2.4rem, 8vw, 2.8rem);
       font-weight: 800;
       line-height: 1.1;
       letter-spacing: -.6px;
     }
 
     h2 {
-      margin-block-end: 12px;
+      margin-block-end: 14px;
       color: var(--color-primary);
-      font-size: 1.36rem;
+      font-size: 1.48rem;
       font-weight: 800;
       line-height: 1.25;
       letter-spacing: -.35px;
     }
 
     p {
-      margin-block-end: 14px;
-      font-size: .96rem;
+      margin-block-end: 16px;
+      font-size: 1.05rem;
       line-height: 1.58;
     }
 
@@ -234,23 +234,23 @@
     .screen--home { align-items: center; overflow: hidden; text-align: center; }
 
     .home-main {
-      max-width: 330px;
-      margin-block-end: 28px;
-      font-size: 1.08rem;
+      max-width: 350px;
+      margin-block-end: 32px;
+      font-size: 1.18rem;
       font-weight: 500;
       line-height: 1.5;
     }
 
     .home-invitation {
       width: 100%;
-      max-width: 330px;
-      margin-block-end: 30px;
+      max-width: 350px;
+      margin-block-end: 34px;
       color: var(--color-primary);
-      font-size: .98rem;
+      font-size: 1.08rem;
       line-height: 1.38;
     }
 
-    .home-invitation p { margin-block-end: 6px; color: var(--color-primary); text-align: center; }
+    .home-invitation p { margin-block-end: 6px; color: var(--color-primary); text-align: center; font-size: 1.08rem; }
     .home-invitation strong { font-weight: 800; }
     .home-spacer { flex: 1; min-height: 18px; }
 
@@ -259,12 +259,10 @@
       margin-block-start: auto;
       padding-block-start: 10px;
       color: var(--color-muted);
-      font-size: .72rem;
+      font-size: .8rem;
       line-height: 1.35;
       text-align: center;
     }
-
-
 
     .home-privacy { color: #74716d; }
 
@@ -273,30 +271,33 @@
       padding-block-start: 8px;
       border-block-start: 1px solid rgba(0, 0, 0, .06);
       color: rgba(133, 130, 125, .86);
-      font-size: .67rem;
+      font-size: .75rem;
       line-height: 1.28;
     }
 
     .step-indicator {
-      margin-block-end: 16px;
+      margin-block-end: 20px;
       color: #999;
-      font-size: .9rem;
+      font-size: .98rem;
       font-weight: 600;
       letter-spacing: -.2px;
     }
 
     .intro-note {
-      margin: 4px 0 14px;
+      margin: 4px 0 16px;
       color: var(--color-muted);
-      font-size: 1.04rem;
+      font-size: 1.14rem;
       font-weight: 500;
       line-height: 1.42;
     }
 
     .content-card {
       width: 100%;
-      margin: auto 0;
-      padding: 20px 18px 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin: 0 0 20px 0;
+      padding: 24px 20px 20px;
       border: 1px solid var(--color-white-border);
       border-radius: var(--radius-card);
       background: var(--color-surface-soft);
@@ -304,30 +305,31 @@
     }
 
     .field-label {
-      margin: 12px 0 6px;
+      margin: 16px 0 8px;
       color: var(--color-primary);
-      font-size: 1.02rem;
+      font-size: 1.12rem;
       font-weight: 800;
       line-height: 1.35;
     }
 
     .helper-text {
-      margin-block-end: 10px;
+      margin-block-end: 12px;
       color: var(--color-muted);
-      font-size: .84rem;
+      font-size: .92rem;
       line-height: 1.42;
     }
 
     .button-stack {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       width: 100%;
       margin-block-start: auto;
-      padding-block-start: 14px;
+      padding-block-start: 16px;
     }
 
     .button--secondary {
+      flex-shrink: 0;
       min-height: 46px;
       margin-block-end: 2px;
       padding: 12px;
@@ -335,7 +337,7 @@
       background: var(--color-primary-soft);
       color: var(--color-primary);
       box-shadow: none;
-      font-size: .95rem;
+      font-size: 1.05rem;
     }
 
     .button--secondary.is-hidden { display: none; }
@@ -344,14 +346,16 @@
       display: none;
       opacity: 0;
       transform: translateY(10px);
+      flex-direction: column;
+      flex: 1;
     }
 
-    .reveal-section.is-visible { display: block; animation: reveal-in .36s var(--ease-smooth) forwards; }
+    .reveal-section.is-visible { display: flex; animation: reveal-in .36s var(--ease-smooth) forwards; }
 
     .soft-divider {
       width: 100%;
       height: 1px;
-      margin: 22px 0 18px;
+      margin: 24px 0 20px;
       background: linear-gradient(to left, transparent, rgba(95, 116, 109, .24), transparent);
     }
 
@@ -361,6 +365,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 30px;
       min-height: 320px;
     }
 
@@ -390,17 +395,21 @@
 
     .breathing__text {
       min-height: 24px;
-      margin-block-start: 2px;
+      margin-block-start: 0;
       color: var(--color-text);
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
       text-align: center;
+      animation: breathe-text 11s infinite ease-in-out;
     }
+
+    .breathing__circle.is-guided + .breathing__text { animation: breathe-text 11s ease-in-out 4 forwards; }
+    .breathing__circle.is-paused + .breathing__text { animation: none; transform: translateY(-14px); }
 
     .summary-card {
       width: 100%;
-      margin: 16px 0 18px;
-      padding: 16px;
+      margin: 24px 0;
+      padding: 20px;
       border: 1px solid rgba(255, 255, 255, .75);
       border-radius: 20px;
       background: var(--color-primary-bg);
@@ -409,15 +418,15 @@
     }
 
     .summary-card__title {
-      margin-block-end: 10px;
+      margin-block-end: 12px;
       color: var(--color-primary);
-      font-size: 1.03rem;
+      font-size: 1.13rem;
       font-weight: 800;
     }
 
     .quote-note {
-      min-height: 58px;
-      padding: 12px 14px;
+      min-height: 80px;
+      padding: 14px 16px;
       border-inline-start: 4px solid rgba(95, 116, 109, .35);
       border-radius: 14px;
       background: #fff;
@@ -433,31 +442,32 @@
     .center { text-align: center; }
 
     .closing-text {
-      max-width: 315px;
+      max-width: 340px;
       margin-inline: auto;
-      font-size: .94rem;
+      margin-block-end: auto;
+      font-size: 1.03rem;
       line-height: 1.5;
       text-align: center;
     }
 
     .feedback-intro {
-      max-width: 320px;
-      margin: 12px auto 10px;
+      max-width: 340px;
+      margin: 24px auto 12px;
       color: var(--color-muted);
-      font-size: .88rem;
+      font-size: .96rem;
       line-height: 1.42;
       text-align: center;
     }
 
     .feedback-link {
       display: block;
-      padding: 14px;
+      padding: 16px;
       border: 1px solid rgba(0, 0, 0, .02);
       border-radius: 16px;
       background: #fff;
       color: var(--color-primary);
       box-shadow: var(--shadow-card);
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 800;
       letter-spacing: -.2px;
       text-align: center;
@@ -491,6 +501,13 @@
       100% { transform: scale(.85); opacity: .45; }
     }
 
+    @keyframes breathe-text {
+      0% { transform: translateY(-14px); }
+      36% { transform: translateY(15px); }
+      54% { transform: translateY(15px); }
+      100% { transform: translateY(-14px); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: .01ms !important;
@@ -503,37 +520,38 @@
     @media (max-height: 760px) {
       :root { --space-screen-block: 20px; --space-screen-inline: 20px; }
       .screen { padding-block-end: 16px; }
-      h1 { margin-block-end: 24px; font-size: 2.1rem; }
-      h2 { font-size: 1.22rem; }
-      p { font-size: .9rem; line-height: 1.45; }
-      .home-main { margin-block-end: 22px; font-size: 1rem; line-height: 1.42; }
-      .home-invitation { margin-block-end: 22px; }
-      .home-invitation p { margin-block-end: 4px; font-size: .92rem; line-height: 1.25; }
-      .home-footer { font-size: .66rem; }
-      .home-credit { font-size: .64rem; line-height: 1.22; }
-      .content-card { padding: 15px 14px 13px; }
-      textarea { min-height: 68px; height: 72px; margin-block-end: 10px; padding: 10px 12px; font-size: .88rem; }
-      .field-label { margin-block-start: 7px; margin-block-end: 4px; font-size: .92rem; }
-      .helper-text { margin-block-end: 6px; font-size: .74rem; line-height: 1.28; }
-      .soft-divider { margin: 12px 0 10px; }
-      .button--secondary { min-height: 42px; padding: 10px; font-size: .9rem; }
-      .breathing { min-height: 280px; }
-      .summary-card { margin: 10px 0 12px; padding: 12px; }
-      .closing-text, .feedback-intro { font-size: .8rem; line-height: 1.3; }
-      .quote-note { min-height: 46px; padding: 10px 12px; font-size: .82rem; }
-      button, .feedback-link { min-height: 44px; padding: 12px; font-size: .96rem; }
+      h1 { margin-block-end: 28px; font-size: 2.3rem; }
+      h2 { font-size: 1.34rem; }
+      p { font-size: .98rem; line-height: 1.45; }
+      .home-main { margin-block-end: 24px; font-size: 1.1rem; line-height: 1.42; }
+      .home-invitation { margin-block-end: 24px; }
+      .home-invitation p { margin-block-end: 4px; font-size: 1.0rem; line-height: 1.25; }
+      .home-footer { font-size: .72rem; }
+      .home-credit { font-size: .7rem; line-height: 1.22; }
+      .content-card { padding: 20px 16px 16px; margin: 0 0 16px 0; }
+      textarea { min-height: 76px; margin-block-end: 12px; padding: 12px 14px; font-size: .96rem; }
+      .field-label { margin-block-start: 10px; margin-block-end: 6px; font-size: 1.0rem; }
+      .helper-text { margin-block-end: 8px; font-size: .81rem; line-height: 1.28; }
+      .soft-divider { margin: 16px 0 14px; }
+      .button--secondary { min-height: 42px; padding: 10px; font-size: .98rem; }
+      .breathing { min-height: 280px; gap: 26px; }
+      .summary-card { margin: 16px 0; padding: 16px; }
+      .closing-text, .feedback-intro { font-size: .88rem; line-height: 1.3; }
+      .quote-note { min-height: 60px; padding: 12px 14px; font-size: .9rem; }
+      button, .feedback-link { min-height: 44px; padding: 12px; font-size: 1.05rem; }
     }
 
     @media (max-height: 640px) {
       :root { --space-screen-block: 14px; --space-screen-inline: 18px; }
       .screen { padding-block-end: 12px; }
-      h1 { margin-block-end: 16px; font-size: 1.85rem; }
-      .home-main { margin-block-end: 14px; font-size: .9rem; }
+      h1 { margin-block-end: 16px; font-size: 2.0rem; }
+      .home-main { margin-block-end: 14px; font-size: .98rem; }
       .home-invitation { margin-block-end: 14px; }
-      .home-invitation p { margin-block-end: 3px; font-size: .84rem; line-height: 1.18; }
-      .home-footer { font-size: .6rem; }
-      .home-credit { font-size: .58rem; }
-      button { min-height: 40px; padding: 10px; font-size: .92rem; }
+      .home-invitation p { margin-block-end: 3px; font-size: .92rem; line-height: 1.18; }
+      .home-footer { font-size: .66rem; }
+      .home-credit { font-size: .64rem; }
+      button { min-height: 40px; padding: 10px; font-size: 1.0rem; }
+      .content-card { padding: 16px 14px 14px; margin: 0 0 12px 0; }
     }
   </style>
 </head>
@@ -628,184 +646,4 @@
         <div class="reveal-section" id="supportSection" data-reveal-section>
           <div class="soft-divider" aria-hidden="true"></div>
           <h2>אם אדם קרוב היה לצדכם...</h2>
-          <label class="field-label" for="supportText">אילו מילים הייתם רוצים לשמוע באותו רגע?</label>
-          
-          <textarea id="supportText" placeholder="כתבו כאן את המילים שהייתם רוצים לשמוע..."></textarea>
-        </div>
-      </div>
-
-      <div class="button-stack">
-        <button type="button" data-summary>לסיום</button>
-      </div>
-    </section>
-
-    <section class="screen" id="summary" data-screen aria-labelledby="summary-title">
-      <div class="step-indicator center">שלב 4 מתוך 4</div>
-      <h2 class="center" id="summary-title">תודה שהקדשתם לעצמכם רגע.</h2>
-
-      <div class="summary-card">
-        <div class="summary-card__title">המילים שלכם</div>
-        <p class="helper-text center">קראו אותן לאט.</p>
-        <div class="quote-note" data-support-review aria-label="המילים שלכם"></div>
-      </div>
-
-      <p class="closing-text">אפשר לחזור למילים האלה בכל פעם שתרגישו צורך.</p>
-
-      <p class="feedback-intro">אשמח לשמוע איך הייתה החוויה שלכם.<br>המשוב שלכם יעזור לי להמשיך ולדייק את הכלי.</p>
-      <a href="https://forms.gle/6XtRAuLPUkvy1XXE8" target="_blank" rel="noopener noreferrer" class="feedback-link">איך היה?</a>
-    </section>
-  </main>
-
-  <script>
-    (() => {
-      "use strict";
-
-      const screensOrder = ["home", "breathing", "event", "need", "summary"];
-      const state = {
-        activeScreen: "home",
-        breathingIntervalId: null,
-        breathingTimeoutIds: []
-      };
-
-      const dom = {
-        screens: [...document.querySelectorAll("[data-screen]")],
-        progress: document.querySelector("[data-progress]"),
-        progressBar: document.querySelector("[data-progress-bar]"),
-        breathingCircle: document.querySelector("[data-breathing-circle]"),
-        breathingText: document.querySelector("[data-breathing-text]"),
-        supportText: document.querySelector("#supportText"),
-        supportReview: document.querySelector("[data-support-review]")
-      };
-
-      const activeClass = "is-active";
-      const visibleClass = "is-visible";
-      const hiddenClass = "is-hidden";
-
-      function setTimeoutTracked(callback, delay) {
-        const id = window.setTimeout(() => {
-          state.breathingTimeoutIds = state.breathingTimeoutIds.filter(timeoutId => timeoutId !== id);
-          callback();
-        }, delay);
-        state.breathingTimeoutIds.push(id);
-        return id;
-      }
-
-      function clearBreathingTimers() {
-        if (state.breathingIntervalId !== null) {
-          window.clearInterval(state.breathingIntervalId);
-          state.breathingIntervalId = null;
-        }
-
-        state.breathingTimeoutIds.forEach(timeoutId => window.clearTimeout(timeoutId));
-        state.breathingTimeoutIds = [];
-      }
-
-      function resetBreathingCircle() {
-        if (!dom.breathingCircle) return;
-        dom.breathingCircle.classList.remove("is-guided", "is-paused");
-        void dom.breathingCircle.offsetWidth;
-      }
-
-      function stopBreathing({ reset = true } = {}) {
-        clearBreathingTimers();
-        if (reset) resetBreathingCircle();
-      }
-
-      function updateProgress(screenId) {
-        if (!dom.progress || !dom.progressBar) return;
-
-        if (screenId === "home") {
-          dom.progress.classList.remove(visibleClass);
-          dom.progressBar.style.width = "0%";
-          return;
-        }
-
-        const stepIndex = Math.max(1, screensOrder.indexOf(screenId));
-        const progressValue = Math.min(100, (stepIndex / 4) * 100);
-        dom.progress.classList.add(visibleClass);
-        dom.progressBar.style.width = `${progressValue}%`;
-      }
-
-      function focusScreenHeading(screen) {
-        const heading = screen.querySelector("h1, h2");
-        if (!heading) return;
-
-        heading.setAttribute("tabindex", "-1");
-        heading.focus({ preventScroll: true });
-        heading.addEventListener("blur", () => heading.removeAttribute("tabindex"), { once: true });
-      }
-
-      function showScreen(screenId) {
-        const nextScreen = document.getElementById(screenId);
-        if (!nextScreen) return;
-
-        dom.screens.forEach(screen => screen.classList.remove(activeClass));
-        nextScreen.classList.add(activeClass);
-        nextScreen.scrollTop = 0;
-        state.activeScreen = screenId;
-
-        updateProgress(screenId);
-        focusScreenHeading(nextScreen);
-
-        if (screenId === "breathing") {
-          runBreathingGuide();
-        } else {
-          stopBreathing();
-        }
-      }
-
-      function runBreathingGuide() {
-        if (!dom.breathingText || !dom.breathingCircle) return;
-
-        stopBreathing();
-        dom.breathingText.textContent = "";
-        dom.breathingCircle.classList.add("is-paused");
-
-        setTimeoutTracked(() => {
-          if (state.activeScreen !== "breathing") return;
-          dom.breathingCircle.classList.remove("is-paused");
-          dom.breathingCircle.classList.add("is-guided");
-        }, 250);
-
-      }
-
-      function revealSection(button) {
-        const sectionId = button.dataset.reveal;
-        const section = document.getElementById(sectionId);
-        if (!section) return;
-
-        section.classList.add(visibleClass);
-        button.classList.add(hiddenClass);
-
-        const focusTarget = section.querySelector("textarea, h2");
-        if (focusTarget) focusTarget.focus({ preventScroll: false });
-      }
-
-      function showSummary() {
-        const text = dom.supportText?.value.trim() || "";
-        if (dom.supportReview) dom.supportReview.textContent = text;
-        showScreen("summary");
-      }
-
-      function handleClick(event) {
-        const nextButton = event.target.closest("[data-next]");
-        if (nextButton) {
-          showScreen(nextButton.dataset.next);
-          return;
-        }
-
-        const revealButton = event.target.closest("[data-reveal]");
-        if (revealButton) {
-          revealSection(revealButton);
-          return;
-        }
-
-        if (event.target.closest("[data-summary]")) showSummary();
-      }
-
-      document.addEventListener("click", handleClick);
-      window.addEventListener("pagehide", () => stopBreathing());
-    })();
-  </script>
-</body>
-</html>
+          <label class
