@@ -491,6 +491,15 @@
       100% { transform: scale(.85); opacity: .45; }
     }
 
+
+
+    /* Release layout fix: prevent skip by never showing the lower continue button
+       while the in-card reveal button is still visible. */
+    #event:has(> .content-card > .button--secondary:not(.is-hidden)) > .button-stack,
+    #need:has(> .content-card > .button--secondary:not(.is-hidden)) > .button-stack {
+      display: none;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: .01ms !important;
@@ -535,221 +544,30 @@
       .home-credit { font-size: .58rem; }
       button { min-height: 40px; padding: 10px; font-size: .92rem; }
     }
-  
 
-    /* Release mobile layout correction: layout/spacing only */
+    /* Release layout fix: on phones, the app shell itself uses almost the full
+       available browser viewport. No visual language, text, color, or flow changes. */
     @media (hover: none), (max-width: 520px) {
       :root {
-        --space-screen-block: clamp(20px, 3.2svh, 30px);
-        --space-screen-inline: 22px;
+        --shell-width: min(94vw, 430px);
+        --shell-height: calc(100svh - 8px);
       }
 
-      .screen {
-        padding-block: var(--space-screen-block) clamp(18px, 2.6svh, 24px);
+      body {
+        min-height: 100svh;
+        padding-block: 4px;
       }
 
-      p {
-        font-size: 1.04rem;
-        line-height: 1.56;
-      }
-
-      .field-label {
-        font-size: 1.1rem;
-        line-height: 1.34;
-      }
-
-      .helper-text {
-        font-size: .92rem;
-        line-height: 1.42;
-      }
-
-      textarea {
-        font-size: 1.03rem;
-        line-height: 1.5;
-      }
-
-      .step-indicator {
-        font-size: .96rem;
-      }
-
-      .intro-note {
-        font-size: 1.12rem;
-      }
-
-      .closing-text {
-        font-size: 1.02rem;
-      }
-
-      .feedback-intro {
-        font-size: .95rem;
-      }
-
-      .screen--home {
-        justify-content: flex-start;
-      }
-
-      .home-spacer {
-        flex: 0 1 clamp(58px, 11svh, 104px);
-        min-height: clamp(58px, 11svh, 104px);
-      }
-
-      .home-footer {
-        margin-block-start: auto;
-      }
-
-      #breathing.is-active {
-        display: grid;
-        grid-template-rows: auto auto auto minmax(0, 1fr) auto;
-      }
-
-      #breathing .step-indicator {
-        margin-block-end: clamp(8px, 1.5svh, 14px);
-      }
-
-      #breathing .intro-note {
-        margin-block: 0 clamp(8px, 1.4svh, 12px);
-      }
-
-      #breathing h2 {
-        margin-block-end: 0;
-      }
-
-      #breathing .breathing {
-        min-height: 0;
-        padding-block: clamp(10px, 2svh, 18px) clamp(6px, 1.4svh, 12px);
-        justify-content: center;
-        gap: clamp(48px, 6.2svh, 58px);
-      }
-
-      #breathing .breathing__text {
-        margin-block-start: 0;
-        min-height: 2.7em;
-        font-size: 1.06rem;
-        line-height: 1.32;
-      }
-
-      #event.is-active,
-      #need.is-active {
-        display: grid;
-        grid-template-rows: minmax(0, 1fr) auto;
-        row-gap: clamp(12px, 2svh, 18px);
-      }
-
-      #event > .content-card,
-      #need > .content-card {
-        height: 100%;
-        min-height: 0;
-        margin-block: 0;
-        display: flex;
-        flex-direction: column;
-      }
-
-      #event > .button-stack,
-      #need > .button-stack {
-        margin-block-start: 0;
-        padding-block-start: 0;
-      }
-
-      #event:has(> .content-card > .button--secondary:not(.is-hidden)) > .button-stack,
-      #need:has(> .content-card > .button--secondary:not(.is-hidden)) > .button-stack {
-        display: none;
-      }
-
-      #event .content-card > .button--secondary:not(.is-hidden),
-      #need .content-card > .button--secondary:not(.is-hidden) {
-        margin-block-start: auto;
-      }
-
-      #event .content-card > textarea,
-      #need .content-card > textarea {
-        flex: 1 1 auto;
-        min-height: clamp(124px, 24svh, 178px);
-        height: auto;
-      }
-
-      #event .content-card:has(.reveal-section.is-visible),
-      #need .content-card:has(.reveal-section.is-visible) {
-        justify-content: flex-start;
-      }
-
-      #event .content-card:has(.reveal-section.is-visible) > textarea,
-      #need .content-card:has(.reveal-section.is-visible) > textarea {
-        flex: 0 0 clamp(78px, 12svh, 108px);
-        min-height: clamp(78px, 12svh, 108px);
-        height: clamp(78px, 12svh, 108px);
-      }
-
-      .reveal-section.is-visible {
-        flex: 1 1 auto;
-        min-height: 0;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .reveal-section.is-visible textarea {
-        flex: 1 1 auto;
-        min-height: clamp(108px, 19svh, 158px);
-        height: auto;
-      }
-
-      #summary.is-active {
-        display: flex;
-        flex-direction: column;
-      }
-
-      #summary .summary-card {
-        flex: 1 1 auto;
-        min-height: 0;
-        margin-block: clamp(14px, 2.2svh, 20px);
-        display: flex;
-        flex-direction: column;
-      }
-
-      #summary .quote-note {
-        flex: 1 1 auto;
-        min-height: clamp(150px, 28svh, 230px);
-      }
-
-      #summary .feedback-link {
-        margin-block-start: auto;
+      .app-shell {
+        max-height: calc(100svh - 8px);
       }
     }
 
-    @media (hover: none) and (max-height: 760px), (max-width: 520px) and (max-height: 760px) {
-      p { font-size: .98rem; line-height: 1.48; }
-      .field-label { font-size: 1rem; }
-      .helper-text { font-size: .82rem; line-height: 1.34; }
-      textarea { font-size: .95rem; }
-      .intro-note { font-size: 1rem; }
-      .closing-text, .feedback-intro { font-size: .88rem; line-height: 1.34; }
-
-      .home-spacer {
-        flex-basis: clamp(42px, 8svh, 76px);
-        min-height: clamp(42px, 8svh, 76px);
-      }
-
-      #breathing .breathing {
-        gap: clamp(42px, 5.8svh, 52px);
-      }
-
-      #event .content-card > textarea,
-      #need .content-card > textarea {
-        min-height: clamp(96px, 20svh, 136px);
-      }
-
-      #event .content-card:has(.reveal-section.is-visible) > textarea,
-      #need .content-card:has(.reveal-section.is-visible) > textarea {
-        flex-basis: clamp(68px, 11svh, 92px);
-        min-height: clamp(68px, 11svh, 92px);
-        height: clamp(68px, 11svh, 92px);
-      }
-
-      .reveal-section.is-visible textarea {
-        min-height: clamp(82px, 16svh, 124px);
-      }
-
-      #summary .quote-note {
-        min-height: clamp(100px, 22svh, 160px);
+    @supports (height: 100dvh) {
+      @media (hover: none), (max-width: 520px) {
+        :root { --shell-height: calc(100dvh - 8px); }
+        body { min-height: 100dvh; }
+        .app-shell { max-height: calc(100dvh - 8px); }
       }
     }
 
