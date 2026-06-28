@@ -1,515 +1,658 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>רגע חמלה</title>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* פאלת הצבעים המקורית והייחודית של הכלי - Quiet Luxury */
-        :root { 
-            --bg-color: #F7F5F0; 
-            --text-main: #2C302E; 
-            --text-muted: #6B706E; 
-            --accent-color: #8DA19A; 
-            --border-color: #E3DFD5; 
-            --card-bg: #FFFFFF; 
-        }
-        
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Assistant', sans-serif;
-            -webkit-tap-highlight-color: transparent; 
-        }
-        
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            /* פתרון הגובה הדינמי המוחלט למניעת חיתוך וגלילה באייפון */
-            height: 100vh;
-            height: 100svh;
-            height: 100dvh;
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center;
-            align-items: center;
-            padding: 0;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>רגע חמלה</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-sage: #e4e9e0;
+      --card-cream: #fdfcf8;
+      --text-green: #294732;
+      --text-body: #4a4a4a;
+      --text-muted: #85827d;
+      --primary: #5f746d;
+      --primary-bg: #eef4ef;
+      --primary-light: rgba(95, 116, 109, 0.13);
+      --primary-shadow: rgba(95, 116, 109, 0.18);
+      --border-soft: rgba(0,0,0,0.055);
+      --shadow-soft: 0 30px 60px rgba(0,0,0,.06), 0 12px 24px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.02);
+      --shadow-card: 0 14px 30px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03), 0 1px 3px rgba(0,0,0,.015);
+      --shadow-inner: inset 0 3px 6px rgba(0,0,0,.015), inset 0 1px 3px rgba(0,0,0,.01);
+      --ease-smooth: cubic-bezier(.2,.8,.2,1);
+      --ease-spring: cubic-bezier(.25,.8,.15,1.15);
+    }
 
-        /* מכולת הטלפון הרספונסיבית - פריסה רחבה ומלאה בתוך גבולות המובייל */
-        .phone-container {
-            width: 100%;
-            max-width: 420px;
-            height: 100%;
-            background-color: var(--bg-color);
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            padding: 24px 24px 20px 24px; /* פדינג מבוקר ומהודק למובייל */
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-        /* במחשב בלבד - הגבלת פריסה אסתטית ומסגרת עדינה */
-        @media (min-width: 440px) {
-            .phone-container {
-                height: 92vh;
-                max-height: 780px;
-                border-radius: 24px;
-                border: 1px solid rgba(0, 0, 0, 0.03);
-                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.02);
-            }
-            body {
-                padding: 20px;
-                background-color: #eaddcb; 
-            }
-        }
+    body {
+      background: var(--bg-sage);
+      font-family: 'Heebo', system-ui, -apple-system, sans-serif;
+      height: 100svh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: var(--text-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-        /* סרגל התקדמות עליון דק וקבוע */
-        .progress-container { 
-            width: 100%; 
-            height: 3px; 
-            background-color: var(--border-color); 
-            margin-bottom: 16px; 
-            border-radius: 2px; 
-            flex-shrink: 0;
-            display: none; /* מוסתר במסך הפתיחה */
-        }
-        
-        .progress-bar { 
-            height: 100%; 
-            width: 0%; 
-            background-color: var(--accent-color); 
-            transition: width 0.4s ease; 
-        }
+    .poster-container {
+      width: 92%;
+      max-width: 414px;
+      height: 94svh;
+      max-height: 844px;
+      background:
+        radial-gradient(circle at 16% 10%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 28%),
+        radial-gradient(circle at 88% 18%, rgba(95,116,109,.14) 0%, rgba(95,116,109,0) 30%),
+        var(--card-cream);
+      border-radius: 36px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.85);
+      display: flex;
+      flex-direction: column;
+    }
 
-        /* אינדיקטור שלב טקסטואלי */
-        .step-indicator {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 400;
-            text-align: right;
-            width: 100%;
-        }
-        
-        /* אזור מעטפת המסכים המרכזי - גמיש ותופס את מקסימום הגובה ברוחב מלא */
-        .screens-wrapper { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column;
-            min-height: 0; 
-            width: 100%;
-        }
+    .decor-blob-1 {
+      position: absolute; top: -56px; right: -54px; width: 190px; height: 190px;
+      background: radial-gradient(circle, rgba(232,238,226,.95) 0%, rgba(253,252,248,0) 70%);
+      border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(10px);
+    }
+    .decor-blob-2 {
+      position: absolute; bottom: -64px; left: -60px; width: 210px; height: 210px;
+      background: radial-gradient(circle, rgba(232,238,226,.72) 0%, rgba(253,252,248,0) 72%);
+      border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(10px);
+    }
+    .leaf-shadow {
+      position: absolute; top: 18px; left: -24px; width: 170px; height: 170px;
+      background:
+        radial-gradient(ellipse at 30% 28%, rgba(95,116,109,.10) 0 11%, transparent 12%),
+        radial-gradient(ellipse at 62% 38%, rgba(95,116,109,.08) 0 10%, transparent 11%),
+        radial-gradient(ellipse at 44% 68%, rgba(95,116,109,.07) 0 11%, transparent 12%);
+      filter: blur(9px);
+      transform: rotate(-18deg);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .screen { 
-            display: none; 
-            flex-direction: column; 
-            align-items: flex-start;
-            text-align: right;
-            height: 100%;
-            width: 100%;
-            opacity: 0; 
-            transition: opacity 0.3s; 
-        }
-        
-        .screen.active { 
-            display: flex; 
-            opacity: 1; 
-        }
+    .progress-bar-container {
+      position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+      background: rgba(0,0,0,.02); z-index: 10; display: none;
+    }
+    .progress-bar {
+      height: 100%; width: 0%; background: var(--primary);
+      transition: width .6s var(--ease-smooth);
+      border-radius: 0 4px 4px 0;
+    }
 
-        /* טיפוגרפיה מהודקת ומיושרת ל-RTL */
-        h1 { 
-            font-size: 1.85rem; 
-            font-weight: 600;
-            margin-bottom: 8px; 
-            color: var(--text-main);
-            text-align: center;
-            width: 100%;
-        }
-        
-        h2 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text-main);
-            line-height: 1.3;
-            text-align: right;
-            width: 100%;
-        }
+    @keyframes fadeInSlideUp {
+      0% { opacity: 0; transform: translateY(16px) scale(.99); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes revealIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        p { 
-            font-size: 0.95rem; 
-            color: var(--text-muted); 
-            margin-bottom: 12px; 
-            line-height: 1.45; 
-            text-align: right;
-            width: 100%;
-        }
+    .screen {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: 24px 22px 20px;
+      z-index: 2;
+      position: relative;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+    }
+    .screen::-webkit-scrollbar { display: none; }
+    .screen.active { display: flex; animation: fadeInSlideUp .5s var(--ease-smooth) forwards; }
 
-        /* תיבת מיקוד והנחיה רכה - רוחב מלא ויישור ימין */
-        .guidance-box {
-            background-color: var(--card-bg);
-            border-right: 3px solid var(--accent-color);
-            padding: 12px;
-            border-radius: 4px 12px 12px 4px;
-            margin-bottom: 14px;
-            font-size: 0.85rem;
-            line-height: 1.4;
-            color: var(--text-main);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
-            text-align: right;
-            width: 100%;
-        }
+    #home { overflow: hidden; align-items: center; text-align: center; }
 
-        /* אזור הזנה - רוחב מלא ואופטימיזציה למובייל */
-        textarea {
-            width: 100%;
-            height: 90px;
-            min-height: 85px;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            background-color: var(--card-bg);
-            resize: none;
-            font-size: 0.95rem;
-            color: var(--text-main);
-            outline: none;
-            line-height: 1.4;
-            text-align: right;
-            transition: border-color 0.3s;
-        }
+    h1 {
+      color: var(--text-green);
+      font-size: clamp(2.2rem, 8vw, 2.55rem);
+      font-weight: 800;
+      letter-spacing: -.6px;
+      line-height: 1.1;
+      margin-bottom: 34px;
+    }
+    h2 {
+      color: var(--primary);
+      font-size: 1.36rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: -.35px;
+    }
+    p {
+      font-size: .96rem;
+      line-height: 1.58;
+      margin-bottom: 14px;
+    }
 
-        textarea:focus {
-            border-color: var(--accent-color);
-        }
+    .home-main {
+      color: var(--text-body);
+      font-size: 1.08rem;
+      line-height: 1.5;
+      font-weight: 500;
+      margin-bottom: 28px;
+      max-width: 330px;
+    }
+    .home-invitation {
+      width: 100%;
+      max-width: 330px;
+      margin-bottom: 30px;
+      color: var(--primary);
+      font-size: .98rem;
+      line-height: 1.38;
+    }
+    .home-invitation p {
+      text-align: center;
+      margin-bottom: 6px;
+      color: var(--primary);
+    }
+    .home-invitation strong { font-weight: 800; }
 
-        /* --- רכיב נשימה קצבי (Soothing Rhythm Breathing) --- */
-        .breathing-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-top: 10px;
-            width: 100%;
-        }
+    .home-spacer { flex: 1; min-height: 18px; }
+    .home-footer {
+      width: 100%;
+      margin-top: auto;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.35;
+      padding-top: 10px;
+      font-size: .72rem;
+    }
+    .home-credit {
+      border-top: 1px solid rgba(0,0,0,.06);
+      margin-top: 8px;
+      padding-top: 8px;
+      font-size: .67rem;
+      line-height: 1.28;
+      color: rgba(133,130,125,.86);
+    }
 
-        .breathing-circle {
-            width: 110px;
-            height: 110px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(141, 161, 154, 0.2);
-            /* קצב אקדמי: שאיפה 4 ש', עצירה 2 ש', נשיפה 5 ש' */
-            animation: soothePulse 11s infinite ease-in-out;
-        }
+    .step-indicator {
+      font-size: .9rem;
+      color: #999;
+      margin-bottom: 16px;
+      font-weight: 600;
+      letter-spacing: -.2px;
+    }
 
-        /* עיגול סגירה מוקטן ומותאם אישית למסך הסיום כדי למנוע גלילה */
-        .breathing-circle.circle-small {
-            width: 75px;
-            height: 75px;
-            box-shadow: 0 6px 20px rgba(141, 161, 154, 0.15);
-        }
+    .intro-note {
+      color: var(--text-muted);
+      font-size: 1.04rem;
+      font-weight: 500;
+      margin: 4px 0 14px;
+      line-height: 1.42;
+    }
 
-        @keyframes soothePulse {
-            0% { transform: scale(0.85); }
-            36% { transform: scale(1.25); }   
-            54% { transform: scale(1.25); }   
-            100% { transform: scale(0.85); }  
-        }
+    .content-card {
+      width: 100%;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 24px;
+      padding: 20px 18px 18px;
+      box-shadow: var(--shadow-card);
+      margin: auto 0;
+    }
 
-        .breathing-text {
-            margin-top: 20px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-main);
-            min-height: 24px;
-            text-align: center;
-        }
-        
-        /* אזור כפתורים וניווט תחתון - מקובע ומעוגן קשיח בתחתית המכולה */
-        .footer-container { 
-            flex-shrink: 0; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            margin-top: auto; 
-            padding-top: 10px;
-            width: 100%;
-        }
-        
-        .btn-primary { 
-            width: 100%; 
-            height: 48px; 
-            background-color: var(--text-main); 
-            color: #fff; 
-            border: none; 
-            border-radius: 26px; 
-            font-size: 0.95rem; 
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
+    .field-label {
+      color: var(--primary);
+      font-size: 1.02rem;
+      font-weight: 800;
+      line-height: 1.35;
+      margin: 12px 0 6px;
+    }
+    .helper-text {
+      color: var(--text-muted);
+      font-size: .84rem;
+      line-height: 1.42;
+      margin-bottom: 10px;
+    }
 
-        .btn-primary:active {
-            background-color: #404643;
-        }
-        
-        /* עיצוב הקרדיט הקבוע והמדויק - מופיע רק במסך הפתיחה */
-        .credit { 
-            font-size: 10px; 
-            color: var(--text-muted); 
-            text-align: center; 
-            line-height: 1.4; 
-            margin-top: 12px;
-            width: 100%;
-            padding-top: 8px;
-            border-top: 1px solid rgba(0, 0, 0, 0.03);
-        }
+    textarea {
+      width: 100%;
+      min-height: 106px;
+      height: clamp(96px, 17svh, 128px);
+      padding: 14px 16px;
+      border: 1px solid var(--border-soft);
+      border-radius: 18px;
+      background-color: #faf9f7;
+      resize: none;
+      font-size: .95rem;
+      color: var(--text-body);
+      outline: none;
+      line-height: 1.5;
+      transition: border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
+      box-shadow: var(--shadow-inner);
+      margin-bottom: 14px;
+      font-family: inherit;
+    }
+    textarea:focus {
+      background: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 0 3px var(--primary-light), var(--shadow-card);
+    }
+    textarea::placeholder { color: #b0b0b0; }
 
-        /* אלמנט קישור המשוב המשודרג - מובלט ומותאם לפאלת הצבעים הייחודית של הכלי */
-        .feedback-link-container {
-            width: 100%;
-            margin-top: 8px;
-            margin-bottom: 8px;
-        }
+    button {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 99px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all .3s var(--ease-spring);
+      box-shadow: 0 8px 20px var(--primary-shadow);
+      font-family: inherit;
+      letter-spacing: -.2px;
+      touch-action: manipulation;
+    }
+    button:active { transform: scale(.96); box-shadow: 0 4px 10px var(--primary-shadow); }
 
-        .feedback-link {
-            display: block;
-            text-align: center;
-            color: #ffffff;
-            background-color: #72867e; /* גרסה נוכחת ומובלטת יותר של צבע האקסט המקורי של הכלי */
-            padding: 13px 16px;
-            border-radius: 14px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 4px 12px rgba(141, 161, 154, 0.2);
-            transition: all 0.2s ease;
-        }
+    .btn-container {
+      width: 100%;
+      margin-top: auto;
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-        .feedback-link:active {
-            background-color: var(--text-main);
-            transform: scale(0.98);
-        }
-    </style>
+    .secondary-reveal {
+      background: rgba(95,116,109,.13);
+      color: var(--primary);
+      border: 1px solid rgba(95,116,109,.14);
+      box-shadow: none;
+      padding: 12px;
+      font-size: .95rem;
+      margin-bottom: 2px;
+    }
+    .secondary-reveal.hidden { display: none; }
+
+    .reveal-section {
+      display: none;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .reveal-section.visible {
+      display: block;
+      animation: revealIn .36s var(--ease-smooth) forwards;
+    }
+    .soft-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to left, transparent, rgba(95,116,109,.24), transparent);
+      margin: 22px 0 18px;
+    }
+
+    .breathing-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 320px;
+    }
+    .breathing-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #a7bbb2 0%, #8da19a 100%);
+      box-shadow: 0 10px 30px rgba(95,116,109,.22), inset 0 -4px 12px rgba(0,0,0,.05);
+      position: relative;
+      animation: idlePulse 11s infinite ease-in-out;
+    }
+    .breathing-circle::after {
+      content: '';
+      position: absolute;
+      inset: -18px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(141,161,154,.18), rgba(141,161,154,0) 68%);
+      z-index: -1;
+      animation: idleHalo 11s infinite ease-in-out;
+    }
+    @keyframes idlePulse {
+      0% { transform: scale(.85); }
+      36% { transform: scale(1.25); }
+      54% { transform: scale(1.25); }
+      100% { transform: scale(.85); }
+    }
+    @keyframes idleHalo {
+      0% { transform: scale(.85); opacity: .45; }
+      36% { transform: scale(1.22); opacity: .72; }
+      54% { transform: scale(1.22); opacity: .72; }
+      100% { transform: scale(.85); opacity: .45; }
+    }
+    .breathing-text {
+      margin-top: 28px;
+      min-height: 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-body);
+      text-align: center;
+    }
+
+    .summary-showcase {
+      background: var(--primary-bg);
+      padding: 16px;
+      border-radius: 20px;
+      margin: 16px 0 18px;
+      text-align: center;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.75);
+      box-shadow: 0 8px 24px rgba(0,0,0,.02);
+    }
+    .summary-showcase-title {
+      font-size: 1.03rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .quote-note {
+      background: #fff;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border-right: 4px solid rgba(95,116,109,.35);
+      color: var(--text-body);
+      text-align: right;
+      line-height: 1.45;
+      min-height: 58px;
+      white-space: pre-wrap;
+      box-shadow: 0 4px 12px rgba(0,0,0,.018);
+    }
+    .quote-note:empty::before {
+      content: "המילים שכתבתם יופיעו כאן.";
+      color: #aaa;
+    }
+
+    .center-text { text-align: center; }
+    .closing-text {
+      text-align: center;
+      max-width: 315px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: .94rem;
+      line-height: 1.5;
+    }
+    .feedback-intro {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: .88rem;
+      line-height: 1.42;
+      margin: 12px auto 10px;
+      max-width: 320px;
+    }
+    .feedback-link {
+      display: block;
+      text-align: center;
+      color: var(--primary);
+      background: #fff;
+      padding: 14px;
+      border-radius: 16px;
+      font-size: 1rem;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,.02);
+      transition: all .3s var(--ease-spring);
+      letter-spacing: -.2px;
+    }
+    .feedback-link:active { transform: scale(.97); }
+
+    @media (max-height: 760px) {
+      .screen { padding: 20px 20px 16px; }
+      h1 { font-size: 2.1rem; margin-bottom: 24px; }
+      .home-main { font-size: 1rem; line-height: 1.42; margin-bottom: 22px; }
+      .home-invitation { margin-bottom: 22px; }
+      .home-invitation p { font-size: .92rem; line-height: 1.25; margin-bottom: 4px; }
+      .home-credit { font-size: .64rem; line-height: 1.22; }
+      .home-footer { font-size: .66rem; }
+      h2 { font-size: 1.22rem; }
+      p { font-size: .9rem; line-height: 1.45; }
+      .content-card { padding: 15px 14px 13px; }
+      textarea { min-height: 68px; height: 72px; padding: 10px 12px; font-size: .88rem; margin-bottom: 10px; }
+      .field-label { font-size: .92rem; margin-top: 7px; margin-bottom: 4px; }
+      .helper-text { font-size: .74rem; line-height: 1.28; margin-bottom: 6px; }
+      .soft-divider { margin: 12px 0 10px; }
+      .secondary-reveal { padding: 10px; font-size: .9rem; }
+      .breathing-container { min-height: 280px; }
+      .summary-showcase { margin: 10px 0 12px; padding: 12px; }
+      .closing-text, .feedback-intro { font-size: .8rem; line-height: 1.3; }
+      .quote-note { min-height: 46px; padding: 10px 12px; font-size: .82rem; }
+      button, .feedback-link { padding: 12px; font-size: .96rem; }
+    }
+
+    @media (max-height: 640px) {
+      .screen { padding: 14px 18px 12px; }
+      h1 { font-size: 1.85rem; margin-bottom: 16px; }
+      .home-main { font-size: .9rem; margin-bottom: 14px; }
+      .home-invitation { margin-bottom: 14px; }
+      .home-invitation p { font-size: .84rem; line-height: 1.18; margin-bottom: 3px; }
+      .home-footer { font-size: .6rem; }
+      .home-credit { font-size: .58rem; }
+      button { padding: 10px; font-size: .92rem; }
+    }
+  </style>
 </head>
 <body>
+<div class="poster-container" id="app">
+  <div class="decor-blob-1"></div>
+  <div class="decor-blob-2"></div>
+  <div class="leaf-shadow"></div>
+  <div class="progress-bar-container" id="progressBarContainer"><div class="progress-bar" id="progressBar"></div></div>
 
-    <div class="phone-container">
-        <div class="progress-container" id="progressContainer">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
+  <div class="screen active" id="home">
+    <div class="home-spacer"></div>
+    <h1>רגע חמלה</h1>
+    <p class="home-main">לפעמים גם מי שדואג לאחרים,<br>צריך לעצור לרגע.</p>
+    <div class="home-invitation">
+      <p>קחו לעצמכם שתי דקות.</p>
+      <p><strong>לנשום.</strong></p>
+      <p><strong>להניח קצת את העומס.</strong></p>
+      <p><strong>ולהמשיך הלאה עם קצת יותר מרחב.</strong></p>
+    </div>
+    <button onclick="startTool()">מתחילים</button>
+    <div class="home-footer">
+      <p>כל מה שנכתב כאן נשאר על המסך בלבד ואינו נשמר.</p>
+      <div class="home-credit">
+        פיתוח והתאמה להקשר הישראלי: שגית ציפלוביץ · 2026<br>
+        מבוסס על פרוטוקול CMT-T של Matos et al.
+      </div>
+    </div>
+  </div>
 
-        <div class="screens-wrapper">
-            
-            <div class="screen active" id="screen1" style="align-items: center; text-align: center;">
-                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%;">
-                    <h1>רגע חמלה</h1>
-                    <p style="color: var(--accent-color); font-weight: 600; margin-bottom: 14px; text-align: center;">מרחב תמיכה פנימי בעומס</p>
-                    <p style="max-width: 290px; text-align: center;">
-                        עצירה מודעת של 2 דקות המיועדת להפחתת שיפוטיות עצמית ופיתוח גישה מכילה כלפי קשיים ואתגרים שעלו במהלך היום שלך בבית הספר.
-                        <br><br>
-                        <span style="font-size: 0.8rem;">הטקסט נשאר על המכשיר שלך בלבד ואינו נשמר בשום מקום.</span>
-                    </p>
-                </div>
-            </div>
+  <div class="screen" id="breathing">
+    <div class="step-indicator">שלב 1 מתוך 4</div>
+    <p class="intro-note">לכולנו יש רגעים מורכבים.</p>
+    <h2>לפני שממשיכים, בואו ניקח רגע לנשום.</h2>
+    <div class="breathing-container">
+      <div class="breathing-circle" id="breathingCircle"></div>
+      <div class="breathing-text" id="breathingText"></div>
+    </div>
+    <div class="btn-container"><button onclick="nextStep('event')">המשך</button></div>
+  </div>
 
-            <div class="screen" id="screen2">
-                <div class="step-indicator">שלב 1 מתוך 5</div>
-                <h2>קצב נשימה מרגיע</h2>
-                <p>לפני שנתבונן באירועי היום, נרצה לאותת למערכת העצבית לעבור למצב של רגיעה וביטחון פנימי.</p>
-                
-                <div class="breathing-container">
-                    <div class="breathing-circle" id="breathingCircle"></div>
-                    <div class="breathing-text" id="breathingText">קחו נשימה עמוקה...</div>
-                </div>
-            </div>
+  <div class="screen" id="event">
+    <div class="content-card">
+      <div class="step-indicator">שלב 2 מתוך 4</div>
+      <h2>בואו נחזור לרגע אחד מהיום.</h2>
+      <p>חשבו על סיטואציה שלא הייתה פשוטה עבורכם.</p>
 
-            <div class="screen" id="screen3">
-                <div class="step-indicator">שלב 2 מתוך 5</div>
-                <h2>להביט בקושי ובאתגר</h2>
-                <p>חשבו על רגע קשה, מתסכל או מעורר אי נוחות שחוויתם היום בעבודה מול תלמיד, קולגה או משימה.</p>
-                
-                <div class="guidance-box">
-                    <strong>מה קרה שם?</strong> נסו לתאר את הסיטואציה בצורה עובדתית ויבשה, ללא שיפוטיות או האשמה עצמית.
-                </div>
-                
-                <textarea id="input-challenge" placeholder="תארו בקצרה את האירוע או התחושה שהיוו אתגר..."></textarea>
-            </div>
+      <p class="field-label">מה קרה?</p>
+      <p class="helper-text">תארו בקצרה את מה שקרה, בלי לנתח או לשפוט.</p>
+      <textarea id="challengeText" placeholder="כתבו כאן בקצרה..."></textarea>
+      <button class="secondary-reveal" id="showFeelingsBtn" onclick="showReveal('feelingsSection', 'showFeelingsBtn')">המשך</button>
 
-            <div class="screen" id="screen4">
-                <div class="step-indicator">שלב 3 מתוך 5</div>
-                <h2>להכיר באנושיות המשותפת</h2>
-                <p>קל מאוד ליפול למלכודת של ביקורת עצמית נוקשה ולחשוב שרק אתם חווים קשיים כאלה.</p>
-                
-                <div class="guidance-box">
-                    <strong>תזכורת פנימית:</strong> אתגרים, תסכולים וטעויות הם חלק טבעי, בלתי נפרד ואנושי לחלוטין מעבודת החינוך וההוראה.
-                    <br><br>
-                    <em>לפעמים קל יותר להיות חומלים כלפי אחרים מאשר כלפי עצמנו.</em>
-                </div>
-                
-                <p style="font-weight: 600; color: var(--text-main); font-size: 0.9rem;">מה הייתם אומרים לקולגה יקר/ה שהיה מספר לכם על אתגר כזה בדיוק?</p>
-                <textarea id="input-kindness" placeholder="כתבו לעצמכם מילות תמיכה והבנה, כאילו דיברתם אל חבר קרוב..."></textarea>
-            </div>
+      <div class="reveal-section" id="feelingsSection">
+        <div class="soft-divider"></div>
+        <h2>ומה עבר עליכם באותו רגע?</h2>
+        <p>מה הרגשתם באותו רגע?</p>
+        <p class="helper-text">כל מה שהרגשתם הוא תשובה נכונה.</p>
+        <textarea id="feelingsText" placeholder="כתבו כאן..."></textarea>
+      </div>
+    </div>
+    <div class="btn-container"><button onclick="nextStep('need')">המשך</button></div>
+  </div>
 
-            <div class="screen" id="screen5">
-                <div class="step-indicator">שלב 4 מתוך 5</div>
-                <h2>פעולה מטיבה ותומכת</h2>
-                <p>חמלה היא לא רק הרגשה, היא גם פעולה של טיפוח עצמי שנועדה להקל על העומס המנטלי שלך.</p>
-                
-                <p style="font-weight: 600; margin-top: 10px; margin-bottom: 8px; font-size: 0.9rem;">מהו דבר קטן אחד שיכול לעשות לכם קצת טוב או להקל עליכם בהמשך הערב?</p>
-                
-                <div class="guidance-box" style="margin-bottom: 12px;">
-                    <strong>רעיונות קטנים:</strong> כוס תה בשקט מוחלט, מקלחת חמה ללא נייד, חצי שעה של האזנה למוזיקה, או החלטה מודעת לא לפתוח מיילים בית-ספריים עד מחר.
-                </div>
-                
-                <textarea id="input-action" placeholder="מה תעשו הערב למען השקט שלכם?"></textarea>
-            </div>
+  <div class="screen" id="need">
+    <div class="content-card">
+      <div class="step-indicator">שלב 3 מתוך 4</div>
+      <h2>מה הייתם צריכים באותו רגע?</h2>
+      <p>מה היה יכול לעזור לכם באותו רגע?</p>
+      <p class="helper-text">לפעמים זו יכולה להיות מילה טובה, עידוד, הבנה, תמיכה או פשוט רגע לנשום.</p>
+      <textarea id="needText" placeholder="כתבו כאן..."></textarea>
+      <button class="secondary-reveal" id="showSupportBtn" onclick="showReveal('supportSection', 'showSupportBtn')">המשך</button>
 
-            <div class="screen" id="screen6" style="align-items: center; text-align: center; justify-content: center;">
-                <div class="step-indicator" style="text-align: center;">שלב 5 מתוך 5</div>
-                <h2 style="text-align: center; margin-bottom: 6px;">נשימה עמוקה פנימה.</h2>
-                <p style="font-size: 0.95rem; color: var(--text-main); margin-bottom: 4px; max-width: 300px; text-align: center;">
-                    אישרתם לעצמכם להיות אנושיים, להרגיש קושי ולהעניק לעצמכם תמיכה.
-                </p>
-                
-                <div class="breathing-container" style="margin-top: 5px; margin-bottom: 5px;">
-                    <div class="breathing-circle circle-small" id="closingBreathingCircle"></div>
-                    <div class="breathing-text" id="closingBreathingText" style="margin-top: 12px; font-size: 0.85rem;">קחו נשימה עמוקה...</div>
-                </div>
+      <div class="reveal-section" id="supportSection">
+        <div class="soft-divider"></div>
+        <h2>אם אדם קרוב היה לצדכם...</h2>
+        <p>מה הייתם רוצים לשמוע ממנו באותו רגע?</p>
+        <p class="helper-text">לפעמים זו יכולה להיות מילה טובה, עידוד, הבנה, תמיכה או פשוט רגע לנשום.</p>
+        <textarea id="supportText" placeholder="כתבו כאן את המילים שהייתם רוצים לשמוע..."></textarea>
+      </div>
+    </div>
+    <div class="btn-container"><button onclick="showSummary()">לסיום</button></div>
+  </div>
 
-                <p style="font-size: 0.85rem; max-width: 290px; text-align: center; margin-top: 4px; margin-bottom: 4px;">
-                    אתם עושים עבודה משמעותית, ומותר לכם לפעמים פשוט להניח להכל ולנוח.
-                </p>
+  <div class="screen" id="summary">
+    <div class="step-indicator center-text">שלב 4 מתוך 4</div>
+    <h2 class="center-text">תודה שהקדשתם לעצמכם רגע.</h2>
+    <p class="closing-text">לפעמים כמה דקות של עצירה יכולות לשנות את הדרך שבה אנחנו ממשיכים את היום.</p>
 
-                <div class="feedback-link-container">
-                    <a href="https://forms.gle/6XtRAuLPUkvy1XXE8" target="_blank" class="feedback-link">
-                        📝 נשמח לשמוע ממך: דקה קצרה למשוב והערכה
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="footer-container">
-            <button class="btn-primary" id="actionButton" onclick="handleNavigation()">להתחיל</button>
-            
-            <div class="credit" id="appCredit">
-                פיתוח, עיצוב והתאמה להקשר הישראלי: שגית ציפלוביץ &middot; 2026<br>
-                מבוסס על פרוטוקול CMT-T של Matos et al.
-            </div>
-        </div>
-
+    <div class="summary-showcase">
+      <div class="summary-showcase-title">רגע חמלה</div>
+      <p class="closing-text" style="margin-bottom:12px;">הרגע הזה הוא הזדמנות לעצור, להקשיב לעצמכם ולפגוש גם את הקושי במעט יותר חמלה.</p>
+      <p class="field-label center-text" style="margin-top:12px;">קראו את מה שכתבתם, ותנו לעצמכם לקבל את המילים האלה.</p>
+      <div class="quote-note" id="supportReview"></div>
     </div>
 
-    <script>
-        let currentScreenIdx = 1;
-        const totalScreensCount = 6; 
-        let breathingTimerId = null;
+    <p class="closing-text">אפשר לחזור לרגע הזה בכל פעם שתרגישו צורך.</p>
+    <p class="feedback-intro">אשמח לשמוע איך הייתה החוויה שלכם.<br>המשוב שלכם יעזור לי להמשיך ולדייק את הכלי.</p>
+    <a href="https://forms.gle/6XtRAuLPUkvy1XXE8" target="_blank" class="feedback-link">איך היה?</a>
+  </div>
+</div>
 
-        function runBreathingSequence(textElementId) {
-            const textEl = document.getElementById(textElementId);
-            if (!textEl) return;
-            
-            const sequence = () => {
-                textEl.innerText = 'שאיפה... למלא את הבטן';
-                
-                setTimeout(() => {
-                    textEl.innerText = 'להחזיק... בעדינות';
-                }, 4000);
-                
-                setTimeout(() => {
-                    textEl.innerText = 'נשיפה... לשחרר מתח';
-                }, 6000);
-            };
-            
-            sequence();
-            breathingTimerId = setInterval(sequence, 11000);
-        }
+<script>
+  let breathingTimerId = null;
+  const screens = ["home", "breathing", "event", "need", "summary"];
 
-        function stopBreathingSequence() {
-            if (breathingTimerId) {
-                clearInterval(breathingTimerId);
-                breathingTimerId = null;
-            }
-        }
+  function showScreen(id) {
+    document.querySelectorAll(".screen").forEach(screen => {
+      screen.classList.remove("active");
+      void screen.offsetWidth;
+    });
+    const target = document.getElementById(id);
+    if (target) {
+      target.classList.add("active");
+      target.scrollTop = 0;
+    }
+    updateProgress(id);
+    if (id !== "breathing") stopBreathing();
+    if (id === "breathing") runBreathing();
+  }
 
-        // ניווט קשיח, ישיר ובטוח לחלוטין ללא תלות במשתנים גלובליים פגיעים בדפדפן
-        function handleNavigation() {
-            if (currentScreenIdx === 2 || currentScreenIdx === 6) {
-                stopBreathingSequence();
-            }
+  function updateProgress(id) {
+    const container = document.getElementById("progressBarContainer");
+    const bar = document.getElementById("progressBar");
+    if (id === "home") {
+      container.style.display = "none";
+      bar.style.width = "0%";
+      return;
+    }
+    container.style.display = "block";
+    const step = Math.max(1, screens.indexOf(id));
+    bar.style.width = Math.min(100, (step / 4) * 100) + "%";
+  }
 
-            if (currentScreenIdx < totalScreensCount) {
-                currentScreenIdx++;
-                applyScreenState(currentScreenIdx);
-            } else {
-                resetApp();
-            }
-        }
+  function startTool() { showScreen("breathing"); }
+  function nextStep(id) { showScreen(id); }
 
-        function applyScreenState(screenNumber) {
-            // העברת מסכים מוחלטת
-            for (let i = 1; i <= 6; i++) {
-                const scr = document.getElementById('screen' + i);
-                if (scr) scr.classList.remove('active');
-            }
-            
-            const target = document.getElementById('screen' + screenNumber);
-            if (target) target.classList.add('active');
+  function showReveal(sectionId, buttonId) {
+    const section = document.getElementById(sectionId);
+    const button = document.getElementById(buttonId);
+    if (section) section.classList.add("visible");
+    if (button) button.classList.add("hidden");
+  }
 
-            // הפעלת נשימות במסכים הרלוונטיים
-            if (screenNumber === 2) {
-                runBreathingSequence('breathingText');
-            } else if (screenNumber === 6) {
-                runBreathingSequence('closingBreathingText');
-            }
+  function showSummary() {
+    const support = document.getElementById("supportText");
+    const review = document.getElementById("supportReview");
+    if (review && support) review.textContent = support.value.trim();
+    showScreen("summary");
+  }
 
-            // עדכון הממשק החיצוני
-            const progressContainer = document.getElementById('progressContainer');
-            const progressBar = document.getElementById('progressBar');
-            const actionButton = document.getElementById('actionButton');
-            const appCredit = document.getElementById('appCredit');
+  function runBreathing() {
+    const textEl = document.getElementById("breathingText");
+    const circle = document.getElementById("breathingCircle");
+    if (!textEl) return;
 
-            if (screenNumber === 1) {
-                if (progressContainer) progressContainer.style.display = 'none';
-                if (actionButton) actionButton.innerText = 'להתחיל';
-                if (appCredit) appCredit.style.display = 'block'; 
-            } else {
-                if (progressContainer) progressContainer.style.display = 'block';
-                if (appCredit) appCredit.style.display = 'none';
-                if (progressBar) progressBar.style.width = ((screenNumber - 1) * 20) + '%';
-                
-                if (actionButton) {
-                    if (screenNumber === totalScreensCount) {
-                        actionButton.innerText = 'חזרה להתחלה';
-                    } else {
-                        actionButton.innerText = 'המשך';
-                    }
-                }
-            }
-        }
+    stopBreathing();
+    if (circle) {
+      circle.style.animation = "none";
+      void circle.offsetWidth;
+    }
 
-        function resetApp() {
-            stopBreathingSequence();
-            
-            const ch = document.getElementById('input-challenge');
-            const kin = document.getElementById('input-kindness');
-            const act = document.getElementById('input-action');
-            if (ch) ch.value = '';
-            if (kin) kin.value = '';
-            if (act) act.value = '';
-            
-            currentScreenIdx = 1;
-            applyScreenState(1);
-        }
-    </script>
+    textEl.textContent = "";
+
+    setTimeout(() => {
+      if (!document.getElementById("breathing").classList.contains("active")) return;
+      textEl.textContent = "נשמו בקצב הכדור.";
+
+      setTimeout(() => {
+        if (!document.getElementById("breathing").classList.contains("active")) return;
+        if (circle) circle.style.animation = "idlePulse 11s ease-in-out 4 forwards";
+
+        let cycleCount = 0;
+        const sequence = () => {
+          if (!document.getElementById("breathing").classList.contains("active")) return;
+          if (cycleCount >= 4) {
+            textEl.textContent = "אפשר להמשיך כשתרצו.";
+            stopBreathing(false);
+            return;
+          }
+
+          textEl.textContent = "שאיפה...";
+          setTimeout(() => {
+            if (document.getElementById("breathing").classList.contains("active")) textEl.textContent = "להחזיק...";
+          }, 4000);
+          setTimeout(() => {
+            if (document.getElementById("breathing").classList.contains("active")) textEl.textContent = "נשיפה...";
+          }, 6000);
+          cycleCount++;
+        };
+
+        sequence();
+        breathingTimerId = setInterval(sequence, 11000);
+      }, 2000);
+    }, 1000);
+  }
+
+  function stopBreathing(resetCircle = true) {
+    if (breathingTimerId) {
+      clearInterval(breathingTimerId);
+      breathingTimerId = null;
+    }
+    if (resetCircle) {
+      const circle = document.getElementById("breathingCircle");
+      if (circle) circle.style.animation = "idlePulse 11s infinite ease-in-out";
+    }
+  }
+</script>
 </body>
 </html>
