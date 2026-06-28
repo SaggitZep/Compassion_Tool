@@ -40,8 +40,8 @@
       --radius-field: 18px;
       --radius-pill: 999px;
 
-      --shell-width: min(92vw, 414px);
-      --shell-height: min(94svh, 844px);
+      --shell-width: min(100vw, 414px);
+      --shell-height: min(100svh, 844px);
       --space-screen-block: 24px;
       --space-screen-inline: 22px;
 
@@ -365,7 +365,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 30px;
+      gap: 40px;
       min-height: 320px;
     }
 
@@ -400,11 +400,7 @@
       font-size: 1.1rem;
       font-weight: 600;
       text-align: center;
-      animation: breathe-text 11s infinite ease-in-out;
     }
-
-    .breathing__circle.is-guided + .breathing__text { animation: breathe-text 11s ease-in-out 4 forwards; }
-    .breathing__circle.is-paused + .breathing__text { animation: none; transform: translateY(-14px); }
 
     .summary-card {
       width: 100%;
@@ -499,13 +495,6 @@
       36% { transform: scale(1.22); opacity: .72; }
       54% { transform: scale(1.22); opacity: .72; }
       100% { transform: scale(.85); opacity: .45; }
-    }
-
-    @keyframes breathe-text {
-      0% { transform: translateY(-14px); }
-      36% { transform: translateY(15px); }
-      54% { transform: translateY(15px); }
-      100% { transform: translateY(-14px); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -646,4 +635,184 @@
         <div class="reveal-section" id="supportSection" data-reveal-section>
           <div class="soft-divider" aria-hidden="true"></div>
           <h2>אם אדם קרוב היה לצדכם...</h2>
-          <label class
+          <label class="field-label" for="supportText">אילו מילים הייתם רוצים לשמוע באותו רגע?</label>
+          
+          <textarea id="supportText" placeholder="כתבו כאן את המילים שהייתם רוצים לשמוע..."></textarea>
+        </div>
+      </div>
+
+      <div class="button-stack">
+        <button type="button" data-summary>לסיום</button>
+      </div>
+    </section>
+
+    <section class="screen" id="summary" data-screen aria-labelledby="summary-title">
+      <div class="step-indicator center">שלב 4 מתוך 4</div>
+      <h2 class="center" id="summary-title">תודה שהקדשתם לעצמכם רגע.</h2>
+
+      <div class="summary-card">
+        <div class="summary-card__title">המילים שלכם</div>
+        <p class="helper-text center">קראו אותן לאט.</p>
+        <div class="quote-note" data-support-review aria-label="המילים שלכם"></div>
+      </div>
+
+      <p class="closing-text">אפשר לחזור למילים האלה בכל פעם שתרגישו צורך.</p>
+
+      <p class="feedback-intro">אשמח לשמוע איך הייתה החוויה שלכם.<br>המשוב שלכם יעזור לי להמשיך ולדייק את הכלי.</p>
+      <a href="https://forms.gle/6XtRAuLPUkvy1XXE8" target="_blank" rel="noopener noreferrer" class="feedback-link">איך היה?</a>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const screensOrder = ["home", "breathing", "event", "need", "summary"];
+      const state = {
+        activeScreen: "home",
+        breathingIntervalId: null,
+        breathingTimeoutIds: []
+      };
+
+      const dom = {
+        screens: [...document.querySelectorAll("[data-screen]")],
+        progress: document.querySelector("[data-progress]"),
+        progressBar: document.querySelector("[data-progress-bar]"),
+        breathingCircle: document.querySelector("[data-breathing-circle]"),
+        breathingText: document.querySelector("[data-breathing-text]"),
+        supportText: document.querySelector("#supportText"),
+        supportReview: document.querySelector("[data-support-review]")
+      };
+
+      const activeClass = "is-active";
+      const visibleClass = "is-visible";
+      const hiddenClass = "is-hidden";
+
+      function setTimeoutTracked(callback, delay) {
+        const id = window.setTimeout(() => {
+          state.breathingTimeoutIds = state.breathingTimeoutIds.filter(timeoutId => timeoutId !== id);
+          callback();
+        }, delay);
+        state.breathingTimeoutIds.push(id);
+        return id;
+      }
+
+      function clearBreathingTimers() {
+        if (state.breathingIntervalId !== null) {
+          window.clearInterval(state.breathingIntervalId);
+          state.breathingIntervalId = null;
+        }
+
+        state.breathingTimeoutIds.forEach(timeoutId => window.clearTimeout(timeoutId));
+        state.breathingTimeoutIds = [];
+      }
+
+      function resetBreathingCircle() {
+        if (!dom.breathingCircle) return;
+        dom.breathingCircle.classList.remove("is-guided", "is-paused");
+        void dom.breathingCircle.offsetWidth;
+      }
+
+      function stopBreathing({ reset = true } = {}) {
+        clearBreathingTimers();
+        if (reset) resetBreathingCircle();
+      }
+
+      function updateProgress(screenId) {
+        if (!dom.progress || !dom.progressBar) return;
+
+        if (screenId === "home") {
+          dom.progress.classList.remove(visibleClass);
+          dom.progressBar.style.width = "0%";
+          return;
+        }
+
+        const stepIndex = Math.max(1, screensOrder.indexOf(screenId));
+        const progressValue = Math.min(100, (stepIndex / 4) * 100);
+        dom.progress.classList.add(visibleClass);
+        dom.progressBar.style.width = `${progressValue}%`;
+      }
+
+      function focusScreenHeading(screen) {
+        const heading = screen.querySelector("h1, h2");
+        if (!heading) return;
+
+        heading.setAttribute("tabindex", "-1");
+        heading.focus({ preventScroll: true });
+        heading.addEventListener("blur", () => heading.removeAttribute("tabindex"), { once: true });
+      }
+
+      function showScreen(screenId) {
+        const nextScreen = document.getElementById(screenId);
+        if (!nextScreen) return;
+
+        dom.screens.forEach(screen => screen.classList.remove(activeClass));
+        nextScreen.classList.add(activeClass);
+        nextScreen.scrollTop = 0;
+        state.activeScreen = screenId;
+
+        updateProgress(screenId);
+        focusScreenHeading(nextScreen);
+
+        if (screenId === "breathing") {
+          runBreathingGuide();
+        } else {
+          stopBreathing();
+        }
+      }
+
+      function runBreathingGuide() {
+        if (!dom.breathingText || !dom.breathingCircle) return;
+
+        stopBreathing();
+        dom.breathingText.textContent = "";
+        dom.breathingCircle.classList.add("is-paused");
+
+        setTimeoutTracked(() => {
+          if (state.activeScreen !== "breathing") return;
+          dom.breathingCircle.classList.remove("is-paused");
+          dom.breathingCircle.classList.add("is-guided");
+        }, 250);
+
+      }
+
+      function revealSection(button) {
+        const sectionId = button.dataset.reveal;
+        const section = document.getElementById(sectionId);
+        if (!section) return;
+
+        section.classList.add(visibleClass);
+        button.classList.add(hiddenClass);
+
+        const focusTarget = section.querySelector("textarea, h2");
+        if (focusTarget) focusTarget.focus({ preventScroll: false });
+      }
+
+      function showSummary() {
+        const text = dom.supportText?.value.trim() || "";
+        if (dom.supportReview) dom.supportReview.textContent = text;
+        showScreen("summary");
+      }
+
+      function handleClick(event) {
+        const nextButton = event.target.closest("[data-next]");
+        if (nextButton) {
+          showScreen(nextButton.dataset.next);
+          return;
+        }
+
+        const revealButton = event.target.closest("[data-reveal]");
+        if (revealButton) {
+          revealSection(revealButton);
+          return;
+        }
+
+        if (event.target.closest("[data-summary]")) showSummary();
+      }
+
+      document.addEventListener("click", handleClick);
+      window.addEventListener("pagehide", () => stopBreathing());
+    })();
+  </script>
+</body>
+</html>
