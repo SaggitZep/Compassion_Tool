@@ -1,421 +1,344 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#e4e9e0">
+  <meta name="description" content="רגע חמלה - כלי קצר לעצירה, נשימה וחמלה עצמית.">
   <title>רגע חמלה</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-sage: #e4e9e0;
-      --card-cream: #fdfcf8;
-      --primary: #5f746d;
-      --primary-dark: #294732;
-      --primary-soft: #eef4ef;
-      --text-body: #4a4a4a;
-      --text-muted: #85827d;
-      --border-soft: rgba(0,0,0,0.055);
-      --shadow-soft: 0 30px 60px rgba(0,0,0,.06), 0 12px 24px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.02);
-      --shadow-card: 0 14px 30px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03), 0 1px 3px rgba(0,0,0,.015);
-      --shadow-inner: inset 0 3px 6px rgba(0,0,0,.015), inset 0 1px 3px rgba(0,0,0,.01);
-      --ease-smooth: cubic-bezier(.2,.8,.2,1);
-      --ease-spring: cubic-bezier(.25,.8,.15,1.15);
+      color-scheme: light;
+
+      --color-bg: #e4e9e0;
+      --color-surface: #fdfcf8;
+      --color-surface-soft: rgba(255, 255, 255, .72);
+      --color-input: #faf9f7;
+      --color-primary: #5f746d;
+      --color-primary-deep: #294732;
+      --color-primary-bg: #eef4ef;
+      --color-primary-soft: rgba(95, 116, 109, .13);
+      --color-primary-border: rgba(95, 116, 109, .16);
+      --color-text: #4a4a4a;
+      --color-muted: #85827d;
+      --color-placeholder: #aaa;
+      --color-border: rgba(0, 0, 0, .055);
+      --color-white-border: rgba(255, 255, 255, .82);
+
+      --shadow-shell: 0 30px 60px rgba(0, 0, 0, .06), 0 12px 24px rgba(0, 0, 0, .04), 0 4px 12px rgba(0, 0, 0, .02);
+      --shadow-card: 0 14px 30px rgba(0, 0, 0, .04), 0 4px 12px rgba(0, 0, 0, .03), 0 1px 3px rgba(0, 0, 0, .015);
+      --shadow-inner: inset 0 3px 6px rgba(0, 0, 0, .015), inset 0 1px 3px rgba(0, 0, 0, .01);
+      --shadow-primary: 0 8px 20px rgba(95, 116, 109, .18);
+
+      --radius-shell: 36px;
+      --radius-card: 24px;
+      --radius-field: 18px;
+      --radius-pill: 999px;
+
+      --shell-width: min(92vw, 414px);
+      --shell-height: min(94svh, 844px);
+      --space-screen-block: 24px;
+      --space-screen-inline: 22px;
+
+      --ease-smooth: cubic-bezier(.2, .8, .2, 1);
+      --ease-spring: cubic-bezier(.25, .8, .15, 1.15);
     }
 
+    *, *::before, *::after { box-sizing: border-box; }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
     }
 
+    html { height: 100%; }
+
     body {
+      min-height: 100svh;
       width: 100vw;
-      height: 100svh;
+      display: grid;
+      place-items: center;
       overflow: hidden;
-      background: var(--bg-sage);
-      font-family: 'Heebo', system-ui, -apple-system, sans-serif;
-      color: var(--text-body);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: Heebo, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    .app {
-      width: 92%;
-      max-width: 414px;
-      height: 94svh;
-      max-height: 844px;
+    button, textarea, a { font: inherit; }
+
+    button {
+      width: 100%;
+      min-height: 50px;
+      border: 0;
+      border-radius: var(--radius-pill);
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -.2px;
+      cursor: pointer;
+      box-shadow: var(--shadow-primary);
+      transition: transform .3s var(--ease-spring), box-shadow .3s var(--ease-spring), background-color .3s ease;
+      touch-action: manipulation;
+    }
+
+    button:active { transform: scale(.96); box-shadow: 0 4px 10px rgba(95, 116, 109, .18); }
+    button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 3px solid rgba(95, 116, 109, .28); outline-offset: 3px; }
+
+    textarea {
+      width: 100%;
+      min-height: 106px;
+      height: clamp(96px, 17svh, 128px);
+      margin-block-end: 14px;
+      padding: 14px 16px;
+      resize: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-field);
+      background: var(--color-input);
+      color: var(--color-text);
+      font-size: .95rem;
+      line-height: 1.5;
+      box-shadow: var(--shadow-inner);
+      transition: border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
+    }
+
+    textarea:focus {
+      border-color: transparent;
+      background: #fff;
+      box-shadow: 0 0 0 3px var(--color-primary-soft), var(--shadow-card);
+      outline: none;
+    }
+
+    textarea::placeholder { color: #b0b0b0; }
+
+    h1 {
+      margin-block-end: 34px;
+      color: var(--color-primary-deep);
+      font-size: clamp(2.2rem, 8vw, 2.55rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.6px;
+    }
+
+    h2 {
+      margin-block-end: 12px;
+      color: var(--color-primary);
+      font-size: 1.36rem;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -.35px;
+    }
+
+    p {
+      margin-block-end: 14px;
+      font-size: .96rem;
+      line-height: 1.58;
+    }
+
+    .app-shell {
       position: relative;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      width: var(--shell-width);
+      height: var(--shell-height);
       overflow: hidden;
-      border-radius: 36px;
-      border: 1px solid rgba(255,255,255,.85);
-      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--color-white-border);
+      border-radius: var(--radius-shell);
       background:
-        radial-gradient(circle at 16% 10%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 28%),
-        radial-gradient(circle at 88% 18%, rgba(95,116,109,.14) 0%, rgba(95,116,109,0) 30%),
-        var(--card-cream);
+        radial-gradient(circle at 16% 10%, rgba(255, 255, 255, .75) 0%, rgba(255, 255, 255, 0) 28%),
+        radial-gradient(circle at 88% 18%, rgba(95, 116, 109, .14) 0%, rgba(95, 116, 109, 0) 30%),
+        var(--color-surface);
+      box-shadow: var(--shadow-shell);
     }
 
-    .decor-blob-1,
-    .decor-blob-2,
-    .leaf-shadow {
-      position: absolute;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .decor-blob-1 {
-      top: -56px;
-      right: -54px;
+    .decor { position: absolute; pointer-events: none; z-index: -1; }
+    .decor--top {
+      inset-block-start: -56px;
+      inset-inline-end: -54px;
       width: 190px;
       height: 190px;
       border-radius: 50%;
+      background: radial-gradient(circle, rgba(232, 238, 226, .95) 0%, rgba(253, 252, 248, 0) 70%);
       filter: blur(10px);
-      background: radial-gradient(circle, rgba(232,238,226,.95) 0%, rgba(253,252,248,0) 70%);
     }
 
-    .decor-blob-2 {
-      bottom: -64px;
-      left: -60px;
+    .decor--bottom {
+      inset-block-end: -64px;
+      inset-inline-start: -60px;
       width: 210px;
       height: 210px;
       border-radius: 50%;
+      background: radial-gradient(circle, rgba(232, 238, 226, .72) 0%, rgba(253, 252, 248, 0) 72%);
       filter: blur(10px);
-      background: radial-gradient(circle, rgba(232,238,226,.72) 0%, rgba(253,252,248,0) 72%);
     }
 
-    .leaf-shadow {
-      top: 18px;
-      left: -24px;
+    .decor--leaf {
+      inset-block-start: 18px;
+      inset-inline-start: -24px;
       width: 170px;
       height: 170px;
+      background:
+        radial-gradient(ellipse at 30% 28%, rgba(95, 116, 109, .10) 0 11%, transparent 12%),
+        radial-gradient(ellipse at 62% 38%, rgba(95, 116, 109, .08) 0 10%, transparent 11%),
+        radial-gradient(ellipse at 44% 68%, rgba(95, 116, 109, .07) 0 11%, transparent 12%);
       filter: blur(9px);
       transform: rotate(-18deg);
-      background:
-        radial-gradient(ellipse at 30% 28%, rgba(95,116,109,.10) 0 11%, transparent 12%),
-        radial-gradient(ellipse at 62% 38%, rgba(95,116,109,.08) 0 10%, transparent 11%),
-        radial-gradient(ellipse at 44% 68%, rgba(95,116,109,.07) 0 11%, transparent 12%);
     }
 
-    .progress-bar-container {
+    .progress {
       position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 10;
-      width: 100%;
+      inset-block-start: 0;
+      inset-inline: 0;
+      z-index: 5;
       height: 5px;
-      display: none;
-      background: rgba(0,0,0,.02);
+      overflow: hidden;
+      background: rgba(0, 0, 0, .02);
+      opacity: 0;
+      transition: opacity .24s ease;
     }
 
-    .progress-bar {
-      width: 0%;
+    .progress.is-visible { opacity: 1; }
+
+    .progress__bar {
+      width: 0;
       height: 100%;
-      background: var(--primary);
       border-radius: 0 4px 4px 0;
+      background: var(--color-primary);
       transition: width .6s var(--ease-smooth);
-    }
-
-    @keyframes fadeInSlideUp {
-      from { opacity: 0; transform: translateY(16px) scale(.99); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes revealIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .screen {
       display: none;
       position: relative;
-      z-index: 2;
+      z-index: 1;
+      flex-direction: column;
       width: 100%;
       height: 100%;
+      padding: var(--space-screen-block) var(--space-screen-inline) 20px;
       overflow-x: hidden;
       overflow-y: auto;
       scrollbar-width: none;
-      flex-direction: column;
-      padding: 24px 22px 20px;
     }
 
-    .screen::-webkit-scrollbar {
-      display: none;
-    }
-
-    .screen.active {
-      display: flex;
-      animation: fadeInSlideUp .5s var(--ease-smooth) forwards;
-    }
-
-    h1 {
-      color: var(--primary-dark);
-      font-size: clamp(2.2rem, 8vw, 2.55rem);
-      font-weight: 800;
-      letter-spacing: -.6px;
-      line-height: 1.1;
-      margin-bottom: 30px;
-      text-align: center;
-    }
-
-    h2 {
-      color: var(--primary);
-      font-size: 1.34rem;
-      font-weight: 800;
-      line-height: 1.25;
-      letter-spacing: -.35px;
-      margin-bottom: 12px;
-    }
-
-    p {
-      font-size: .96rem;
-      line-height: 1.55;
-      margin-bottom: 14px;
-    }
-
-    button,
-    .feedback-link {
-      width: 100%;
-      border: none;
-      border-radius: 99px;
-      padding: 14px;
-      font-family: inherit;
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: -.2px;
-      cursor: pointer;
-      transition: all .3s var(--ease-spring);
-      touch-action: manipulation;
-    }
-
-    button {
-      color: #fff;
-      background: var(--primary);
-      box-shadow: 0 8px 20px rgba(95,116,109,.18);
-    }
-
-    button:active,
-    .feedback-link:active {
-      transform: scale(.96);
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 104px;
-      height: clamp(104px, 18svh, 132px);
-      padding: 14px 16px;
-      border: 1px solid var(--border-soft);
-      border-radius: 18px;
-      background: #faf9f7;
-      resize: none;
-      outline: none;
-      box-shadow: var(--shadow-inner);
-      font-family: inherit;
-      font-size: .95rem;
-      line-height: 1.5;
-      color: var(--text-body);
-      margin-bottom: 14px;
-      transition: border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
-    }
-
-    textarea:focus {
-      background: #fff;
-      border-color: transparent;
-      box-shadow: 0 0 0 3px rgba(95,116,109,.13), var(--shadow-card);
-    }
-
-    textarea::placeholder {
-      color: #aaa;
-    }
-
-    .btn-container {
-      margin-top: auto;
-      width: 100%;
-      padding-top: 14px;
-    }
-
-    .step-indicator {
-      color: #999;
-      font-size: .9rem;
-      font-weight: 600;
-      margin-bottom: 14px;
-      letter-spacing: -.2px;
-    }
-
-    .center-text {
-      text-align: center;
-    }
-
-    /* Home */
-    #home {
-      overflow: hidden;
-      text-align: center;
-      align-items: center;
-      justify-content: center;
-      padding-top: 26px;
-      padding-bottom: 22px;
-    }
-
-    .home-top-space {
-      flex: .55 1 64px;
-      min-height: 34px;
-    }
+    .screen::-webkit-scrollbar { display: none; }
+    .screen.is-active { display: flex; animation: fade-in-up .5s var(--ease-smooth) both; }
+    .screen--home { align-items: center; overflow: hidden; text-align: center; }
 
     .home-main {
       max-width: 330px;
-      color: var(--text-body);
+      margin-block-end: 28px;
       font-size: 1.08rem;
       font-weight: 500;
       line-height: 1.5;
-      margin-bottom: 22px;
     }
 
     .home-invitation {
       width: 100%;
       max-width: 330px;
-      color: var(--primary);
-      margin-bottom: 26px;
+      margin-block-end: 30px;
+      color: var(--color-primary);
+      font-size: .98rem;
+      line-height: 1.38;
     }
 
-    .home-invitation p {
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 5px;
-      line-height: 1.3;
-    }
-
-    .home-invitation strong {
-      font-weight: 800;
-    }
+    .home-invitation p { margin-block-end: 6px; color: var(--color-primary); text-align: center; }
+    .home-invitation strong { font-weight: 800; }
+    .home-spacer { flex: 1; min-height: 18px; }
 
     .home-footer {
       width: 100%;
-      margin-top: auto;
-      color: var(--text-muted);
-      text-align: center;
-      font-size: .74rem;
+      margin-block-start: auto;
+      padding-block-start: 10px;
+      color: var(--color-muted);
+      font-size: .72rem;
       line-height: 1.35;
-      padding-bottom: 2px;
+      text-align: center;
     }
 
-    .home-footer p {
-      margin-bottom: 8px;
-    }
+
+
+    .home-privacy { color: #74716d; }
 
     .home-credit {
-      border-top: 1px solid rgba(0,0,0,.06);
-      padding-top: 8px;
-      font-size: .68rem;
+      margin-block-start: 8px;
+      padding-block-start: 8px;
+      border-block-start: 1px solid rgba(0, 0, 0, .06);
+      color: rgba(133, 130, 125, .86);
+      font-size: .67rem;
       line-height: 1.28;
-      color: rgba(133,130,125,.9);
     }
 
-    /* Breathing */
+    .step-indicator {
+      margin-block-end: 16px;
+      color: #999;
+      font-size: .9rem;
+      font-weight: 600;
+      letter-spacing: -.2px;
+    }
+
     .intro-note {
-      color: var(--text-muted);
+      margin: 4px 0 14px;
+      color: var(--color-muted);
       font-size: 1.04rem;
       font-weight: 500;
-      margin: 4px 0 14px;
       line-height: 1.42;
     }
 
-    .breathing-container {
-      flex: 1;
-      min-height: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-bottom: clamp(34px, 7svh, 72px);
-    }
-
-    .breathing-circle {
-      width: 134px;
-      height: 134px;
-      border-radius: 50%;
-      position: relative;
-      background: radial-gradient(circle at 30% 30%, #a7bbb2 0%, #8da19a 100%);
-      box-shadow: 0 10px 30px rgba(95,116,109,.22), inset 0 -4px 12px rgba(0,0,0,.05);
-      animation: idlePulse 11s infinite ease-in-out;
-    }
-
-    .breathing-circle::after {
-      content: "";
-      position: absolute;
-      inset: -18px;
-      border-radius: 50%;
-      z-index: -1;
-      background: radial-gradient(circle, rgba(141,161,154,.18), rgba(141,161,154,0) 68%);
-      animation: idleHalo 11s infinite ease-in-out;
-    }
-
-    @keyframes idlePulse {
-      0% { transform: scale(.85); }
-      36% { transform: scale(1.25); }
-      54% { transform: scale(1.25); }
-      100% { transform: scale(.85); }
-    }
-
-    @keyframes idleHalo {
-      0% { transform: scale(.85); opacity: .45; }
-      36% { transform: scale(1.22); opacity: .72; }
-      54% { transform: scale(1.22); opacity: .72; }
-      100% { transform: scale(.85); opacity: .45; }
-    }
-
-    .breathing-text {
-      min-height: 28px;
-      margin-top: 20px;
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    /* Writing screens */
     .content-card {
       width: 100%;
       margin: auto 0;
-      padding: clamp(18px, 3svh, 24px) 18px clamp(16px, 2.6svh, 22px);
-      border-radius: 24px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid rgba(255,255,255,.8);
+      padding: 20px 18px 18px;
+      border: 1px solid var(--color-white-border);
+      border-radius: var(--radius-card);
+      background: var(--color-surface-soft);
       box-shadow: var(--shadow-card);
     }
 
     .field-label {
-      color: var(--primary);
+      margin: 12px 0 6px;
+      color: var(--color-primary);
       font-size: 1.02rem;
       font-weight: 800;
       line-height: 1.35;
-      margin: 10px 0 6px;
     }
 
     .helper-text {
-      color: var(--text-muted);
+      margin-block-end: 10px;
+      color: var(--color-muted);
       font-size: .84rem;
       line-height: 1.42;
-      margin-bottom: 12px;
     }
 
-    .secondary-reveal {
-      background: rgba(95,116,109,.13);
-      color: var(--primary);
-      border: 1px solid rgba(95,116,109,.14);
-      box-shadow: none;
+    .button-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-block-start: auto;
+      padding-block-start: 14px;
+    }
+
+    .button--secondary {
+      min-height: 46px;
+      margin-block-end: 2px;
       padding: 12px;
+      border: 1px solid var(--color-primary-border);
+      background: var(--color-primary-soft);
+      color: var(--color-primary);
+      box-shadow: none;
       font-size: .95rem;
-      margin-top: 2px;
     }
 
-    .secondary-reveal.hidden {
-      display: none;
-    }
+    .button--secondary.is-hidden { display: none; }
 
     .reveal-section {
       display: none;
@@ -423,1206 +346,212 @@
       transform: translateY(10px);
     }
 
-    .reveal-section.visible {
-      display: block;
-      animation: revealIn .42s var(--ease-smooth) forwards;
-    }
+    .reveal-section.is-visible { display: block; animation: reveal-in .36s var(--ease-smooth) forwards; }
 
     .soft-divider {
       width: 100%;
       height: 1px;
       margin: 22px 0 18px;
-      background: linear-gradient(to left, transparent, rgba(95,116,109,.24), transparent);
+      background: linear-gradient(to left, transparent, rgba(95, 116, 109, .24), transparent);
     }
 
-    /* Summary */
-    #summary {
-      justify-content: flex-start;
-      padding-top: 18px;
+    .breathing {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
     }
 
-    #summary h2 {
-      margin-bottom: 8px;
+    .breathing__circle {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #a7bbb2 0%, #8da19a 100%);
+      box-shadow: 0 10px 30px rgba(95, 116, 109, .22), inset 0 -4px 12px rgba(0, 0, 0, .05);
+      animation: breathe 11s infinite ease-in-out;
     }
 
-    .closing-text {
-      max-width: 315px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-      font-size: .9rem;
-      line-height: 1.38;
+    .breathing__circle::after {
+      content: "";
+      position: absolute;
+      inset: -18px;
+      z-index: -1;
+      border-radius: inherit;
+      background: radial-gradient(circle, rgba(141, 161, 154, .18), rgba(141, 161, 154, 0) 68%);
+      animation: breathe-halo 11s infinite ease-in-out;
     }
 
-    .summary-showcase {
-      width: 100%;
-      text-align: center;
-      background: var(--primary-soft);
-      border: 1px solid rgba(255,255,255,.75);
-      border-radius: 20px;
-      padding: 12px 14px;
-      margin: 12px 0;
-      box-shadow: 0 8px 24px rgba(0,0,0,.02);
-    }
+    .breathing__circle.is-guided { animation: breathe 11s ease-in-out 4 forwards; }
+    .breathing__circle.is-paused { animation: none; transform: scale(.85); }
+    .breathing__circle.is-paused::after { animation: none; transform: scale(.85); opacity: .45; }
 
-    .summary-showcase-title {
-      color: var(--primary);
-      font-size: 1.08rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-
-    #summary .field-label {
+    .breathing__text {
+      min-height: 24px;
+      margin-block-start: 2px;
+      color: var(--color-text);
       font-size: 1rem;
+      font-weight: 600;
       text-align: center;
-      margin: 6px 0 8px;
+    }
+
+    .summary-card {
+      width: 100%;
+      margin: 16px 0 18px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, .75);
+      border-radius: 20px;
+      background: var(--color-primary-bg);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .02);
+      text-align: center;
+    }
+
+    .summary-card__title {
+      margin-block-end: 10px;
+      color: var(--color-primary);
+      font-size: 1.03rem;
+      font-weight: 800;
     }
 
     .quote-note {
-      min-height: 46px;
-      padding: 10px 12px;
+      min-height: 58px;
+      padding: 12px 14px;
+      border-inline-start: 4px solid rgba(95, 116, 109, .35);
       border-radius: 14px;
-      border-right: 4px solid rgba(95,116,109,.35);
       background: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,.018);
-      color: var(--text-body);
-      text-align: right;
-      line-height: 1.32;
+      color: var(--color-text);
+      line-height: 1.45;
+      text-align: start;
       white-space: pre-wrap;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .018);
     }
 
-    .quote-note:empty::before {
-      content: "המילים שכתבתם יופיעו כאן.";
-      color: #aaa;
+    .quote-note:empty::before { content: "המילים שכתבתם יופיעו כאן."; color: var(--color-placeholder); }
+
+    .center { text-align: center; }
+
+    .closing-text {
+      max-width: 315px;
+      margin-inline: auto;
+      font-size: .94rem;
+      line-height: 1.5;
+      text-align: center;
     }
 
     .feedback-intro {
       max-width: 320px;
-      margin: 8px auto;
-      color: var(--text-muted);
-      font-size: .86rem;
-      line-height: 1.32;
+      margin: 12px auto 10px;
+      color: var(--color-muted);
+      font-size: .88rem;
+      line-height: 1.42;
       text-align: center;
     }
 
     .feedback-link {
       display: block;
-      color: var(--primary);
-      background: #fff;
-      box-shadow: var(--shadow-card);
-      border: 1px solid rgba(0,0,0,.02);
-      text-decoration: none;
-      text-align: center;
+      padding: 14px;
+      border: 1px solid rgba(0, 0, 0, .02);
       border-radius: 16px;
-      padding: 12px 14px;
-      font-size: .96rem;
+      background: #fff;
+      color: var(--color-primary);
+      box-shadow: var(--shadow-card);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -.2px;
+      text-align: center;
+      text-decoration: none;
+      transition: transform .3s var(--ease-spring);
     }
 
-    /* Mobile app surface */
-    @media (max-width: 600px) {
-      body {
-        background: var(--card-cream);
-        align-items: stretch;
-        justify-content: flex-start;
-      }
+    .feedback-link:active { transform: scale(.97); }
 
-      .app {
-        width: 100vw;
-        max-width: none;
-        height: 100svh;
-        max-height: none;
-        border-radius: 0;
-        border: none;
-        box-shadow: none;
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(16px) scale(.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes reveal-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes breathe {
+      0% { transform: scale(.85); }
+      36% { transform: scale(1.25); }
+      54% { transform: scale(1.25); }
+      100% { transform: scale(.85); }
+    }
+
+    @keyframes breathe-halo {
+      0% { transform: scale(.85); opacity: .45; }
+      36% { transform: scale(1.22); opacity: .72; }
+      54% { transform: scale(1.22); opacity: .72; }
+      100% { transform: scale(.85); opacity: .45; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
       }
     }
 
-    /* Safari visible viewport / smaller phones */
     @media (max-height: 760px) {
-      .screen {
-        padding: 18px 18px 14px;
-      }
-
-      #home {
-        padding-top: 22px;
-        padding-bottom: 14px;
-      }
-
-      .home-top-space {
-        flex-basis: 18px;
-        min-height: 12px;
-      }
-
-      h1 {
-        font-size: 2.05rem;
-        margin-bottom: 22px;
-      }
-
-      .home-main {
-        font-size: .98rem;
-        line-height: 1.38;
-        margin-bottom: 18px;
-      }
-
-      .home-invitation {
-        margin-bottom: 20px;
-      }
-
-      .home-invitation p {
-        font-size: .88rem;
-        line-height: 1.2;
-        margin-bottom: 4px;
-      }
-
-      #home button {
-        padding: 11px;
-      }
-
-      .home-footer {
-        font-size: .68rem;
-      }
-
-      .home-credit {
-        font-size: .64rem;
-        line-height: 1.22;
-      }
-
-      h2 {
-        font-size: 1.16rem;
-      }
-
-      p {
-        font-size: .88rem;
-        line-height: 1.34;
-      }
-
-      .step-indicator {
-        font-size: .8rem;
-        margin-bottom: 9px;
-      }
-
-      .intro-note {
-        font-size: .95rem;
-      }
-
-      .content-card {
-        padding: 14px 13px 12px;
-      }
-
-      .field-label {
-        font-size: .9rem;
-        margin-top: 7px;
-        margin-bottom: 4px;
-      }
-
-      .helper-text {
-        font-size: .72rem;
-        line-height: 1.25;
-        margin-bottom: 6px;
-      }
-
-      textarea {
-        min-height: 74px;
-        height: 78px;
-        padding: 10px 12px;
-        font-size: .88rem;
-        margin-bottom: 9px;
-      }
-
-      .secondary-reveal {
-        padding: 9px;
-        font-size: .88rem;
-      }
-
-      .soft-divider {
-        margin: 12px 0 10px;
-      }
-
-      .breathing-circle {
-        width: 126px;
-        height: 126px;
-      }
-
-      .breathing-container {
-        padding-bottom: 52px;
-      }
-
-      #summary {
-        padding-top: 14px;
-      }
-
-      .summary-showcase {
-        padding: 10px 12px;
-        margin: 10px 0;
-      }
-
-      .summary-showcase-title {
-        font-size: .94rem;
-      }
-
-      .closing-text,
-      .feedback-intro {
-        font-size: .78rem;
-        line-height: 1.25;
-      }
-
-      .quote-note {
-        min-height: 42px;
-        padding: 9px 10px;
-        font-size: .8rem;
-        line-height: 1.24;
-      }
-
-      .feedback-link {
-        padding: 10px 12px;
-        font-size: .9rem;
-      }
+      :root { --space-screen-block: 20px; --space-screen-inline: 20px; }
+      .screen { padding-block-end: 16px; }
+      h1 { margin-block-end: 24px; font-size: 2.1rem; }
+      h2 { font-size: 1.22rem; }
+      p { font-size: .9rem; line-height: 1.45; }
+      .home-main { margin-block-end: 22px; font-size: 1rem; line-height: 1.42; }
+      .home-invitation { margin-block-end: 22px; }
+      .home-invitation p { margin-block-end: 4px; font-size: .92rem; line-height: 1.25; }
+      .home-footer { font-size: .66rem; }
+      .home-credit { font-size: .64rem; line-height: 1.22; }
+      .content-card { padding: 15px 14px 13px; }
+      textarea { min-height: 68px; height: 72px; margin-block-end: 10px; padding: 10px 12px; font-size: .88rem; }
+      .field-label { margin-block-start: 7px; margin-block-end: 4px; font-size: .92rem; }
+      .helper-text { margin-block-end: 6px; font-size: .74rem; line-height: 1.28; }
+      .soft-divider { margin: 12px 0 10px; }
+      .button--secondary { min-height: 42px; padding: 10px; font-size: .9rem; }
+      .breathing { min-height: 280px; }
+      .summary-card { margin: 10px 0 12px; padding: 12px; }
+      .closing-text, .feedback-intro { font-size: .8rem; line-height: 1.3; }
+      .quote-note { min-height: 46px; padding: 10px 12px; font-size: .82rem; }
+      button, .feedback-link { min-height: 44px; padding: 12px; font-size: .96rem; }
     }
 
     @media (max-height: 640px) {
-      .screen {
-        padding: 12px 16px 10px;
-      }
-
-      h1 {
-        font-size: 1.78rem;
-        margin-bottom: 14px;
-      }
-
-      .home-main {
-        font-size: .84rem;
-        margin-bottom: 10px;
-      }
-
-      .home-invitation {
-        margin-bottom: 12px;
-      }
-
-      .home-invitation p {
-        font-size: .78rem;
-        margin-bottom: 2px;
-      }
-
-      .home-footer,
-      .home-credit {
-        font-size: .56rem;
-      }
-
-      button,
-      .feedback-link {
-        padding: 9px;
-        font-size: .86rem;
-      }
-
-      .breathing-circle {
-        width: 112px;
-        height: 112px;
-      }
-
-      .breathing-container {
-        padding-bottom: 42px;
-      }
+      :root { --space-screen-block: 14px; --space-screen-inline: 18px; }
+      .screen { padding-block-end: 12px; }
+      h1 { margin-block-end: 16px; font-size: 1.85rem; }
+      .home-main { margin-block-end: 14px; font-size: .9rem; }
+      .home-invitation { margin-block-end: 14px; }
+      .home-invitation p { margin-block-end: 3px; font-size: .84rem; line-height: 1.18; }
+      .home-footer { font-size: .6rem; }
+      .home-credit { font-size: .58rem; }
+      button { min-height: 40px; padding: 10px; font-size: .92rem; }
     }
-  
-/* ===== Release 1.3 product-grid spacing pass ===== */
-
-/* Universal rhythm */
-.screen {
-  --space-xs: 8px;
-  --space-sm: 14px;
-  --space-md: 24px;
-  --space-lg: 36px;
-  --space-xl: 52px;
-}
-
-/* Home: move privacy close to the start decision, make footer readable */
-#home {
-  justify-content: flex-start !important;
-  padding-top: clamp(110px, 17svh, 160px) !important;
-  padding-bottom: 24px !important;
-}
-
-#home .home-top-space {
-  display: none !important;
-}
-
-#home h1 {
-  margin-bottom: 34px !important;
-}
-
-#home .home-main {
-  font-size: 1.1rem !important;
-  line-height: 1.55 !important;
-  margin-bottom: 28px !important;
-}
-
-#home .home-invitation {
-  margin-bottom: 34px !important;
-}
-
-#home .home-invitation p {
-  font-size: 1rem !important;
-  line-height: 1.35 !important;
-  margin-bottom: 6px !important;
-}
-
-#home button {
-  margin-bottom: 18px !important;
-}
-
-#home .home-footer {
-  margin-top: 0 !important;
-  font-size: .86rem !important;
-  line-height: 1.45 !important;
-  padding-bottom: 0 !important;
-}
-
-#home .home-footer p {
-  margin-bottom: 18px !important;
-}
-
-#home .home-credit {
-  font-size: .78rem !important;
-  line-height: 1.38 !important;
-  padding-top: 12px !important;
-}
-
-/* Breathing: reduce the empty gap above the ball */
-#breathing {
-  padding-top: 34px !important;
-}
-
-#breathing .step-indicator {
-  margin-bottom: 16px !important;
-}
-
-#breathing .intro-note {
-  margin-bottom: 16px !important;
-}
-
-#breathing h2 {
-  margin-bottom: 0 !important;
-}
-
-#breathing .breathing-container {
-  justify-content: center !important;
-  padding-bottom: clamp(54px, 10svh, 86px) !important;
-}
-
-/* Writing screens: stable grid and clearer separation */
-#event,
-#need {
-  justify-content: flex-start !important;
-  padding-top: clamp(84px, 13svh, 118px) !important;
-}
-
-#event .content-card,
-#need .content-card {
-  margin: 0 !important;
-  padding: 24px 18px 20px !important;
-}
-
-#event .btn-container,
-#need .btn-container {
-  padding-top: 30px !important;
-}
-
-#event textarea,
-#need textarea {
-  min-height: 104px !important;
-  height: 112px !important;
-}
-
-#event .reveal-section textarea,
-#need .reveal-section textarea {
-  min-height: 104px !important;
-  height: 112px !important;
-}
-
-#event .soft-divider,
-#need .soft-divider {
-  margin: 26px 0 22px !important;
-}
-
-/* Summary: make it feel intentional and spacious, not compressed */
-#summary {
-  justify-content: flex-start !important;
-  padding-top: clamp(54px, 8svh, 82px) !important;
-}
-
-#summary .step-indicator {
-  margin-bottom: 26px !important;
-}
-
-#summary h2 {
-  margin-bottom: 18px !important;
-}
-
-#summary > .closing-text:first-of-type {
-  font-size: .96rem !important;
-  line-height: 1.55 !important;
-  margin-bottom: 34px !important;
-}
-
-#summary .summary-showcase {
-  padding: 20px 18px !important;
-  margin: 0 0 32px !important;
-}
-
-#summary .summary-showcase-title {
-  font-size: 1.14rem !important;
-  margin-bottom: 14px !important;
-}
-
-#summary .summary-showcase .closing-text {
-  font-size: .94rem !important;
-  line-height: 1.5 !important;
-  margin-bottom: 22px !important;
-}
-
-#summary .field-label {
-  font-size: 1.03rem !important;
-  line-height: 1.42 !important;
-  margin: 0 0 14px !important;
-}
-
-#summary .quote-note {
-  min-height: 58px !important;
-  padding: 13px 15px !important;
-  font-size: .92rem !important;
-  line-height: 1.38 !important;
-}
-
-#summary > .closing-text:nth-of-type(2) {
-  margin-bottom: 30px !important;
-}
-
-#summary .feedback-intro {
-  font-size: .9rem !important;
-  line-height: 1.45 !important;
-  margin-bottom: 14px !important;
-}
-
-#summary .feedback-link {
-  padding: 14px !important;
-  font-size: 1rem !important;
-}
-
-/* iPhone Safari visible viewport */
-@media (max-height: 760px) {
-  #home {
-    padding-top: 92px !important;
-    padding-bottom: 18px !important;
-  }
-
-  #home h1 {
-    font-size: 2.08rem !important;
-    margin-bottom: 28px !important;
-  }
-
-  #home .home-main {
-    font-size: 1rem !important;
-    line-height: 1.42 !important;
-    margin-bottom: 22px !important;
-  }
-
-  #home .home-invitation {
-    margin-bottom: 26px !important;
-  }
-
-  #home .home-invitation p {
-    font-size: .91rem !important;
-    line-height: 1.25 !important;
-    margin-bottom: 4px !important;
-  }
-
-  #home button {
-    padding: 12px !important;
-    margin-bottom: 16px !important;
-  }
-
-  #home .home-footer {
-    font-size: .76rem !important;
-    line-height: 1.36 !important;
-  }
-
-  #home .home-footer p {
-    margin-bottom: 14px !important;
-  }
-
-  #home .home-credit {
-    font-size: .69rem !important;
-    line-height: 1.3 !important;
-    padding-top: 9px !important;
-  }
-
-  #breathing {
-    padding-top: 28px !important;
-  }
-
-  #breathing .breathing-container {
-    padding-bottom: 66px !important;
-  }
-
-  #event,
-  #need {
-    padding-top: 70px !important;
-  }
-
-  #event .content-card,
-  #need .content-card {
-    padding: 18px 14px 16px !important;
-  }
-
-  #event textarea,
-  #need textarea,
-  #event .reveal-section textarea,
-  #need .reveal-section textarea {
-    min-height: 82px !important;
-    height: 86px !important;
-  }
-
-  #event .btn-container,
-  #need .btn-container {
-    padding-top: 26px !important;
-  }
-
-  #summary {
-    padding-top: 40px !important;
-  }
-
-  #summary .step-indicator {
-    margin-bottom: 20px !important;
-  }
-
-  #summary h2 {
-    font-size: 1.22rem !important;
-    margin-bottom: 14px !important;
-  }
-
-  #summary > .closing-text:first-of-type {
-    font-size: .86rem !important;
-    line-height: 1.42 !important;
-    margin-bottom: 26px !important;
-  }
-
-  #summary .summary-showcase {
-    padding: 16px 14px !important;
-    margin-bottom: 24px !important;
-  }
-
-  #summary .summary-showcase-title {
-    font-size: 1rem !important;
-    margin-bottom: 10px !important;
-  }
-
-  #summary .summary-showcase .closing-text {
-    font-size: .84rem !important;
-    line-height: 1.36 !important;
-    margin-bottom: 16px !important;
-  }
-
-  #summary .field-label {
-    font-size: .9rem !important;
-    margin-bottom: 10px !important;
-  }
-
-  #summary .quote-note {
-    min-height: 50px !important;
-    padding: 11px 12px !important;
-    font-size: .82rem !important;
-  }
-
-  #summary > .closing-text:nth-of-type(2) {
-    margin-bottom: 22px !important;
-  }
-
-  #summary .feedback-intro {
-    font-size: .82rem !important;
-    line-height: 1.34 !important;
-    margin-bottom: 10px !important;
-  }
-}
-
-/* Very small visible heights */
-@media (max-height: 640px) {
-  #home {
-    padding-top: 58px !important;
-  }
-
-  #home h1 {
-    margin-bottom: 18px !important;
-  }
-
-  #home .home-main {
-    margin-bottom: 14px !important;
-  }
-
-  #home .home-invitation {
-    margin-bottom: 18px !important;
-  }
-
-  #home button {
-    margin-bottom: 12px !important;
-  }
-
-  #event,
-  #need {
-    padding-top: 44px !important;
-  }
-
-  #summary {
-    padding-top: 24px !important;
-  }
-}
-
-
-/* ===== FINAL VISIBLE RELEASE PASS 2.1 ===== */
-
-/* Home screen: move from "floating middle block" to clear launch composition */
-#home {
-  justify-content: flex-start !important;
-  padding: 118px 22px 24px !important;
-}
-
-#home h1 {
-  font-size: 2.55rem !important;
-  margin-bottom: 32px !important;
-}
-
-#home .home-main {
-  font-size: 1.12rem !important;
-  line-height: 1.55 !important;
-  margin-bottom: 30px !important;
-}
-
-#home .home-invitation {
-  margin-bottom: 34px !important;
-}
-
-#home .home-invitation p {
-  font-size: 1rem !important;
-  line-height: 1.36 !important;
-  margin-bottom: 6px !important;
-}
-
-#home button {
-  margin-bottom: 18px !important;
-}
-
-#home .home-footer {
-  width: 100% !important;
-  margin-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-#home .privacy-note {
-  display: block !important;
-  width: 100% !important;
-  max-width: 340px !important;
-  margin: 0 auto 18px !important;
-  padding: 13px 16px !important;
-  border: 1px solid rgba(95,116,109,.18) !important;
-  border-radius: 18px !important;
-  background: rgba(255,255,255,.58) !important;
-  box-shadow: 0 8px 22px rgba(0,0,0,.028) !important;
-  color: #6f7772 !important;
-  font-size: .88rem !important;
-  line-height: 1.4 !important;
-  font-weight: 600 !important;
-}
-
-#home .privacy-note::before {
-  content: "🔒 ";
-  font-size: .95rem;
-}
-
-#home .home-credit {
-  max-width: 340px !important;
-  margin: 0 auto !important;
-  padding-top: 12px !important;
-  font-size: .78rem !important;
-  line-height: 1.42 !important;
-  color: rgba(112,112,112,.92) !important;
-}
-
-/* Breathing screen: one cohesive vertical composition */
-#breathing {
-  padding-top: 38px !important;
-}
-
-#breathing .step-indicator {
-  margin-bottom: 18px !important;
-}
-
-#breathing .intro-note {
-  margin-bottom: 18px !important;
-}
-
-#breathing h2 {
-  margin-bottom: 0 !important;
-}
-
-#breathing .breathing-container {
-  justify-content: center !important;
-  padding-bottom: 82px !important;
-}
-
-#breathing .breathing-circle {
-  width: 140px !important;
-  height: 140px !important;
-}
-
-/* Writing screens: wider card, stable rhythm, no compressed feel */
-#event,
-#need {
-  padding: 80px 18px 18px !important;
-}
-
-#event .content-card,
-#need .content-card {
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 22px 18px 18px !important;
-  border-radius: 26px !important;
-}
-
-#event textarea,
-#need textarea,
-#event .reveal-section textarea,
-#need .reveal-section textarea {
-  min-height: 100px !important;
-  height: 104px !important;
-}
-
-#event .btn-container,
-#need .btn-container {
-  padding-top: 34px !important;
-}
-
-#event .soft-divider,
-#need .soft-divider {
-  margin: 28px 0 24px !important;
-}
-
-/* Summary screen: deliberately airy, using the available screen */
-#summary {
-  padding: 52px 22px 22px !important;
-  justify-content: flex-start !important;
-}
-
-#summary .step-indicator {
-  margin-bottom: 22px !important;
-}
-
-#summary h2 {
-  margin-bottom: 18px !important;
-}
-
-#summary > .closing-text:first-of-type {
-  font-size: .96rem !important;
-  line-height: 1.56 !important;
-  margin-bottom: 30px !important;
-}
-
-#summary .summary-showcase {
-  padding: 20px 18px !important;
-  margin: 0 0 28px !important;
-  border-radius: 24px !important;
-}
-
-#summary .summary-showcase-title {
-  font-size: 1.16rem !important;
-  margin-bottom: 14px !important;
-}
-
-#summary .summary-showcase .closing-text {
-  font-size: .94rem !important;
-  line-height: 1.5 !important;
-  margin-bottom: 20px !important;
-}
-
-#summary .field-label {
-  font-size: 1.04rem !important;
-  line-height: 1.42 !important;
-  margin: 0 0 14px !important;
-}
-
-#summary .quote-note {
-  min-height: 58px !important;
-  padding: 13px 15px !important;
-  font-size: .92rem !important;
-  line-height: 1.38 !important;
-}
-
-#summary > .closing-text:nth-of-type(2) {
-  margin-bottom: 28px !important;
-}
-
-#summary .feedback-intro {
-  font-size: .9rem !important;
-  line-height: 1.45 !important;
-  margin-bottom: 14px !important;
-}
-
-#summary .feedback-link {
-  padding: 14px !important;
-  font-size: 1rem !important;
-}
-
-/* iPhone Safari visible viewport */
-@media (max-height: 760px) {
-  #home {
-    padding-top: 82px !important;
-    padding-bottom: 18px !important;
-  }
-
-  #home h1 {
-    font-size: 2.2rem !important;
-    margin-bottom: 26px !important;
-  }
-
-  #home .home-main {
-    font-size: 1rem !important;
-    line-height: 1.43 !important;
-    margin-bottom: 22px !important;
-  }
-
-  #home .home-invitation {
-    margin-bottom: 26px !important;
-  }
-
-  #home .home-invitation p {
-    font-size: .91rem !important;
-    line-height: 1.25 !important;
-    margin-bottom: 4px !important;
-  }
-
-  #home button {
-    margin-bottom: 14px !important;
-    padding: 12px !important;
-  }
-
-  #home .privacy-note {
-    font-size: .78rem !important;
-    line-height: 1.32 !important;
-    padding: 10px 12px !important;
-    margin-bottom: 12px !important;
-  }
-
-  #home .home-credit {
-    font-size: .69rem !important;
-    line-height: 1.3 !important;
-    padding-top: 8px !important;
-  }
-
-  #breathing {
-    padding-top: 28px !important;
-  }
-
-  #breathing .breathing-container {
-    padding-bottom: 70px !important;
-  }
-
-  #breathing .breathing-circle {
-    width: 128px !important;
-    height: 128px !important;
-  }
-
-  #event,
-  #need {
-    padding: 66px 18px 18px !important;
-  }
-
-  #event .content-card,
-  #need .content-card {
-    padding: 18px 14px 16px !important;
-  }
-
-  #event textarea,
-  #need textarea,
-  #event .reveal-section textarea,
-  #need .reveal-section textarea {
-    min-height: 86px !important;
-    height: 88px !important;
-  }
-
-  #summary {
-    padding-top: 36px !important;
-  }
-
-  #summary > .closing-text:first-of-type {
-    margin-bottom: 22px !important;
-  }
-
-  #summary .summary-showcase {
-    padding: 16px 14px !important;
-    margin-bottom: 22px !important;
-  }
-
-  #summary .quote-note {
-    min-height: 50px !important;
-  }
-}
-
-
-/* ===== FINAL HOME MOCKUP MATCH ===== */
-#home {
-  justify-content: flex-start !important;
-  padding: 122px 22px 22px !important;
-}
-
-#home h1 {
-  font-size: 2.58rem !important;
-  margin-bottom: 34px !important;
-}
-
-#home .home-main {
-  font-size: 1.12rem !important;
-  line-height: 1.55 !important;
-  margin-bottom: 32px !important;
-}
-
-#home .home-invitation {
-  margin-bottom: 38px !important;
-}
-
-#home .home-invitation p {
-  font-size: 1rem !important;
-  line-height: 1.36 !important;
-  margin-bottom: 6px !important;
-}
-
-#home button {
-  margin-bottom: 0 !important;
-}
-
-#home .home-footer {
-  margin-top: auto !important;
-  width: 100% !important;
-  padding-bottom: 2px !important;
-}
-
-#home .home-credit {
-  max-width: 340px !important;
-  margin: 0 auto !important;
-  padding-top: 16px !important;
-  border-top: 1px solid rgba(0,0,0,.08) !important;
-  font-size: .78rem !important;
-  line-height: 1.42 !important;
-  color: rgba(112,112,112,.92) !important;
-}
-
-#home .privacy-note,
-#home .privacy-note::before {
-  display: none !important;
-  content: none !important;
-}
-
-@media (max-height: 760px) {
-  #home {
-    padding-top: 92px !important;
-    padding-bottom: 16px !important;
-  }
-
-  #home h1 {
-    font-size: 2.22rem !important;
-    margin-bottom: 28px !important;
-  }
-
-  #home .home-main {
-    font-size: 1rem !important;
-    line-height: 1.43 !important;
-    margin-bottom: 24px !important;
-  }
-
-  #home .home-invitation {
-    margin-bottom: 30px !important;
-  }
-
-  #home .home-invitation p {
-    font-size: .91rem !important;
-    line-height: 1.25 !important;
-    margin-bottom: 4px !important;
-  }
-
-  #home button {
-    padding: 12px !important;
-  }
-
-  #home .home-credit {
-    font-size: .69rem !important;
-    line-height: 1.3 !important;
-    padding-top: 12px !important;
-  }
-}
-
-@media (max-height: 640px) {
-  #home {
-    padding-top: 62px !important;
-  }
-}
-
-
-/* ===== Final interaction polish: breathing + ritual ===== */
-.breathing-guide {
-  max-width: 320px;
-  margin: 16px auto 0 !important;
-  color: var(--text-muted) !important;
-  font-size: .9rem !important;
-  line-height: 1.45 !important;
-  text-align: center !important;
-}
-
-.continue-note {
-  color: var(--text-muted) !important;
-  font-size: .82rem !important;
-  line-height: 1.35 !important;
-  text-align: center !important;
-  margin: 0 0 10px !important;
-}
-
-.breathing-circle {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transform: scale(.85);
-  animation: none !important;
-}
-
-.breathing-circle::after {
-  animation: none !important;
-  transform: scale(.85);
-  opacity: .45;
-}
-
-.breathing-circle.breathing-ready {
-  transform: scale(.85);
-}
-
-.breathing-circle.breathing-active {
-  animation: sootheBreath 11s ease-in-out 4 forwards !important;
-}
-
-.breathing-circle.breathing-active::after {
-  animation: sootheHalo 11s ease-in-out 4 forwards !important;
-}
-
-.circle-phase-text {
-  color: rgba(255,255,255,.92);
-  font-size: .95rem;
-  font-weight: 700;
-  letter-spacing: -.2px;
-  text-align: center;
-  text-shadow: 0 1px 6px rgba(0,0,0,.12);
-  transform: scale(.92);
-  pointer-events: none;
-}
-
-@keyframes sootheBreath {
-  0% { transform: scale(.85); }
-  36% { transform: scale(1.25); }
-  54% { transform: scale(1.25); }
-  100% { transform: scale(.85); }
-}
-
-@keyframes sootheHalo {
-  0% { transform: scale(.85); opacity: .45; }
-  36% { transform: scale(1.22); opacity: .72; }
-  54% { transform: scale(1.22); opacity: .72; }
-  100% { transform: scale(.85); opacity: .45; }
-}
-
-#breathing .breathing-container {
-  padding-bottom: 54px !important;
-}
-
-#summary .field-label {
-  max-width: 330px;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-/* Keep privacy as plain text only if it exists anywhere */
-#home .privacy-note {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-}
-#home .privacy-note::before {
-  content: none !important;
-}
-
-@media (max-height: 760px) {
-  .breathing-guide {
-    font-size: .8rem !important;
-    margin-top: 10px !important;
-  }
-  .continue-note {
-    font-size: .74rem !important;
-    margin-bottom: 8px !important;
-  }
-  .circle-phase-text {
-    font-size: .86rem;
-  }
-  #breathing .breathing-container {
-    padding-bottom: 46px !important;
-  }
-}
-
-
-/* ===== Final breathing polish ===== */
-.circle-phase-text{
-  display:none !important;
-}
-
-.breathing-guide{
-  font-size:.96rem !important;
-  font-weight:600 !important;
-  color:var(--primary) !important;
-  margin:18px auto 10px !important;
-}
-
-.continue-note{
-  font-size:.82rem !important;
-  color:var(--text-muted) !important;
-  margin:8px 0 10px !important;
-}
-
-#breathing .breathing-container{
-  padding-top:10px !important;
-}
-
-@media (max-height:760px){
-  .breathing-guide{
-    font-size:.86rem !important;
-    margin:12px auto 8px !important;
-  }
-}
-
-</style>
+  </style>
 </head>
 
 <body>
-  <div class="app" id="app">
-    <div class="decor-blob-1"></div>
-    <div class="decor-blob-2"></div>
-    <div class="leaf-shadow"></div>
+  <main class="app-shell" id="app" aria-live="polite">
+    <span class="decor decor--top" aria-hidden="true"></span>
+    <span class="decor decor--bottom" aria-hidden="true"></span>
+    <span class="decor decor--leaf" aria-hidden="true"></span>
 
-    <div class="progress-bar-container" id="progressBarContainer">
-      <div class="progress-bar" id="progressBar"></div>
+    <div class="progress" data-progress aria-hidden="true">
+      <div class="progress__bar" data-progress-bar></div>
     </div>
 
-    <div class="screen active" id="home">
-      <div class="home-top-space"></div>
-
-      <h1>רגע חמלה</h1>
-
-      <p class="home-main">
-        לפעמים גם מי שדואג לאחרים,<br>
-        צריך לעצור לרגע.
-      </p>
+    <section class="screen screen--home is-active" id="home" data-screen aria-labelledby="home-title">
+      <div class="home-spacer" aria-hidden="true"></div>
+      <h1 id="home-title">רגע חמלה</h1>
+      <p class="home-main">לפעמים גם מי שדואג לאחרים,<br>צריך לעצור לרגע.</p>
 
       <div class="home-invitation">
         <p>קחו לעצמכם שתי דקות.</p>
@@ -1631,237 +560,252 @@
         <p><strong>ולהמשיך הלאה עם קצת יותר מרחב.</strong></p>
       </div>
 
-      <button type="button" onclick="startTool()">מתחילים</button>
+      <button type="button" data-next="breathing">מתחילים</button>
 
-      <div class="home-footer">
+      <footer class="home-footer">
+        <p class="home-privacy">כל מה שנכתב כאן נשאר על המסך בלבד ואינו נשמר.</p>
         <div class="home-credit">
           פיתוח והתאמה להקשר הישראלי: שגית ציפלוביץ · 2026<br>
           מבוסס על פרוטוקול CMT-T של Matos et al.
         </div>
-      </div>
-    </div>
+      </footer>
+    </section>
 
-    <div class="screen" id="breathing">
+    <section class="screen" id="breathing" data-screen aria-labelledby="breathing-title">
       <div class="step-indicator">שלב 1 מתוך 4</div>
       <p class="intro-note">לכולנו יש רגעים מורכבים.</p>
-      <h2>לפני שממשיכים, בואו ניקח רגע לנשום.</h2>
-      <p class="breathing-guide" id="breathingGuide">נשמו עם הכדור.</p>
+      <h2 id="breathing-title">לפני שממשיכים, בואו ניקח רגע לנשום.</h2>
 
-      <div class="breathing-container">
-        <div class="breathing-circle" id="breathingCircle">
-          <span class="circle-phase-text" id="breathingText" aria-hidden="true"></span>
+      <div class="breathing" aria-live="polite">
+        <div class="breathing__circle" data-breathing-circle aria-hidden="true"></div>
+        <div class="breathing__text">
+          <div>נשמו עם הכדור.</div>
+          <div data-breathing-text style="margin-top:4px;min-height:1.2em;"></div>
         </div>
       </div>
 
-      <div class="btn-container">
-        <p class="continue-note">כשתרגישו מוכנים, המשיכו.</p>
-        <button type="button" onclick="nextStep('event')">המשך</button>
+      <div class="button-stack">
+        <button type="button" data-next="event">המשך</button>
       </div>
-    </div>
+    </section>
 
-    <div class="screen" id="event">
+    <section class="screen" id="event" data-screen aria-labelledby="event-title">
       <div class="content-card">
         <div class="step-indicator">שלב 2 מתוך 4</div>
-        <h2>בואו נחזור לרגע אחד מהיום.</h2>
+        <h2 id="event-title">בואו נחזור לרגע אחד מהיום.</h2>
         <p>חשבו על סיטואציה שלא הייתה פשוטה עבורכם.</p>
 
-        <p class="field-label">מה קרה?</p>
-        <p class="helper-text">כתבו רק מה קרה בפועל, בלי לנתח או לשפוט.</p>
-        <textarea id="challengeText" placeholder="כתבו כאן בקצרה..."></textarea>
+        <label class="field-label" for="challengeText">מה קרה?</label>
+        <p class="helper-text" id="challengeHelp">כתבו רק מה קרה בפועל, בלי לנתח או לשפוט.</p>
+        <textarea id="challengeText" aria-describedby="challengeHelp" placeholder="כתבו כאן בקצרה..."></textarea>
 
-        <button type="button" class="secondary-reveal" id="showFeelingsBtn" onclick="showReveal('feelingsSection', 'showFeelingsBtn')">המשך</button>
+        <button class="button--secondary" type="button" data-reveal="feelingsSection">המשך</button>
 
-        <div class="reveal-section" id="feelingsSection">
-          <div class="soft-divider"></div>
-          <h2>ומה עבר עליכם באותו רגע?</h2>
-          <p>מה הרגשתם באותו רגע?</p>
-          <p class="helper-text">אפשר לכתוב רגשות, מחשבות או תחושות גוף. כל מה שהיה שם הוא תשובה נכונה.</p>
-          <textarea id="feelingsText" placeholder="כתבו כאן..."></textarea>
+        <div class="reveal-section" id="feelingsSection" data-reveal-section>
+          <div class="soft-divider" aria-hidden="true"></div>
+          <h2>מה עבר עליכם באותו רגע?</h2>
+          <label class="field-label" for="feelingsText">מה הרגשתם באותו רגע?</label>
+          <p class="helper-text" id="feelingsHelp">אפשר לכתוב רגשות, מחשבות או תחושות גוף.</p>
+          <textarea id="feelingsText" aria-describedby="feelingsHelp" placeholder="כתבו כאן..."></textarea>
         </div>
       </div>
 
-      <div class="btn-container">
-        <button type="button" onclick="nextStep('need')">המשך</button>
+      <div class="button-stack">
+        <button type="button" data-next="need">המשך</button>
       </div>
-    </div>
+    </section>
 
-    <div class="screen" id="need">
+    <section class="screen" id="need" data-screen aria-labelledby="need-title">
       <div class="content-card">
         <div class="step-indicator">שלב 3 מתוך 4</div>
-        <h2>מה הייתם צריכים באותו רגע?</h2>
-        <p>מה היה יכול לעזור לכם באותו רגע?</p>
-        <p class="helper-text">לפעמים זו יכולה להיות מילה טובה, עידוד, הבנה, תמיכה או פשוט רגע לנשום.</p>
-        <textarea id="needText" placeholder="כתבו כאן..."></textarea>
+        <h2 id="need-title">מה הייתם צריכים באותו רגע?</h2>
+        <label class="field-label" for="needText">מה היה חסר לכם באותו רגע?</label>
+        <p class="helper-text" id="needHelp">אפשר לכתוב מילה טובה, עידוד, הבנה, תמיכה או כל משפט שהיה נותן לכם קצת אוויר.</p>
+        <textarea id="needText" aria-describedby="needHelp" placeholder="כתבו כאן..."></textarea>
 
-        <button type="button" class="secondary-reveal" id="showSupportBtn" onclick="showReveal('supportSection', 'showSupportBtn')">המשך</button>
+        <button class="button--secondary" type="button" data-reveal="supportSection">המשך</button>
 
-        <div class="reveal-section" id="supportSection">
-          <div class="soft-divider"></div>
+        <div class="reveal-section" id="supportSection" data-reveal-section>
+          <div class="soft-divider" aria-hidden="true"></div>
           <h2>אם אדם קרוב היה לצדכם...</h2>
-          <p>מה הייתם רוצים לשמוע ממנו באותו רגע?</p>
-          <p class="helper-text">קחו רגע לחשוב על מילים שהיה נעים לקבל. לפעמים זו יכולה להיות מילה טובה, עידוד, הבנה, תמיכה או פשוט רגע לנשום.</p>
+          <label class="field-label" for="supportText">אילו מילים הייתם רוצים לשמוע באותו רגע?</label>
+          
           <textarea id="supportText" placeholder="כתבו כאן את המילים שהייתם רוצים לשמוע..."></textarea>
         </div>
       </div>
 
-      <div class="btn-container">
-        <button type="button" onclick="showSummary()">לסיום</button>
+      <div class="button-stack">
+        <button type="button" data-summary>לסיום</button>
       </div>
-    </div>
+    </section>
 
-    <div class="screen" id="summary">
-      <div class="step-indicator center-text">שלב 4 מתוך 4</div>
-      <h2 class="center-text">תודה שהקדשתם לעצמכם רגע.</h2>
-      <p class="closing-text">לפעמים כמה דקות של עצירה יכולות לשנות את הדרך שבה אנחנו ממשיכים את היום.</p>
+    <section class="screen" id="summary" data-screen aria-labelledby="summary-title">
+      <div class="step-indicator center">שלב 4 מתוך 4</div>
+      <h2 class="center" id="summary-title">תודה שהקדשתם לעצמכם רגע.</h2>
 
-      <div class="summary-showcase">
-        <div class="summary-showcase-title">רגע חמלה</div>
-        <p class="closing-text">הרגע הזה הוא הזדמנות לעצור, להקשיב לעצמכם ולפגוש גם את הקושי במעט יותר חמלה.</p>
-        <p class="field-label center-text">קחו נשימה אחת נוספת, ואז קראו את מה שכתבתם לעצמכם.</p>
-        <div class="quote-note" id="supportReview"></div>
+      <div class="summary-card">
+        <div class="summary-card__title">המילים שלכם</div>
+        <p class="helper-text center">קראו אותן לאט.</p>
+        <div class="quote-note" data-support-review aria-label="המילים שלכם"></div>
       </div>
 
-      <p class="closing-text">אפשר לקחת את המילים האלה איתכם, ולחזור אליהן בכל פעם שתרגישו צורך.</p>
-      <p class="feedback-intro">
-        אשמח לשמוע איך הייתה החוויה שלכם.<br>
-        המשוב שלכם יעזור לי להמשיך ולדייק את הכלי.
-      </p>
-      <a href="https://forms.gle/6XtRAuLPUkvy1XXE8" target="_blank" class="feedback-link">איך היה?</a>
-    </div>
-  </div>
+      <p class="closing-text">אפשר לחזור למילים האלה בכל פעם שתרגישו צורך.</p>
+
+      <p class="feedback-intro">אשמח לשמוע איך הייתה החוויה שלכם.<br>המשוב שלכם יעזור לי להמשיך ולדייק את הכלי.</p>
+      <a href="https://forms.gle/6XtRAuLPUkvy1XXE8" target="_blank" rel="noopener noreferrer" class="feedback-link">איך היה?</a>
+    </section>
+  </main>
 
   <script>
-    let breathingTimerId = null;
-    const screens = ["home", "breathing", "event", "need", "summary"];
+    (() => {
+      "use strict";
 
-    function showScreen(id) {
-      document.querySelectorAll(".screen").forEach(screen => {
-        screen.classList.remove("active");
-        void screen.offsetWidth;
-      });
+      const screensOrder = ["home", "breathing", "event", "need", "summary"];
+      const state = {
+        activeScreen: "home",
+        breathingIntervalId: null,
+        breathingTimeoutIds: []
+      };
 
-      const target = document.getElementById(id);
-      if (target) {
-        target.classList.add("active");
-        target.scrollTop = 0;
+      const dom = {
+        screens: [...document.querySelectorAll("[data-screen]")],
+        progress: document.querySelector("[data-progress]"),
+        progressBar: document.querySelector("[data-progress-bar]"),
+        breathingCircle: document.querySelector("[data-breathing-circle]"),
+        breathingText: document.querySelector("[data-breathing-text]"),
+        supportText: document.querySelector("#supportText"),
+        supportReview: document.querySelector("[data-support-review]")
+      };
+
+      const activeClass = "is-active";
+      const visibleClass = "is-visible";
+      const hiddenClass = "is-hidden";
+
+      function setTimeoutTracked(callback, delay) {
+        const id = window.setTimeout(() => {
+          state.breathingTimeoutIds = state.breathingTimeoutIds.filter(timeoutId => timeoutId !== id);
+          callback();
+        }, delay);
+        state.breathingTimeoutIds.push(id);
+        return id;
       }
 
-      updateProgress(id);
+      function clearBreathingTimers() {
+        if (state.breathingIntervalId !== null) {
+          window.clearInterval(state.breathingIntervalId);
+          state.breathingIntervalId = null;
+        }
 
-      if (id !== "breathing") stopBreathing();
-      if (id === "breathing") runBreathing();
-    }
-
-    function updateProgress(id) {
-      const container = document.getElementById("progressBarContainer");
-      const bar = document.getElementById("progressBar");
-
-      if (id === "home") {
-        container.style.display = "none";
-        bar.style.width = "0%";
-        return;
+        state.breathingTimeoutIds.forEach(timeoutId => window.clearTimeout(timeoutId));
+        state.breathingTimeoutIds = [];
       }
 
-      container.style.display = "block";
-      const step = Math.max(1, screens.indexOf(id));
-      bar.style.width = Math.min(100, (step / 4) * 100) + "%";
-    }
-
-    function startTool() {
-      showScreen("breathing");
-    }
-
-    function nextStep(id) {
-      showScreen(id);
-    }
-
-    function showReveal(sectionId, buttonId) {
-      const section = document.getElementById(sectionId);
-      const button = document.getElementById(buttonId);
-
-      if (section) section.classList.add("visible");
-      if (button) button.classList.add("hidden");
-    }
-
-    function showSummary() {
-      const support = document.getElementById("supportText");
-      const review = document.getElementById("supportReview");
-
-      if (review && support) {
-        review.textContent = support.value.trim();
+      function resetBreathingCircle() {
+        if (!dom.breathingCircle) return;
+        dom.breathingCircle.classList.remove("is-guided", "is-paused");
+        void dom.breathingCircle.offsetWidth;
       }
 
-      showScreen("summary");
-    }
-
-    function runBreathing() {
-      const textEl = document.getElementById("breathingText");
-      const circle = document.getElementById("breathingCircle");
-      if (!textEl || !circle) return;
-
-      stopBreathing();
-
-      circle.classList.remove("breathing-active");
-      circle.classList.add("breathing-ready");
-      textEl.textContent = "";
-
-      setTimeout(() => {
-        if (!document.getElementById("breathing").classList.contains("active")) return;
-
-        textEl.textContent = "";
-
-        setTimeout(() => {
-          if (!document.getElementById("breathing").classList.contains("active")) return;
-
-          circle.classList.add("breathing-active");
-
-          let cycleCount = 0;
-
-          const sequence = () => {
-            if (!document.getElementById("breathing").classList.contains("active")) return;
-
-            if (cycleCount >= 4) {
-              textEl.textContent = "";
-              stopBreathing(false);
-              return;
-            }
-
-            textEl.textContent = "";
-
-            setTimeout(() => {
-              if (document.getElementById("breathing").classList.contains("active")) {
-                textEl.textContent = "";
-              }
-            }, 4000);
-
-            setTimeout(() => {
-              if (document.getElementById("breathing").classList.contains("active")) {
-                textEl.textContent = "";
-              }
-            }, 6000);
-
-            cycleCount++;
-          };
-
-          sequence();
-          breathingTimerId = setInterval(sequence, 11000);
-        }, 1800);
-      }, 900);
-    }
-
-    function stopBreathing(resetCircle = true) {
-      if (breathingTimerId) {
-        clearInterval(breathingTimerId);
-        breathingTimerId = null;
+      function stopBreathing({ reset = true } = {}) {
+        clearBreathingTimers();
+        if (reset) resetBreathingCircle();
       }
 
-      const circle = document.getElementById("breathingCircle");
-      if (circle && resetCircle) {
-        circle.classList.remove("breathing-active");
-        circle.classList.add("breathing-ready");
-      }
-    }
+      function updateProgress(screenId) {
+        if (!dom.progress || !dom.progressBar) return;
 
+        if (screenId === "home") {
+          dom.progress.classList.remove(visibleClass);
+          dom.progressBar.style.width = "0%";
+          return;
+        }
+
+        const stepIndex = Math.max(1, screensOrder.indexOf(screenId));
+        const progressValue = Math.min(100, (stepIndex / 4) * 100);
+        dom.progress.classList.add(visibleClass);
+        dom.progressBar.style.width = `${progressValue}%`;
+      }
+
+      function focusScreenHeading(screen) {
+        const heading = screen.querySelector("h1, h2");
+        if (!heading) return;
+
+        heading.setAttribute("tabindex", "-1");
+        heading.focus({ preventScroll: true });
+        heading.addEventListener("blur", () => heading.removeAttribute("tabindex"), { once: true });
+      }
+
+      function showScreen(screenId) {
+        const nextScreen = document.getElementById(screenId);
+        if (!nextScreen) return;
+
+        dom.screens.forEach(screen => screen.classList.remove(activeClass));
+        nextScreen.classList.add(activeClass);
+        nextScreen.scrollTop = 0;
+        state.activeScreen = screenId;
+
+        updateProgress(screenId);
+        focusScreenHeading(nextScreen);
+
+        if (screenId === "breathing") {
+          runBreathingGuide();
+        } else {
+          stopBreathing();
+        }
+      }
+
+      function runBreathingGuide() {
+        if (!dom.breathingText || !dom.breathingCircle) return;
+
+        stopBreathing();
+        dom.breathingText.textContent = "";
+        dom.breathingCircle.classList.add("is-paused");
+
+        setTimeoutTracked(() => {
+          if (state.activeScreen !== "breathing") return;
+          dom.breathingCircle.classList.remove("is-paused");
+          dom.breathingCircle.classList.add("is-guided");
+        }, 250);
+
+      }
+
+      function revealSection(button) {
+        const sectionId = button.dataset.reveal;
+        const section = document.getElementById(sectionId);
+        if (!section) return;
+
+        section.classList.add(visibleClass);
+        button.classList.add(hiddenClass);
+
+        const focusTarget = section.querySelector("textarea, h2");
+        if (focusTarget) focusTarget.focus({ preventScroll: false });
+      }
+
+      function showSummary() {
+        const text = dom.supportText?.value.trim() || "";
+        if (dom.supportReview) dom.supportReview.textContent = text;
+        showScreen("summary");
+      }
+
+      function handleClick(event) {
+        const nextButton = event.target.closest("[data-next]");
+        if (nextButton) {
+          showScreen(nextButton.dataset.next);
+          return;
+        }
+
+        const revealButton = event.target.closest("[data-reveal]");
+        if (revealButton) {
+          revealSection(revealButton);
+          return;
+        }
+
+        if (event.target.closest("[data-summary]")) showSummary();
+      }
+
+      document.addEventListener("click", handleClick);
+      window.addEventListener("pagehide", () => stopBreathing());
+    })();
   </script>
 </body>
 </html>
