@@ -1571,6 +1571,36 @@
   }
 }
 
+
+/* ===== Final breathing polish ===== */
+.circle-phase-text{
+  display:none !important;
+}
+
+.breathing-guide{
+  font-size:.96rem !important;
+  font-weight:600 !important;
+  color:var(--primary) !important;
+  margin:18px auto 10px !important;
+}
+
+.continue-note{
+  font-size:.82rem !important;
+  color:var(--text-muted) !important;
+  margin:8px 0 10px !important;
+}
+
+#breathing .breathing-container{
+  padding-top:10px !important;
+}
+
+@media (max-height:760px){
+  .breathing-guide{
+    font-size:.86rem !important;
+    margin:12px auto 8px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -1615,16 +1645,16 @@
       <div class="step-indicator">שלב 1 מתוך 4</div>
       <p class="intro-note">לכולנו יש רגעים מורכבים.</p>
       <h2>לפני שממשיכים, בואו ניקח רגע לנשום.</h2>
-      <p class="breathing-guide" id="breathingGuide">הניחו לעיניים לעקוב אחרי הכדור. אין צורך למהר.</p>
+      <p class="breathing-guide" id="breathingGuide">נשמו עם הכדור.</p>
 
       <div class="breathing-container">
         <div class="breathing-circle" id="breathingCircle">
-          <span class="circle-phase-text" id="breathingText"></span>
+          <span class="circle-phase-text" id="breathingText" aria-hidden="true"></span>
         </div>
       </div>
 
       <div class="btn-container">
-        <p class="continue-note">כשתרגישו מוכנים, המשיכו בקצב שלכם.</p>
+        <p class="continue-note">כשתרגישו מוכנים, המשיכו.</p>
         <button type="button" onclick="nextStep('event')">המשך</button>
       </div>
     </div>
@@ -1778,7 +1808,7 @@
       setTimeout(() => {
         if (!document.getElementById("breathing").classList.contains("active")) return;
 
-        textEl.textContent = "נשמו";
+        textEl.textContent = "";
 
         setTimeout(() => {
           if (!document.getElementById("breathing").classList.contains("active")) return;
@@ -1791,22 +1821,22 @@
             if (!document.getElementById("breathing").classList.contains("active")) return;
 
             if (cycleCount >= 4) {
-              textEl.textContent = "אפשר להמשיך";
+              textEl.textContent = "";
               stopBreathing(false);
               return;
             }
 
-            textEl.textContent = "שאיפה";
+            textEl.textContent = "";
 
             setTimeout(() => {
               if (document.getElementById("breathing").classList.contains("active")) {
-                textEl.textContent = "להחזיק";
+                textEl.textContent = "";
               }
             }, 4000);
 
             setTimeout(() => {
               if (document.getElementById("breathing").classList.contains("active")) {
-                textEl.textContent = "נשיפה";
+                textEl.textContent = "";
               }
             }, 6000);
 
