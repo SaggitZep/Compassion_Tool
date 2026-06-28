@@ -231,7 +231,15 @@
 
     .screen::-webkit-scrollbar { display: none; }
     .screen.is-active { display: flex; animation: fade-in-up .5s var(--ease-smooth) both; }
-    .screen--home { align-items: center; justify-content: flex-start; overflow: hidden; text-align: center; }
+    .screen--home {
+      display: none;
+      grid-template-rows: minmax(34px, .75fr) auto auto auto auto minmax(18px, .55fr) auto;
+      align-items: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .screen--home.is-active { display: grid; animation: fade-in-up .5s var(--ease-smooth) both; }
 
     .home-main {
       max-width: 330px;
@@ -252,7 +260,7 @@
 
     .home-invitation p { margin-block-end: 6px; color: var(--color-primary); text-align: center; }
     .home-invitation strong { font-weight: 800; }
-    .home-spacer { flex: 0 0 clamp(58px, 8svh, 88px); min-height: 0; }
+    .home-spacer { min-height: 0; }
 
     .home-footer {
       width: 100%;
@@ -529,7 +537,7 @@
       .home-invitation { margin-block-end: 22px; }
       .home-invitation p { margin-block-end: 4px; font-size: .92rem; line-height: 1.25; }
       .home-footer { margin-block-start: auto; font-size: .66rem; }
-      .home-spacer { flex-basis: clamp(44px, 7svh, 68px); }
+      .screen--home { grid-template-rows: minmax(24px, .55fr) auto auto auto auto minmax(14px, .35fr) auto; }
       .home-credit { font-size: .64rem; line-height: 1.22; }
       textarea { min-height: 108px; height: clamp(108px, 18svh, 132px); margin-block-end: 10px; padding: 12px 14px; font-size: .96rem; }
       .field-label { margin-block-start: 7px; margin-block-end: 4px; font-size: 1rem; }
@@ -552,7 +560,7 @@
       .home-invitation { margin-block-end: 14px; }
       .home-invitation p { margin-block-end: 3px; font-size: .84rem; line-height: 1.18; }
       .home-footer { margin-block-start: auto; font-size: .6rem; }
-      .home-spacer { flex-basis: clamp(28px, 5svh, 44px); }
+      .screen--home { grid-template-rows: minmax(14px, .35fr) auto auto auto auto minmax(8px, .25fr) auto; }
       .home-credit { font-size: .58rem; }
       button { min-height: 40px; padding: 10px; font-size: .94rem; }
       .flow-section { gap: 12px; padding-block: 2px 6px; }
