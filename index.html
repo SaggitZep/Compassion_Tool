@@ -293,14 +293,9 @@
       line-height: 1.42;
     }
 
-    .content-card {
+    .flow-section {
       width: 100%;
-      margin: auto 0;
-      padding: 20px 18px 18px;
-      border: 1px solid var(--color-white-border);
-      border-radius: var(--radius-card);
-      background: var(--color-surface-soft);
-      box-shadow: var(--shadow-card);
+      margin-block-start: 4px;
     }
 
     .field-label {
@@ -360,8 +355,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: 320px;
+      padding-block-start: 36px;
     }
 
     .breathing__circle {
@@ -397,19 +393,14 @@
       text-align: center;
     }
 
-    .summary-card {
+    .summary-section {
       width: 100%;
-      margin: 16px 0 18px;
-      padding: 16px;
-      border: 1px solid rgba(255, 255, 255, .75);
-      border-radius: 20px;
-      background: var(--color-primary-bg);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, .02);
+      margin-block: 18px 16px;
       text-align: center;
     }
 
-    .summary-card__title {
-      margin-block-end: 10px;
+    .summary-section__title {
+      margin-block-end: 6px;
       color: var(--color-primary);
       font-size: 1.03rem;
       font-weight: 800;
@@ -417,6 +408,7 @@
 
     .quote-note {
       min-height: 58px;
+      margin-block-start: 10px;
       padding: 12px 14px;
       border-inline-start: 4px solid rgba(95, 116, 109, .35);
       border-radius: 14px;
@@ -511,14 +503,13 @@
       .home-invitation p { margin-block-end: 4px; font-size: .92rem; line-height: 1.25; }
       .home-footer { font-size: .66rem; }
       .home-credit { font-size: .64rem; line-height: 1.22; }
-      .content-card { padding: 15px 14px 13px; }
       textarea { min-height: 68px; height: 72px; margin-block-end: 10px; padding: 10px 12px; font-size: .88rem; }
       .field-label { margin-block-start: 7px; margin-block-end: 4px; font-size: .92rem; }
       .helper-text { margin-block-end: 6px; font-size: .74rem; line-height: 1.28; }
       .soft-divider { margin: 12px 0 10px; }
       .button--secondary { min-height: 42px; padding: 10px; font-size: .9rem; }
-      .breathing { min-height: 280px; }
-      .summary-card { margin: 10px 0 12px; padding: 12px; }
+      .breathing { min-height: 280px; padding-block-start: 24px; }
+      .summary-section { margin-block: 12px 0; }
       .closing-text, .feedback-intro { font-size: .8rem; line-height: 1.3; }
       .quote-note { min-height: 46px; padding: 10px 12px; font-size: .82rem; }
       button, .feedback-link { min-height: 44px; padding: 12px; font-size: .96rem; }
@@ -590,7 +581,7 @@
     </section>
 
     <section class="screen" id="event" data-screen aria-labelledby="event-title">
-      <div class="content-card">
+      <div class="flow-section">
         <div class="step-indicator">שלב 2 מתוך 4</div>
         <h2 id="event-title">בואו נחזור לרגע אחד מהיום.</h2>
         <p>חשבו על סיטואציה שלא הייתה פשוטה עבורכם.</p>
@@ -616,7 +607,7 @@
     </section>
 
     <section class="screen" id="need" data-screen aria-labelledby="need-title">
-      <div class="content-card">
+      <div class="flow-section">
         <div class="step-indicator">שלב 3 מתוך 4</div>
         <h2 id="need-title">מה הייתם צריכים באותו רגע?</h2>
         <label class="field-label" for="needText">מה היה חסר לכם באותו רגע?</label>
@@ -643,8 +634,8 @@
       <div class="step-indicator center">שלב 4 מתוך 4</div>
       <h2 class="center" id="summary-title">תודה שהקדשתם לעצמכם רגע.</h2>
 
-      <div class="summary-card">
-        <div class="summary-card__title">המילים שלכם</div>
+      <div class="summary-section">
+        <div class="summary-section__title">המילים שלכם</div>
         <p class="helper-text center">קראו אותן לאט.</p>
         <div class="quote-note" data-support-review aria-label="המילים שלכם"></div>
       </div>
