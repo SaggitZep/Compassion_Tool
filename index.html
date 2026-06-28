@@ -1463,6 +1463,114 @@
   }
 }
 
+
+/* ===== Final interaction polish: breathing + ritual ===== */
+.breathing-guide {
+  max-width: 320px;
+  margin: 16px auto 0 !important;
+  color: var(--text-muted) !important;
+  font-size: .9rem !important;
+  line-height: 1.45 !important;
+  text-align: center !important;
+}
+
+.continue-note {
+  color: var(--text-muted) !important;
+  font-size: .82rem !important;
+  line-height: 1.35 !important;
+  text-align: center !important;
+  margin: 0 0 10px !important;
+}
+
+.breathing-circle {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: scale(.85);
+  animation: none !important;
+}
+
+.breathing-circle::after {
+  animation: none !important;
+  transform: scale(.85);
+  opacity: .45;
+}
+
+.breathing-circle.breathing-ready {
+  transform: scale(.85);
+}
+
+.breathing-circle.breathing-active {
+  animation: sootheBreath 11s ease-in-out 4 forwards !important;
+}
+
+.breathing-circle.breathing-active::after {
+  animation: sootheHalo 11s ease-in-out 4 forwards !important;
+}
+
+.circle-phase-text {
+  color: rgba(255,255,255,.92);
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: -.2px;
+  text-align: center;
+  text-shadow: 0 1px 6px rgba(0,0,0,.12);
+  transform: scale(.92);
+  pointer-events: none;
+}
+
+@keyframes sootheBreath {
+  0% { transform: scale(.85); }
+  36% { transform: scale(1.25); }
+  54% { transform: scale(1.25); }
+  100% { transform: scale(.85); }
+}
+
+@keyframes sootheHalo {
+  0% { transform: scale(.85); opacity: .45; }
+  36% { transform: scale(1.22); opacity: .72; }
+  54% { transform: scale(1.22); opacity: .72; }
+  100% { transform: scale(.85); opacity: .45; }
+}
+
+#breathing .breathing-container {
+  padding-bottom: 54px !important;
+}
+
+#summary .field-label {
+  max-width: 330px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Keep privacy as plain text only if it exists anywhere */
+#home .privacy-note {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+#home .privacy-note::before {
+  content: none !important;
+}
+
+@media (max-height: 760px) {
+  .breathing-guide {
+    font-size: .8rem !important;
+    margin-top: 10px !important;
+  }
+  .continue-note {
+    font-size: .74rem !important;
+    margin-bottom: 8px !important;
+  }
+  .circle-phase-text {
+    font-size: .86rem;
+  }
+  #breathing .breathing-container {
+    padding-bottom: 46px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -1507,13 +1615,16 @@
       <div class="step-indicator">שלב 1 מתוך 4</div>
       <p class="intro-note">לכולנו יש רגעים מורכבים.</p>
       <h2>לפני שממשיכים, בואו ניקח רגע לנשום.</h2>
+      <p class="breathing-guide" id="breathingGuide">הניחו לעיניים לעקוב אחרי הכדור. אין צורך למהר.</p>
 
       <div class="breathing-container">
-        <div class="breathing-circle" id="breathingCircle"></div>
-        <div class="breathing-text" id="breathingText"></div>
+        <div class="breathing-circle" id="breathingCircle">
+          <span class="circle-phase-text" id="breathingText"></span>
+        </div>
       </div>
 
       <div class="btn-container">
+        <p class="continue-note">כשתרגישו מוכנים, המשיכו בקצב שלכם.</p>
         <button type="button" onclick="nextStep('event')">המשך</button>
       </div>
     </div>
@@ -1525,7 +1636,7 @@
         <p>חשבו על סיטואציה שלא הייתה פשוטה עבורכם.</p>
 
         <p class="field-label">מה קרה?</p>
-        <p class="helper-text">תארו בקצרה את מה שקרה, בלי לנתח או לשפוט.</p>
+        <p class="helper-text">כתבו רק מה קרה בפועל, בלי לנתח או לשפוט.</p>
         <textarea id="challengeText" placeholder="כתבו כאן בקצרה..."></textarea>
 
         <button type="button" class="secondary-reveal" id="showFeelingsBtn" onclick="showReveal('feelingsSection', 'showFeelingsBtn')">המשך</button>
@@ -1534,7 +1645,7 @@
           <div class="soft-divider"></div>
           <h2>ומה עבר עליכם באותו רגע?</h2>
           <p>מה הרגשתם באותו רגע?</p>
-          <p class="helper-text">כל מה שהרגשתם הוא תשובה נכונה.</p>
+          <p class="helper-text">אפשר לכתוב רגשות, מחשבות או תחושות גוף. כל מה שהיה שם הוא תשובה נכונה.</p>
           <textarea id="feelingsText" placeholder="כתבו כאן..."></textarea>
         </div>
       </div>
@@ -1558,7 +1669,7 @@
           <div class="soft-divider"></div>
           <h2>אם אדם קרוב היה לצדכם...</h2>
           <p>מה הייתם רוצים לשמוע ממנו באותו רגע?</p>
-          <p class="helper-text">לפעמים זו יכולה להיות מילה טובה, עידוד, הבנה, תמיכה או פשוט רגע לנשום.</p>
+          <p class="helper-text">קחו רגע לחשוב על מילים שהיה נעים לקבל. לפעמים זו יכולה להיות מילה טובה, עידוד, הבנה, תמיכה או פשוט רגע לנשום.</p>
           <textarea id="supportText" placeholder="כתבו כאן את המילים שהייתם רוצים לשמוע..."></textarea>
         </div>
       </div>
@@ -1576,11 +1687,11 @@
       <div class="summary-showcase">
         <div class="summary-showcase-title">רגע חמלה</div>
         <p class="closing-text">הרגע הזה הוא הזדמנות לעצור, להקשיב לעצמכם ולפגוש גם את הקושי במעט יותר חמלה.</p>
-        <p class="field-label center-text">קראו את מה שכתבתם, ותנו לעצמכם לקבל את המילים האלה.</p>
+        <p class="field-label center-text">קחו נשימה אחת נוספת, ואז קראו את מה שכתבתם לעצמכם.</p>
         <div class="quote-note" id="supportReview"></div>
       </div>
 
-      <p class="closing-text">אפשר לחזור לרגע הזה בכל פעם שתרגישו צורך.</p>
+      <p class="closing-text">אפשר לקחת את המילים האלה איתכם, ולחזור אליהן בכל פעם שתרגישו צורך.</p>
       <p class="feedback-intro">
         אשמח לשמוע איך הייתה החוויה שלכם.<br>
         המשוב שלכם יעזור לי להמשיך ולדייק את הכלי.
@@ -1656,27 +1767,23 @@
     function runBreathing() {
       const textEl = document.getElementById("breathingText");
       const circle = document.getElementById("breathingCircle");
-      if (!textEl) return;
+      if (!textEl || !circle) return;
 
       stopBreathing();
 
-      if (circle) {
-        circle.style.animation = "none";
-        void circle.offsetWidth;
-      }
-
+      circle.classList.remove("breathing-active");
+      circle.classList.add("breathing-ready");
       textEl.textContent = "";
 
       setTimeout(() => {
         if (!document.getElementById("breathing").classList.contains("active")) return;
-        textEl.textContent = "נשמו בקצב הכדור.";
+
+        textEl.textContent = "נשמו";
 
         setTimeout(() => {
           if (!document.getElementById("breathing").classList.contains("active")) return;
 
-          if (circle) {
-            circle.style.animation = "idlePulse 11s ease-in-out 4 forwards";
-          }
+          circle.classList.add("breathing-active");
 
           let cycleCount = 0;
 
@@ -1684,22 +1791,22 @@
             if (!document.getElementById("breathing").classList.contains("active")) return;
 
             if (cycleCount >= 4) {
-              textEl.textContent = "אפשר להמשיך כשתרצו.";
+              textEl.textContent = "אפשר להמשיך";
               stopBreathing(false);
               return;
             }
 
-            textEl.textContent = "שאיפה...";
+            textEl.textContent = "שאיפה";
 
             setTimeout(() => {
               if (document.getElementById("breathing").classList.contains("active")) {
-                textEl.textContent = "להחזיק...";
+                textEl.textContent = "להחזיק";
               }
             }, 4000);
 
             setTimeout(() => {
               if (document.getElementById("breathing").classList.contains("active")) {
-                textEl.textContent = "נשיפה...";
+                textEl.textContent = "נשיפה";
               }
             }, 6000);
 
@@ -1708,8 +1815,8 @@
 
           sequence();
           breathingTimerId = setInterval(sequence, 11000);
-        }, 2000);
-      }, 1000);
+        }, 1800);
+      }, 900);
     }
 
     function stopBreathing(resetCircle = true) {
@@ -1718,13 +1825,13 @@
         breathingTimerId = null;
       }
 
-      if (resetCircle) {
-        const circle = document.getElementById("breathingCircle");
-        if (circle) {
-          circle.style.animation = "idlePulse 11s infinite ease-in-out";
-        }
+      const circle = document.getElementById("breathingCircle");
+      if (circle && resetCircle) {
+        circle.classList.remove("breathing-active");
+        circle.classList.add("breathing-ready");
       }
     }
+
   </script>
 </body>
 </html>
