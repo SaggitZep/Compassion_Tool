@@ -690,23 +690,55 @@
     }
 
 
-    /* Keep the final step button visible above mobile browser chrome on writing screens. */
+    /* Keep the final step button visible inside the page flow on mobile browsers. */
     #event:has(#feelingsSection.is-visible),
     #need:has(#supportSection.is-visible) {
-      padding-block-end: calc(104px + env(safe-area-inset-bottom));
+      padding-block-end: calc(126px + env(safe-area-inset-bottom));
+      scroll-padding-block-end: calc(126px + env(safe-area-inset-bottom));
+    }
+
+    #event:has(#feelingsSection.is-visible) textarea,
+    #need:has(#supportSection.is-visible) textarea {
+      min-height: clamp(96px, 14svh, 136px);
+      max-height: clamp(112px, 17svh, 156px);
     }
 
     #event:has(#feelingsSection.is-visible) > .button-stack,
     #need:has(#supportSection.is-visible) > .button-stack {
-      position: fixed;
-      inset-inline: var(--screen-inline);
-      inset-block-end: calc(clamp(16px, 2.4svh, 24px) + env(safe-area-inset-bottom));
+      position: sticky;
+      inset-block-end: calc(82px + env(safe-area-inset-bottom));
       z-index: 30;
-      width: auto;
-      margin: 0;
-      padding-block-start: 18px;
+      width: 100%;
+      margin-block-start: clamp(10px, 2svh, 18px);
+      padding-block-start: 16px;
       padding-block-end: 0;
-      background: linear-gradient(to top, var(--color-surface) 0%, rgba(253, 252, 248, .94) 68%, rgba(253, 252, 248, 0) 100%);
+      background: linear-gradient(to top, var(--color-surface) 0%, rgba(253, 252, 248, .96) 68%, rgba(253, 252, 248, 0) 100%);
+    }
+
+    @media (max-height: 760px) {
+      #event:has(#feelingsSection.is-visible) textarea,
+      #need:has(#supportSection.is-visible) textarea {
+        min-height: clamp(80px, 12svh, 112px);
+        max-height: clamp(96px, 15svh, 132px);
+      }
+
+      #event:has(#feelingsSection.is-visible) > .button-stack,
+      #need:has(#supportSection.is-visible) > .button-stack {
+        inset-block-end: calc(76px + env(safe-area-inset-bottom));
+      }
+    }
+
+    @media (max-height: 640px) {
+      #event:has(#feelingsSection.is-visible) textarea,
+      #need:has(#supportSection.is-visible) textarea {
+        min-height: 68px;
+        max-height: 88px;
+      }
+
+      #event:has(#feelingsSection.is-visible) > .button-stack,
+      #need:has(#supportSection.is-visible) > .button-stack {
+        inset-block-end: calc(70px + env(safe-area-inset-bottom));
+      }
     }
 
   </style>
