@@ -286,7 +286,7 @@
     }
 
     .home-privacy {
-      margin-block-end: clamp(88px, 12svh, 116px);
+      margin-block-end: clamp(118px, 16svh, 150px);
       color: #74716d;
     }
 
@@ -303,7 +303,7 @@
       margin-block-end: 20px;
       color: #999;
       font-size: 1.06rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: -.2px;
     }
 
@@ -397,9 +397,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      gap: clamp(32px, 5.2svh, 46px);
+      gap: clamp(22px, 3.8svh, 30px);
       min-height: 0;
-      padding-block-start: clamp(72px, 10.8svh, 98px);
+      padding-block-start: clamp(36px, 6svh, 56px);
       padding-block-end: 12px;
     }
 
@@ -407,7 +407,7 @@
       flex: 0 0 auto;
       color: rgba(95, 116, 109, .86);
       font-size: 1.27rem;
-      font-weight: 600;
+      font-weight: 700;
       line-height: 1.45;
       text-align: center;
     }
@@ -443,8 +443,8 @@
     .breathing__text {
       min-height: 1.45em;
       margin-block-start: 0;
-      color: rgba(95, 116, 109, .88);
-      font-size: 1.3rem;
+      color: rgba(95, 116, 109, .96);
+      font-size: 1.36rem;
       font-weight: 600;
       line-height: 1.45;
       text-align: center;
@@ -748,7 +748,7 @@
         <p>חשבו על רגע אחד מהיום שלא היה פשוט עבורכם.</p>
 
         <label class="field-label" for="challengeText">מה קרה?</label>
-        <p class="helper-text" id="challengeHelp">כתבו רק מה קרה בפועל, בלי לנתח או לשפוט.</p>
+        <p class="helper-text" id="challengeHelp">אין צורך לנתח או להסביר. פשוט תארו בקצרה מה קרה.</p>
         <textarea id="challengeText" aria-describedby="challengeHelp" placeholder="כתבו כאן בקצרה..."></textarea>
 
         <button class="button--secondary" type="button" data-reveal="feelingsSection">המשך</button>
@@ -909,38 +909,38 @@
 
       function runBreathingGuide() {
         if (!dom.breathingText || !dom.breathingCircle) return;
-
         stopBreathing();
         dom.breathingText.textContent = "";
-        dom.breathingCircle.classList.add("is-paused");
-
-        const cycleDuration = 11000;
-        const cycles = 3;
-        const cues = [
-          { text: "שאיפה", offset: 250 },
-          { text: "החזיקו", offset: 4200 },
-          { text: "נשיפה", offset: 6200 }
+        resetBreathingCircle();
+        dom.breathingCircle.classList.add("is-guided");
+        const cycleDuration=11000;
+        const cues=[
+          {text:"שאיפה",offset:250},
+          {text:"החזיקו",offset:4200},
+          {text:"נשיפה",offset:6200}
         ];
-
-        setTimeoutTracked(() => {
-          if (state.activeScreen !== "breathing") return;
-          dom.breathingCircle.classList.remove("is-paused");
-          dom.breathingCircle.classList.add("is-guided");
-        }, 250);
-
-        for (let cycle = 0; cycle < cycles; cycle += 1) {
-          cues.forEach(cue => {
-            setTimeoutTracked(() => {
-              if (state.activeScreen !== "breathing") return;
-              dom.breathingText.textContent = cue.text;
-            }, cycle * cycleDuration + cue.offset);
+        let cycle=0;
+        const scheduleCycle=()=>{
+          cues.forEach(cue=>{
+            setTimeoutTracked(()=>{
+              if(state.activeScreen!=="breathing") return;
+              dom.breathingText.textContent=cue.text;
+            }, cue.offset);
           });
-        }
-
-        setTimeoutTracked(() => {
-          if (state.activeScreen !== "breathing") return;
-          dom.breathingText.textContent = "אפשר להמשיך.";
-        }, cycles * cycleDuration + 350);
+        };
+        scheduleCycle();
+        state.breathingIntervalId=window.setInterval(()=>{
+          cycle++;
+          if(state.activeScreen!=="breathing") return;
+          if(cycle===3){
+            dom.breathingText.textContent="אפשר להמשיך.";
+            setTimeoutTracked(()=>{
+              if(state.activeScreen==="breathing") scheduleCycle();
+            },1800);
+          } else {
+            scheduleCycle();
+          }
+        },cycleDuration);
       }
 
       function revealSection(button) {
