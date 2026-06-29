@@ -397,17 +397,17 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      gap: clamp(34px, 5.4svh, 50px);
+      gap: clamp(42px, 6.2svh, 58px);
       min-height: 0;
-      padding-block-start: clamp(2px, 1svh, 12px);
+      padding-block-start: clamp(18px, 3.8svh, 34px);
       padding-block-end: 12px;
     }
 
     .breathing__lead {
       flex: 0 0 auto;
-      color: var(--color-text);
+      color: rgba(95, 116, 109, .76);
       font-size: 1.25rem;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 1.45;
       text-align: center;
     }
@@ -443,9 +443,9 @@
     .breathing__text {
       min-height: 1.45em;
       margin-block-start: 0;
-      color: var(--color-text);
+      color: rgba(95, 116, 109, .78);
       font-size: 1.25rem;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 1.45;
       text-align: center;
     }
@@ -624,9 +624,9 @@
       .soft-divider { margin: 12px 0 10px; }
       .button--secondary { min-height: 42px; padding: 10px; font-size: .98rem; }
 
-      .breathing { gap: 30px; padding-block-start: 4px; }
+      .breathing { gap: 36px; padding-block-start: 12px; }
       .breathing__circle { width: 118px; height: 118px; }
-      .breathing__lead, .breathing__text { font-size: 1.1rem; }
+      .breathing__lead, .breathing__text { font-size: 1.1rem; font-weight: 500; }
 
       .summary-card { margin: 16px 0 24px; padding: 16px; }
       .closing-text { margin-block-end: 56px; font-size: 1rem; line-height: 1.38; }
@@ -647,7 +647,7 @@
 
     @media (max-width: 360px) {
       :root { --screen-inline: 18px; }
-      .breathing { gap: 30px; }
+      .breathing { gap: 34px; }
       .breathing__circle { width: 114px; height: 114px; }
     }
 
@@ -671,9 +671,9 @@
       .home-privacy { margin-block-end: 38px; }
       .home-credit { font-size: .64rem; }
 
-      .breathing { gap: 26px; padding-block-start: 2px; }
+      .breathing { gap: 30px; padding-block-start: 6px; }
       .breathing__circle { width: 104px; height: 104px; }
-      .breathing__lead, .breathing__text { font-size: 1.02rem; }
+      .breathing__lead, .breathing__text { font-size: 1.02rem; font-weight: 500; }
 
       .summary-card { margin-block-end: 18px; }
       .closing-text { margin-block-end: 42px; }
