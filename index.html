@@ -28,7 +28,6 @@
       --color-muted: #85827d;
       --color-placeholder: #aaa;
       --color-border: rgba(0, 0, 0, .055);
-      --color-white-border: rgba(255, 255, 255, .82);
 
       --shadow-card: 0 14px 30px rgba(0, 0, 0, .04), 0 4px 12px rgba(0, 0, 0, .03), 0 1px 3px rgba(0, 0, 0, .015);
       --shadow-inner: inset 0 3px 6px rgba(0, 0, 0, .015), inset 0 1px 3px rgba(0, 0, 0, .01);
@@ -37,16 +36,14 @@
       --radius-field: 18px;
       --radius-pill: 999px;
 
-      --space-screen-block: clamp(24px, 4.1svh, 38px);
+      --space-screen-block: clamp(24px, 4.2svh, 40px);
       --space-screen-inline: clamp(22px, 5vw, 34px);
 
       --ease-smooth: cubic-bezier(.2, .8, .2, 1);
       --ease-spring: cubic-bezier(.25, .8, .15, 1.15);
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
     * {
       margin: 0;
@@ -56,10 +53,12 @@
 
     html {
       height: 100%;
+      overflow: hidden;
     }
 
     body {
       width: 100vw;
+      height: 100%;
       min-height: 100svh;
       display: flex;
       align-items: stretch;
@@ -72,9 +71,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    button, textarea, a {
-      font: inherit;
-    }
+    button, textarea, a { font: inherit; }
 
     button {
       width: 100%;
@@ -105,8 +102,8 @@
     textarea {
       width: 100%;
       flex: 0 0 auto;
-      min-height: clamp(136px, 22svh, 190px);
-      max-height: clamp(170px, 26svh, 230px);
+      min-height: clamp(138px, 21.5svh, 188px);
+      max-height: clamp(168px, 25.5svh, 224px);
       margin-block-end: 10px;
       padding: 16px;
       resize: none;
@@ -114,7 +111,7 @@
       border-radius: var(--radius-field);
       background: var(--color-input);
       color: var(--color-text);
-      font-size: 1.18rem;
+      font-size: 1.2rem;
       line-height: 1.55;
       box-shadow: var(--shadow-inner);
       transition: border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
@@ -127,14 +124,12 @@
       outline: none;
     }
 
-    textarea::placeholder {
-      color: #b0b0b0;
-    }
+    textarea::placeholder { color: #b0b0b0; }
 
     h1 {
       margin-block-end: clamp(30px, 4.6svh, 42px);
       color: var(--color-primary-deep);
-      font-size: clamp(2.78rem, 9.7vw, 3.38rem);
+      font-size: clamp(2.82rem, 9.8vw, 3.42rem);
       font-weight: 800;
       line-height: 1.1;
       letter-spacing: -.6px;
@@ -143,7 +138,7 @@
     h2 {
       margin-block-end: 14px;
       color: var(--color-primary);
-      font-size: 1.62rem;
+      font-size: 1.66rem;
       font-weight: 800;
       line-height: 1.25;
       letter-spacing: -.35px;
@@ -151,7 +146,7 @@
 
     p {
       margin-block-end: 16px;
-      font-size: 1.18rem;
+      font-size: 1.2rem;
       line-height: 1.62;
     }
 
@@ -224,9 +219,7 @@
       transition: opacity .24s ease;
     }
 
-    .progress.is-visible {
-      opacity: 1;
-    }
+    .progress.is-visible { opacity: 1; }
 
     .progress__bar {
       width: 0;
@@ -250,9 +243,7 @@
       scrollbar-width: none;
     }
 
-    .screen::-webkit-scrollbar {
-      display: none;
-    }
+    .screen::-webkit-scrollbar { display: none; }
 
     .screen.is-active {
       display: flex;
@@ -267,14 +258,14 @@
     }
 
     .home-spacer {
-      flex: 0 0 clamp(36px, 7.4svh, 76px);
+      flex: 0 0 clamp(34px, 6.8svh, 72px);
       min-height: 0;
     }
 
     .home-main {
       max-width: 350px;
       margin-block-end: clamp(26px, 4.2svh, 38px);
-      font-size: 1.32rem;
+      font-size: 1.34rem;
       font-weight: 500;
       line-height: 1.52;
     }
@@ -282,9 +273,9 @@
     .home-invitation {
       width: 100%;
       max-width: 350px;
-      margin-block-end: clamp(28px, 4.5svh, 42px);
+      margin-block-end: clamp(28px, 4.4svh, 40px);
       color: var(--color-primary);
-      font-size: 1.22rem;
+      font-size: 1.23rem;
       line-height: 1.42;
     }
 
@@ -292,30 +283,28 @@
       margin-block-end: 6px;
       color: var(--color-primary);
       text-align: center;
-      font-size: 1.22rem;
+      font-size: 1.23rem;
       line-height: 1.42;
     }
 
-    .home-invitation strong {
-      font-weight: 800;
-    }
+    .home-invitation strong { font-weight: 800; }
 
     .home-footer {
       width: 100%;
-      min-height: clamp(150px, 22svh, 230px);
+      min-height: clamp(150px, 21.5svh, 220px);
       margin-block-start: auto;
       padding-block-start: 0;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       color: var(--color-muted);
-      font-size: .8rem;
+      font-size: .82rem;
       line-height: 1.35;
       text-align: center;
     }
 
     .home-privacy {
-      margin-block-end: clamp(34px, 7.4svh, 68px);
+      margin-block-end: clamp(34px, 7svh, 64px);
       color: #74716d;
     }
 
@@ -324,14 +313,14 @@
       padding-block-start: 8px;
       border-block-start: 1px solid rgba(0, 0, 0, .06);
       color: rgba(133, 130, 125, .86);
-      font-size: .75rem;
+      font-size: .76rem;
       line-height: 1.28;
     }
 
     .step-indicator {
       margin-block-end: 20px;
       color: #999;
-      font-size: 1.04rem;
+      font-size: 1.06rem;
       font-weight: 600;
       letter-spacing: -.2px;
     }
@@ -339,7 +328,7 @@
     .intro-note {
       margin: 4px 0 10px;
       color: var(--color-muted);
-      font-size: 1.2rem;
+      font-size: 1.22rem;
       font-weight: 500;
       line-height: 1.42;
     }
@@ -363,7 +352,7 @@
     .field-label {
       margin: 16px 0 8px;
       color: var(--color-primary);
-      font-size: 1.18rem;
+      font-size: 1.2rem;
       font-weight: 800;
       line-height: 1.35;
     }
@@ -371,7 +360,7 @@
     .helper-text {
       margin-block-end: 12px;
       color: var(--color-muted);
-      font-size: 1rem;
+      font-size: 1.02rem;
       line-height: 1.42;
     }
 
@@ -397,9 +386,7 @@
       font-size: 1.05rem;
     }
 
-    .button--secondary.is-hidden {
-      display: none;
-    }
+    .button--secondary.is-hidden { display: none; }
 
     .reveal-section {
       display: none;
@@ -428,9 +415,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: clamp(42px, 6.8svh, 64px);
+      gap: clamp(40px, 5.9svh, 56px);
       min-height: 0;
-      padding-block: clamp(12px, 2.6svh, 24px);
+      padding-block: clamp(10px, 2.2svh, 20px);
     }
 
     .breathing__circle {
@@ -440,6 +427,7 @@
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%, #a7bbb2 0%, #8da19a 100%);
       box-shadow: 0 10px 30px rgba(95, 116, 109, .22), inset 0 -4px 12px rgba(0, 0, 0, .05);
+      transform: scale(.85);
       animation: breathe 11s infinite ease-in-out;
     }
 
@@ -450,12 +438,12 @@
       z-index: -1;
       border-radius: inherit;
       background: radial-gradient(circle, rgba(141, 161, 154, .18), rgba(141, 161, 154, 0) 68%);
+      transform: scale(.85);
+      opacity: .45;
       animation: breathe-halo 11s infinite ease-in-out;
     }
 
-    .breathing__circle.is-guided {
-      animation: breathe 11s ease-in-out 4 forwards;
-    }
+    .breathing__circle.is-guided { animation: breathe 11s ease-in-out 4 forwards; }
 
     .breathing__circle.is-paused {
       animation: none;
@@ -472,7 +460,7 @@
       min-height: 24px;
       margin-block-start: 0;
       color: var(--color-text);
-      font-size: 1.2rem;
+      font-size: 1.22rem;
       font-weight: 600;
       line-height: 1.45;
       text-align: center;
@@ -480,7 +468,7 @@
 
     .summary-card {
       width: 100%;
-      margin: 24px 0 clamp(32px, 5.5svh, 52px);
+      margin: 22px 0 clamp(30px, 5svh, 46px);
       padding: 20px;
       border: 1px solid rgba(255, 255, 255, .75);
       border-radius: 20px;
@@ -490,9 +478,9 @@
     }
 
     .summary-card__title {
-      margin-block-end: 12px;
+      margin-block-end: 8px;
       color: var(--color-primary);
-      font-size: 1.13rem;
+      font-size: 1.15rem;
       font-weight: 800;
     }
 
@@ -503,6 +491,7 @@
       border-radius: 14px;
       background: #fff;
       color: var(--color-text);
+      font-size: 1.02rem;
       line-height: 1.45;
       text-align: start;
       white-space: pre-wrap;
@@ -514,15 +503,13 @@
       color: var(--color-placeholder);
     }
 
-    .center {
-      text-align: center;
-    }
+    .center { text-align: center; }
 
     .closing-text {
       max-width: 340px;
       margin-inline: auto;
       margin-block-end: clamp(30px, 5.2svh, 48px);
-      font-size: 1.12rem;
+      font-size: 1.14rem;
       line-height: 1.5;
       text-align: center;
     }
@@ -531,7 +518,7 @@
       max-width: 340px;
       margin: 0 auto 12px;
       color: var(--color-muted);
-      font-size: 1.04rem;
+      font-size: 1.06rem;
       line-height: 1.42;
       text-align: center;
     }
@@ -552,18 +539,14 @@
       transition: transform .3s var(--ease-spring);
     }
 
-    .feedback-link:active {
-      transform: scale(.97);
-    }
+    .feedback-link:active { transform: scale(.97); }
 
     #breathing {
       justify-content: flex-start;
       overflow: hidden;
     }
 
-    #breathing h2 {
-      margin-block-end: 0;
-    }
+    #breathing h2 { margin-block-end: 0; }
 
     #event, #need {
       overflow-y: auto;
@@ -586,28 +569,18 @@
       max-height: clamp(132px, 20svh, 190px);
     }
 
-    @keyframes fade-in-up {
-      from {
-        opacity: 0;
-        transform: translateY(16px) scale(.99);
-      }
+    #summary .helper-text {
+      margin-block-end: 10px;
+    }
 
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(16px) scale(.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     @keyframes reveal-in {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes breathe {
@@ -625,14 +598,8 @@
     }
 
     @supports (height: 100dvh) {
-      body {
-        min-height: 100dvh;
-      }
-
-      .app-shell {
-        height: 100dvh;
-        min-height: 100dvh;
-      }
+      body { min-height: 100dvh; }
+      .app-shell { height: 100dvh; min-height: 100dvh; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -650,18 +617,14 @@
         --space-screen-inline: 22px;
       }
 
-      .screen {
-        padding-block-end: calc(16px + env(safe-area-inset-bottom));
-      }
+      .screen { padding-block-end: calc(16px + env(safe-area-inset-bottom)); }
 
       h1 {
         margin-block-end: 24px;
         font-size: 2.58rem;
       }
 
-      h2 {
-        font-size: 1.46rem;
-      }
+      h2 { font-size: 1.46rem; }
 
       p {
         font-size: 1.04rem;
@@ -675,16 +638,14 @@
       }
 
       textarea {
-        min-height: clamp(112px, 19svh, 150px);
-        max-height: clamp(130px, 22svh, 170px);
+        min-height: clamp(112px, 18.5svh, 148px);
+        max-height: clamp(130px, 21.5svh, 166px);
         margin-block-end: 12px;
         padding: 12px 14px;
         font-size: 1.04rem;
       }
 
-      .home-spacer {
-        flex-basis: clamp(28px, 5.8svh, 48px);
-      }
+      .home-spacer { flex-basis: clamp(28px, 5.6svh, 46px); }
 
       .home-main {
         margin-block-end: 22px;
@@ -692,9 +653,7 @@
         line-height: 1.42;
       }
 
-      .home-invitation {
-        margin-block-end: 22px;
-      }
+      .home-invitation { margin-block-end: 22px; }
 
       .home-invitation p {
         margin-block-end: 4px;
@@ -703,13 +662,11 @@
       }
 
       .home-footer {
-        min-height: clamp(126px, 20svh, 170px);
+        min-height: clamp(126px, 19.5svh, 166px);
         font-size: .72rem;
       }
 
-      .home-privacy {
-        margin-block-end: clamp(24px, 5.2svh, 42px);
-      }
+      .home-privacy { margin-block-end: clamp(24px, 5svh, 40px); }
 
       .home-credit {
         font-size: .7rem;
@@ -728,9 +685,7 @@
         line-height: 1.28;
       }
 
-      .soft-divider {
-        margin: 14px 0 12px;
-      }
+      .soft-divider { margin: 14px 0 12px; }
 
       .button--secondary {
         min-height: 42px;
@@ -739,7 +694,7 @@
       }
 
       .breathing {
-        gap: 38px;
+        gap: 36px;
         padding-block: 10px;
       }
 
@@ -749,7 +704,7 @@
       }
 
       .summary-card {
-        margin: 16px 0 26px;
+        margin: 16px 0 24px;
         padding: 16px;
       }
 
@@ -782,13 +737,9 @@
     }
 
     @media (max-width: 360px) {
-      :root {
-        --space-screen-inline: 18px;
-      }
+      :root { --space-screen-inline: 18px; }
 
-      .breathing {
-        gap: 36px;
-      }
+      .breathing { gap: 34px; }
 
       .breathing__circle {
         width: 100px;
@@ -802,9 +753,7 @@
         --space-screen-inline: 18px;
       }
 
-      .screen {
-        padding-block-end: calc(12px + env(safe-area-inset-bottom));
-      }
+      .screen { padding-block-end: calc(12px + env(safe-area-inset-bottom)); }
 
       h1 {
         margin-block-end: 15px;
@@ -822,18 +771,14 @@
         max-height: 112px;
       }
 
-      .home-spacer {
-        flex-basis: 18px;
-      }
+      .home-spacer { flex-basis: 18px; }
 
       .home-main {
         margin-block-end: 12px;
         font-size: 1.02rem;
       }
 
-      .home-invitation {
-        margin-block-end: 12px;
-      }
+      .home-invitation { margin-block-end: 12px; }
 
       .home-invitation p {
         margin-block-end: 3px;
@@ -846,16 +791,12 @@
         font-size: .66rem;
       }
 
-      .home-privacy {
-        margin-block-end: 22px;
-      }
+      .home-privacy { margin-block-end: 22px; }
 
-      .home-credit {
-        font-size: .64rem;
-      }
+      .home-credit { font-size: .64rem; }
 
       .breathing {
-        gap: 34px;
+        gap: 32px;
         padding-block: 8px;
       }
 
@@ -864,22 +805,16 @@
         height: 92px;
       }
 
-      .summary-card {
-        margin-block-end: 20px;
-      }
+      .summary-card { margin-block-end: 18px; }
 
-      .closing-text {
-        margin-block-end: 18px;
-      }
+      .closing-text { margin-block-end: 18px; }
 
       #event .reveal-section.is-visible textarea, #need .reveal-section.is-visible textarea {
         min-height: 70px;
         max-height: 92px;
       }
 
-      #event > .button-stack, #need > .button-stack {
-        margin-block-start: 8px;
-      }
+      #event > .button-stack, #need > .button-stack { margin-block-start: 8px; }
     }
   </style>
 </head>
