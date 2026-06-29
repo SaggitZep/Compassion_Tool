@@ -601,6 +601,188 @@
       .home-spacer { flex-basis: 14px; }
       #summary .closing-text { margin-block-end: 14px; }
     }
+  
+
+    /* Final layout pass: CSS-only, no content/JS changes */
+    html,
+    body {
+      height: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100svh;
+    }
+
+    .app-shell {
+      width: 100vw;
+      height: 100svh;
+      min-height: 100svh;
+      max-height: none;
+    }
+
+    .screen {
+      min-height: 100%;
+      height: 100%;
+      padding-block-start: calc(clamp(24px, 4svh, 38px) + env(safe-area-inset-top));
+      padding-block-end: calc(clamp(18px, 3svh, 28px) + env(safe-area-inset-bottom));
+    }
+
+    .screen--home {
+      justify-content: flex-start;
+    }
+
+    .home-spacer {
+      flex: 0 0 clamp(24px, 6svh, 58px);
+      min-height: 0;
+    }
+
+    .screen--home h1 {
+      margin-block-end: clamp(30px, 4.6svh, 42px);
+      font-size: clamp(2.78rem, 9.7vw, 3.38rem);
+    }
+
+    .home-main {
+      margin-block-end: clamp(26px, 4.2svh, 38px);
+      font-size: 1.32rem;
+      line-height: 1.52;
+    }
+
+    .home-invitation,
+    .home-invitation p {
+      font-size: 1.22rem;
+      line-height: 1.42;
+    }
+
+    .home-invitation {
+      margin-block-end: clamp(28px, 4.5svh, 42px);
+    }
+
+    #event,
+    #need {
+      display: none;
+    }
+
+    #event.is-active,
+    #need.is-active {
+      display: flex;
+    }
+
+    #event .content-card,
+    #need .content-card {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    #event textarea,
+    #need textarea {
+      flex: 1 1 auto;
+      min-height: clamp(210px, 34svh, 360px);
+    }
+
+    #event .reveal-section.is-visible,
+    #need .reveal-section.is-visible {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    #event .reveal-section.is-visible textarea,
+    #need .reveal-section.is-visible textarea {
+      flex: 1 1 auto;
+      min-height: clamp(150px, 24svh, 260px);
+    }
+
+    #breathing {
+      justify-content: flex-start;
+    }
+
+    #breathing .intro-note {
+      margin-block-end: 10px;
+    }
+
+    #breathing h2 {
+      margin-block-end: 0;
+    }
+
+    .breathing {
+      flex: 1 1 auto;
+      justify-content: center;
+      gap: clamp(34px, 5.2svh, 48px);
+      min-height: 0;
+      padding-block: clamp(14px, 3svh, 28px);
+    }
+
+    .breathing__text {
+      font-size: 1.2rem;
+      line-height: 1.45;
+    }
+
+    #summary .summary-card {
+      margin-block-end: clamp(32px, 5.5svh, 52px);
+    }
+
+    #summary .closing-text {
+      margin-block-end: clamp(30px, 5.2svh, 48px);
+    }
+
+    @supports (height: 100dvh) {
+      body { min-height: 100dvh; }
+      .app-shell { height: 100dvh; min-height: 100dvh; }
+    }
+
+    @media (max-height: 760px) {
+      .screen {
+        padding-block-start: calc(20px + env(safe-area-inset-top));
+        padding-block-end: calc(16px + env(safe-area-inset-bottom));
+      }
+
+      .home-spacer { flex-basis: clamp(18px, 4.4svh, 34px); }
+      .screen--home h1 { font-size: 2.58rem; margin-block-end: 24px; }
+      .home-main { font-size: 1.16rem; margin-block-end: 22px; }
+      .home-invitation,
+      .home-invitation p { font-size: 1.08rem; line-height: 1.32; }
+      .home-invitation { margin-block-end: 22px; }
+
+      #event textarea,
+      #need textarea { min-height: clamp(170px, 30svh, 280px); }
+      #event .reveal-section.is-visible textarea,
+      #need .reveal-section.is-visible textarea { min-height: clamp(118px, 21svh, 210px); }
+
+      .breathing {
+        gap: 32px;
+        padding-block: 10px;
+      }
+
+      #summary .summary-card { margin-block-end: 26px; }
+      #summary .closing-text { margin-block-end: 24px; }
+    }
+
+    @media (max-height: 640px) {
+      .screen {
+        padding-block-start: calc(14px + env(safe-area-inset-top));
+        padding-block-end: calc(12px + env(safe-area-inset-bottom));
+      }
+
+      .home-spacer { flex-basis: 10px; }
+      .screen--home h1 { font-size: 2.28rem; margin-block-end: 15px; }
+      .home-main { font-size: 1.02rem; margin-block-end: 12px; }
+      .home-invitation,
+      .home-invitation p { font-size: 1rem; line-height: 1.2; }
+      .home-invitation { margin-block-end: 12px; }
+
+      #event textarea,
+      #need textarea { min-height: clamp(132px, 26svh, 220px); }
+      #event .reveal-section.is-visible textarea,
+      #need .reveal-section.is-visible textarea { min-height: clamp(92px, 18svh, 160px); }
+
+      .breathing {
+        gap: 30px;
+        padding-block: 8px;
+      }
+
+      #summary .summary-card { margin-block-end: 20px; }
+      #summary .closing-text { margin-block-end: 18px; }
+    }
   </style>
 </head>
 
