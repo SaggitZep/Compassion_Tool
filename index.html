@@ -255,7 +255,7 @@
     .home-invitation {
       width: 100%;
       max-width: 350px;
-      margin-block-end: clamp(44px, 7svh, 68px);
+      margin-block-end: clamp(66px, 10svh, 92px);
       color: var(--color-primary);
       font-size: 1.22rem;
       line-height: 1.42;
@@ -286,7 +286,7 @@
     }
 
     .home-privacy {
-      margin-block-end: clamp(34px, 6.4svh, 60px);
+      margin-block-end: clamp(52px, 8.8svh, 78px);
       color: #74716d;
     }
 
@@ -397,16 +397,16 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      gap: clamp(38px, 6svh, 56px);
+      gap: clamp(40px, 5.8svh, 54px);
       min-height: 0;
-      padding-block-start: clamp(20px, 4svh, 38px);
+      padding-block-start: clamp(4px, 1.4svh, 16px);
       padding-block-end: 12px;
     }
 
     .breathing__circle {
       position: relative;
-      width: 120px;
-      height: 120px;
+      width: 136px;
+      height: 136px;
       flex: 0 0 auto;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%, #a7bbb2 0%, #8da19a 100%);
@@ -427,7 +427,7 @@
       animation: breathe-halo 11s infinite ease-in-out;
     }
 
-    .breathing__circle.is-guided { animation: breathe 11s ease-in-out 3 forwards; }
+    .breathing__circle.is-guided { animation: breathe 11s infinite ease-in-out; }
     .breathing__circle.is-paused { animation: none; transform: scale(.85); }
     .breathing__circle.is-paused::after { animation: none; transform: scale(.85); opacity: .45; }
 
@@ -479,7 +479,7 @@
     .closing-text {
       max-width: 340px;
       margin-inline: auto;
-      margin-block-end: clamp(42px, 7svh, 72px);
+      margin-block-end: clamp(56px, 9svh, 90px);
       font-size: 1.16rem;
       line-height: 1.5;
       text-align: center;
@@ -603,10 +603,10 @@
 
       .home-spacer { flex-basis: clamp(30px, 6svh, 54px); }
       .home-main { margin-block-end: 22px; font-size: 1.16rem; line-height: 1.42; }
-      .home-invitation { margin-block-end: clamp(30px, 5.8svh, 48px); }
+      .home-invitation { margin-block-end: clamp(48px, 8svh, 68px); }
       .home-invitation p { margin-block-end: 4px; font-size: 1.08rem; line-height: 1.32; }
       .home-footer { min-height: clamp(126px, 19svh, 170px); font-size: .72rem; }
-      .home-privacy { margin-block-end: clamp(24px, 5.2svh, 42px); }
+      .home-privacy { margin-block-end: clamp(36px, 7svh, 56px); }
       .home-credit { font-size: .7rem; line-height: 1.22; }
 
       .step-indicator { margin-block-end: 16px; }
@@ -615,12 +615,12 @@
       .soft-divider { margin: 12px 0 10px; }
       .button--secondary { min-height: 42px; padding: 10px; font-size: .98rem; }
 
-      .breathing { gap: 34px; padding-block-start: 14px; }
-      .breathing__circle { width: 104px; height: 104px; }
+      .breathing { gap: 36px; padding-block-start: 6px; }
+      .breathing__circle { width: 118px; height: 118px; }
       .breathing__text { font-size: 1.1rem; }
 
       .summary-card { margin: 16px 0 24px; padding: 16px; }
-      .closing-text { margin-block-end: 30px; font-size: 1rem; line-height: 1.38; }
+      .closing-text { margin-block-end: 42px; font-size: 1rem; line-height: 1.38; }
       .feedback-intro { font-size: 1rem; line-height: 1.38; }
       .quote-note { min-height: 60px; padding: 12px 14px; font-size: .94rem; }
 
@@ -639,7 +639,7 @@
     @media (max-width: 360px) {
       :root { --screen-inline: 18px; }
       .breathing { gap: 32px; }
-      .breathing__circle { width: 100px; height: 100px; }
+      .breathing__circle { width: 114px; height: 114px; }
     }
 
     @media (max-height: 640px) {
@@ -656,18 +656,18 @@
 
       .home-spacer { flex-basis: 20px; }
       .home-main { margin-block-end: 12px; font-size: 1.02rem; }
-      .home-invitation { margin-block-end: 22px; }
+      .home-invitation { margin-block-end: 34px; }
       .home-invitation p { margin-block-end: 3px; font-size: 1rem; line-height: 1.2; }
       .home-footer { min-height: 106px; font-size: .66rem; }
-      .home-privacy { margin-block-end: 20px; }
+      .home-privacy { margin-block-end: 30px; }
       .home-credit { font-size: .64rem; }
 
-      .breathing { gap: 30px; padding-block-start: 8px; }
-      .breathing__circle { width: 92px; height: 92px; }
+      .breathing { gap: 32px; padding-block-start: 4px; }
+      .breathing__circle { width: 104px; height: 104px; }
       .breathing__text { font-size: 1.02rem; }
 
       .summary-card { margin-block-end: 18px; }
-      .closing-text { margin-block-end: 22px; }
+      .closing-text { margin-block-end: 32px; }
 
       #event .reveal-section.is-visible textarea,
       #need .reveal-section.is-visible textarea {
@@ -720,11 +720,11 @@
       <h2 id="breathing-title">לפני שממשיכים, בואו ניקח רגע לנשום.</h2>
 
       <div class="breathing" aria-live="polite">
-        <div class="breathing__circle" data-breathing-circle aria-hidden="true"></div>
         <div class="breathing__text">
           <div>נשמו עם הכדור.</div>
           <div data-breathing-text style="margin-top:4px;min-height:1.2em;"></div>
         </div>
+        <div class="breathing__circle" data-breathing-circle aria-hidden="true"></div>
       </div>
 
       <div class="button-stack">
