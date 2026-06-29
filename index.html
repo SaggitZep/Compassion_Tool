@@ -30,26 +30,23 @@
       --color-border: rgba(0, 0, 0, .055);
       --color-white-border: rgba(255, 255, 255, .82);
 
-      --shadow-shell: 0 30px 60px rgba(0, 0, 0, .06), 0 12px 24px rgba(0, 0, 0, .04), 0 4px 12px rgba(0, 0, 0, .02);
       --shadow-card: 0 14px 30px rgba(0, 0, 0, .04), 0 4px 12px rgba(0, 0, 0, .03), 0 1px 3px rgba(0, 0, 0, .015);
       --shadow-inner: inset 0 3px 6px rgba(0, 0, 0, .015), inset 0 1px 3px rgba(0, 0, 0, .01);
       --shadow-primary: 0 8px 20px rgba(95, 116, 109, .18);
 
-      --radius-shell: 36px;
-      --radius-card: 24px;
       --radius-field: 18px;
       --radius-pill: 999px;
 
-      --shell-width: 100vw;
-      --shell-height: 100svh;
-      --space-screen-block: clamp(26px, 4.5svh, 44px);
+      --space-screen-block: clamp(24px, 4.1svh, 38px);
       --space-screen-inline: clamp(22px, 5vw, 34px);
 
       --ease-smooth: cubic-bezier(.2, .8, .2, 1);
       --ease-spring: cubic-bezier(.25, .8, .15, 1.15);
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
 
     * {
       margin: 0;
@@ -57,11 +54,13 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    html { height: 100%; }
+    html {
+      height: 100%;
+    }
 
     body {
-      min-height: 100svh;
       width: 100vw;
+      min-height: 100svh;
       display: flex;
       align-items: stretch;
       justify-content: stretch;
@@ -73,7 +72,9 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    button, textarea, a { font: inherit; }
+    button, textarea, a {
+      font: inherit;
+    }
 
     button {
       width: 100%;
@@ -91,14 +92,22 @@
       touch-action: manipulation;
     }
 
-    button:active { transform: scale(.96); box-shadow: 0 4px 10px rgba(95, 116, 109, .18); }
-    button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 3px solid rgba(95, 116, 109, .28); outline-offset: 3px; }
+    button:active {
+      transform: scale(.96);
+      box-shadow: 0 4px 10px rgba(95, 116, 109, .18);
+    }
+
+    button:focus-visible, textarea:focus-visible, a:focus-visible {
+      outline: 3px solid rgba(95, 116, 109, .28);
+      outline-offset: 3px;
+    }
 
     textarea {
       width: 100%;
-      flex: 1;
-      min-height: 100px;
-      margin-block-end: 16px;
+      flex: 0 0 auto;
+      min-height: clamp(136px, 22svh, 190px);
+      max-height: clamp(170px, 26svh, 230px);
+      margin-block-end: 10px;
       padding: 16px;
       resize: none;
       border: 1px solid var(--color-border);
@@ -118,12 +127,14 @@
       outline: none;
     }
 
-    textarea::placeholder { color: #b0b0b0; }
+    textarea::placeholder {
+      color: #b0b0b0;
+    }
 
     h1 {
-      margin-block-end: 38px;
+      margin-block-end: clamp(30px, 4.6svh, 42px);
       color: var(--color-primary-deep);
-      font-size: clamp(2.65rem, 9vw, 3.2rem);
+      font-size: clamp(2.78rem, 9.7vw, 3.38rem);
       font-weight: 800;
       line-height: 1.1;
       letter-spacing: -.6px;
@@ -149,9 +160,9 @@
       isolation: isolate;
       display: flex;
       flex-direction: column;
-      width: var(--shell-width);
+      width: 100vw;
+      height: 100svh;
       min-height: 100svh;
-      height: var(--shell-height);
       overflow: hidden;
       border: 0;
       border-radius: 0;
@@ -162,7 +173,12 @@
       box-shadow: none;
     }
 
-    .decor { position: absolute; pointer-events: none; z-index: -1; }
+    .decor {
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+    }
+
     .decor--top {
       inset-block-start: -56px;
       inset-inline-end: -54px;
@@ -208,7 +224,9 @@
       transition: opacity .24s ease;
     }
 
-    .progress.is-visible { opacity: 1; }
+    .progress.is-visible {
+      opacity: 1;
+    }
 
     .progress__bar {
       width: 0;
@@ -224,54 +242,85 @@
       z-index: 1;
       flex-direction: column;
       width: 100%;
-      flex: 1 1 auto;
-      min-height: 0;
       height: 100%;
-      padding: calc(var(--space-screen-block) + env(safe-area-inset-top)) var(--space-screen-inline) calc(22px + env(safe-area-inset-bottom));
+      min-height: 0;
+      padding: calc(var(--space-screen-block) + env(safe-area-inset-top)) var(--space-screen-inline) calc(clamp(18px, 3svh, 28px) + env(safe-area-inset-bottom));
       overflow-x: hidden;
       overflow-y: auto;
       scrollbar-width: none;
     }
 
-    .screen::-webkit-scrollbar { display: none; }
-    .screen.is-active { display: flex; animation: fade-in-up .5s var(--ease-smooth) both; }
-    .screen--home { align-items: center; justify-content: stretch; overflow: hidden; text-align: center; }
+    .screen::-webkit-scrollbar {
+      display: none;
+    }
+
+    .screen.is-active {
+      display: flex;
+      animation: fade-in-up .5s var(--ease-smooth) both;
+    }
+
+    .screen--home {
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .home-spacer {
+      flex: 0 0 clamp(36px, 7.4svh, 76px);
+      min-height: 0;
+    }
 
     .home-main {
       max-width: 350px;
-      margin-block-end: 32px;
-      font-size: 1.26rem;
+      margin-block-end: clamp(26px, 4.2svh, 38px);
+      font-size: 1.32rem;
       font-weight: 500;
-      line-height: 1.5;
+      line-height: 1.52;
     }
 
     .home-invitation {
       width: 100%;
       max-width: 350px;
-      margin-block-end: 34px;
+      margin-block-end: clamp(28px, 4.5svh, 42px);
       color: var(--color-primary);
-      font-size: 1.16rem;
-      line-height: 1.38;
+      font-size: 1.22rem;
+      line-height: 1.42;
     }
 
-    .home-invitation p { margin-block-end: 6px; color: var(--color-primary); text-align: center; font-size: 1.16rem; }
-    .home-invitation strong { font-weight: 800; }
-    .home-spacer { flex: 1; min-height: 18px; }
+    .home-invitation p {
+      margin-block-end: 6px;
+      color: var(--color-primary);
+      text-align: center;
+      font-size: 1.22rem;
+      line-height: 1.42;
+    }
+
+    .home-invitation strong {
+      font-weight: 800;
+    }
 
     .home-footer {
       width: 100%;
+      min-height: clamp(150px, 22svh, 230px);
       margin-block-start: auto;
-      padding-block-start: 10px;
+      padding-block-start: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       color: var(--color-muted);
       font-size: .8rem;
       line-height: 1.35;
       text-align: center;
     }
 
-    .home-privacy { color: #74716d; }
+    .home-privacy {
+      margin-block-end: clamp(34px, 7.4svh, 68px);
+      color: #74716d;
+    }
 
     .home-credit {
-      margin-block-start: 8px;
+      margin-block-start: 0;
       padding-block-start: 8px;
       border-block-start: 1px solid rgba(0, 0, 0, .06);
       color: rgba(133, 130, 125, .86);
@@ -288,7 +337,7 @@
     }
 
     .intro-note {
-      margin: 4px 0 16px;
+      margin: 4px 0 10px;
       color: var(--color-muted);
       font-size: 1.2rem;
       font-weight: 500;
@@ -297,7 +346,7 @@
 
     .content-card {
       width: 100%;
-      flex: 1;
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
       min-height: 0;
@@ -307,6 +356,8 @@
       border-radius: 0;
       background: transparent;
       box-shadow: none;
+      justify-content: flex-start;
+      overflow: visible;
     }
 
     .field-label {
@@ -326,6 +377,7 @@
 
     .button-stack {
       display: flex;
+      flex: 0 0 auto;
       flex-direction: column;
       gap: 12px;
       width: 100%;
@@ -345,34 +397,40 @@
       font-size: 1.05rem;
     }
 
-    .button--secondary.is-hidden { display: none; }
+    .button--secondary.is-hidden {
+      display: none;
+    }
 
     .reveal-section {
       display: none;
+      flex: 0 0 auto;
+      flex-direction: column;
       opacity: 0;
       transform: translateY(10px);
-      flex-direction: column;
-      flex: 1;
     }
 
-    .reveal-section.is-visible { display: flex; animation: reveal-in .36s var(--ease-smooth) forwards; }
+    .reveal-section.is-visible {
+      display: flex;
+      min-height: auto;
+      animation: reveal-in .36s var(--ease-smooth) forwards;
+    }
 
     .soft-divider {
       width: 100%;
       height: 1px;
-      margin: 24px 0 20px;
+      margin: clamp(18px, 3svh, 26px) 0 clamp(14px, 2.4svh, 20px);
       background: linear-gradient(to left, transparent, rgba(95, 116, 109, .24), transparent);
     }
 
     .breathing {
-      flex: 1;
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-evenly;
-      gap: clamp(54px, 9svh, 86px);
+      justify-content: center;
+      gap: clamp(42px, 6.8svh, 64px);
       min-height: 0;
-      padding-block: 22px;
+      padding-block: clamp(12px, 2.6svh, 24px);
     }
 
     .breathing__circle {
@@ -395,9 +453,20 @@
       animation: breathe-halo 11s infinite ease-in-out;
     }
 
-    .breathing__circle.is-guided { animation: breathe 11s ease-in-out 4 forwards; }
-    .breathing__circle.is-paused { animation: none; transform: scale(.85); }
-    .breathing__circle.is-paused::after { animation: none; transform: scale(.85); opacity: .45; }
+    .breathing__circle.is-guided {
+      animation: breathe 11s ease-in-out 4 forwards;
+    }
+
+    .breathing__circle.is-paused {
+      animation: none;
+      transform: scale(.85);
+    }
+
+    .breathing__circle.is-paused::after {
+      animation: none;
+      transform: scale(.85);
+      opacity: .45;
+    }
 
     .breathing__text {
       min-height: 24px;
@@ -405,12 +474,13 @@
       color: var(--color-text);
       font-size: 1.2rem;
       font-weight: 600;
+      line-height: 1.45;
       text-align: center;
     }
 
     .summary-card {
       width: 100%;
-      margin: 24px 0;
+      margin: 24px 0 clamp(32px, 5.5svh, 52px);
       padding: 20px;
       border: 1px solid rgba(255, 255, 255, .75);
       border-radius: 20px;
@@ -439,14 +509,19 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, .018);
     }
 
-    .quote-note:empty::before { content: "המילים שכתבתם יופיעו כאן."; color: var(--color-placeholder); }
+    .quote-note:empty::before {
+      content: "המילים שכתבתם יופיעו כאן.";
+      color: var(--color-placeholder);
+    }
 
-    .center { text-align: center; }
+    .center {
+      text-align: center;
+    }
 
     .closing-text {
       max-width: 340px;
       margin-inline: auto;
-      margin-block-end: auto;
+      margin-block-end: clamp(30px, 5.2svh, 48px);
       font-size: 1.12rem;
       line-height: 1.5;
       text-align: center;
@@ -454,7 +529,7 @@
 
     .feedback-intro {
       max-width: 340px;
-      margin: 24px auto 12px;
+      margin: 0 auto 12px;
       color: var(--color-muted);
       font-size: 1.04rem;
       line-height: 1.42;
@@ -477,16 +552,62 @@
       transition: transform .3s var(--ease-spring);
     }
 
-    .feedback-link:active { transform: scale(.97); }
+    .feedback-link:active {
+      transform: scale(.97);
+    }
+
+    #breathing {
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    #breathing h2 {
+      margin-block-end: 0;
+    }
+
+    #event, #need {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    #event > .button-stack, #need > .button-stack {
+      display: none;
+      margin-block-start: clamp(12px, 2.6svh, 22px);
+      padding-block-start: 0;
+      padding-block-end: calc(10px + env(safe-area-inset-bottom));
+    }
+
+    #event:has(#feelingsSection.is-visible) > .button-stack, #need:has(#supportSection.is-visible) > .button-stack {
+      display: flex;
+    }
+
+    #event .reveal-section.is-visible textarea, #need .reveal-section.is-visible textarea {
+      min-height: clamp(112px, 17svh, 160px);
+      max-height: clamp(132px, 20svh, 190px);
+    }
 
     @keyframes fade-in-up {
-      from { opacity: 0; transform: translateY(16px) scale(.99); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(.99);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     @keyframes reveal-in {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes breathe {
@@ -503,11 +624,15 @@
       100% { transform: scale(.85); opacity: .45; }
     }
 
-
-
     @supports (height: 100dvh) {
-      body { min-height: 100dvh; }
-      .app-shell { min-height: 100dvh; height: 100dvh; }
+      body {
+        min-height: 100dvh;
+      }
+
+      .app-shell {
+        height: 100dvh;
+        min-height: 100dvh;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -520,456 +645,242 @@
     }
 
     @media (max-height: 760px) {
-      :root { --space-screen-block: 22px; --space-screen-inline: 22px; }
-      .screen { padding-block-end: calc(18px + env(safe-area-inset-bottom)); }
-      h1 { margin-block-end: 28px; font-size: 2.45rem; }
-      h2 { font-size: 1.46rem; }
-      p { font-size: 1.04rem; line-height: 1.5; }
-      .home-main { margin-block-end: 24px; font-size: 1.1rem; line-height: 1.42; }
-      .home-invitation { margin-block-end: 24px; }
-      .home-invitation p { margin-block-end: 4px; font-size: 1.0rem; line-height: 1.25; }
-      .home-footer { font-size: .72rem; }
-      .home-credit { font-size: .7rem; line-height: 1.22; }
-      .content-card { padding: 0; margin: 0; }
-      textarea { min-height: 76px; margin-block-end: 12px; padding: 12px 14px; font-size: 1.04rem; }
-      .field-label { margin-block-start: 10px; margin-block-end: 6px; font-size: 1.0rem; }
-      .helper-text { margin-block-end: 8px; font-size: .81rem; line-height: 1.28; }
-      .soft-divider { margin: 16px 0 14px; }
-      .button--secondary { min-height: 42px; padding: 10px; font-size: .98rem; }
-      .breathing { gap: 48px; padding-block: 14px; }
-      .breathing__circle { width: 104px; height: 104px; }
-      .summary-card { margin: 16px 0; padding: 16px; }
-      .closing-text, .feedback-intro { font-size: .98rem; line-height: 1.38; }
-      .quote-note { min-height: 60px; padding: 12px 14px; font-size: .9rem; }
-      button, .feedback-link { min-height: 44px; padding: 12px; font-size: 1.05rem; }
-    }
+      :root {
+        --space-screen-block: 20px;
+        --space-screen-inline: 22px;
+      }
 
-
-
-    @media (max-width: 360px) {
-      :root { --space-screen-inline: 18px; }
-      .breathing { gap: 44px; }
-      .breathing__circle { width: 100px; height: 100px; }
-    }
-
-    @media (max-height: 640px) {
-      :root { --space-screen-block: 16px; --space-screen-inline: 18px; }
-      .screen { padding-block-end: calc(14px + env(safe-area-inset-bottom)); }
-      h1 { margin-block-end: 16px; font-size: 2.18rem; }
-      .home-main { margin-block-end: 14px; font-size: .98rem; }
-      .home-invitation { margin-block-end: 14px; }
-      .home-invitation p { margin-block-end: 3px; font-size: 1rem; line-height: 1.18; }
-      .home-footer { font-size: .66rem; }
-      .home-credit { font-size: .64rem; }
-      button { min-height: 40px; padding: 10px; font-size: 1.0rem; }
-      .content-card { padding: 0; margin: 0; }
-      .breathing { gap: 42px; padding-block: 10px; }
-      .breathing__circle { width: 92px; height: 92px; }
-    }
-
-
-    /* Targeted CSS-only corrections */
-    .home-spacer {
-      flex: 0 0 clamp(34px, 8svh, 78px);
-      min-height: 0;
-    }
-
-    #event > .button-stack,
-    #need > .button-stack {
-      display: none;
-    }
-
-    #event:has(#feelingsSection.is-visible) > .button-stack,
-    #need:has(#supportSection.is-visible) > .button-stack {
-      display: flex;
-    }
-
-    #summary .closing-text {
-      margin-block-end: clamp(22px, 5svh, 46px);
-    }
-
-    #summary .feedback-intro {
-      margin-block-start: 0;
-    }
-
-    @media (max-height: 760px) {
-      .home-spacer { flex-basis: clamp(22px, 5svh, 44px); }
-      #summary .closing-text { margin-block-end: 18px; }
-    }
-
-    @media (max-height: 640px) {
-      .home-spacer { flex-basis: 14px; }
-      #summary .closing-text { margin-block-end: 14px; }
-    }
-  
-
-    /* Final layout pass: CSS-only, no content/JS changes */
-    html,
-    body {
-      height: 100%;
-      min-height: 100%;
-    }
-
-    body {
-      min-height: 100svh;
-    }
-
-    .app-shell {
-      width: 100vw;
-      height: 100svh;
-      min-height: 100svh;
-      max-height: none;
-    }
-
-    .screen {
-      min-height: 100%;
-      height: 100%;
-      padding-block-start: calc(clamp(24px, 4svh, 38px) + env(safe-area-inset-top));
-      padding-block-end: calc(clamp(18px, 3svh, 28px) + env(safe-area-inset-bottom));
-    }
-
-    .screen--home {
-      justify-content: flex-start;
-    }
-
-    .home-spacer {
-      flex: 0 0 clamp(24px, 6svh, 58px);
-      min-height: 0;
-    }
-
-    .screen--home h1 {
-      margin-block-end: clamp(30px, 4.6svh, 42px);
-      font-size: clamp(2.78rem, 9.7vw, 3.38rem);
-    }
-
-    .home-main {
-      margin-block-end: clamp(26px, 4.2svh, 38px);
-      font-size: 1.32rem;
-      line-height: 1.52;
-    }
-
-    .home-invitation,
-    .home-invitation p {
-      font-size: 1.22rem;
-      line-height: 1.42;
-    }
-
-    .home-invitation {
-      margin-block-end: clamp(28px, 4.5svh, 42px);
-    }
-
-    #event,
-    #need {
-      display: none;
-    }
-
-    #event.is-active,
-    #need.is-active {
-      display: flex;
-    }
-
-    #event .content-card,
-    #need .content-card {
-      flex: 1 1 auto;
-      min-height: 0;
-    }
-
-    #event textarea,
-    #need textarea {
-      flex: 1 1 auto;
-      min-height: clamp(210px, 34svh, 360px);
-    }
-
-    #event .reveal-section.is-visible,
-    #need .reveal-section.is-visible {
-      flex: 1 1 auto;
-      min-height: 0;
-    }
-
-    #event .reveal-section.is-visible textarea,
-    #need .reveal-section.is-visible textarea {
-      flex: 1 1 auto;
-      min-height: clamp(150px, 24svh, 260px);
-    }
-
-    #breathing {
-      justify-content: flex-start;
-    }
-
-    #breathing .intro-note {
-      margin-block-end: 10px;
-    }
-
-    #breathing h2 {
-      margin-block-end: 0;
-    }
-
-    .breathing {
-      flex: 1 1 auto;
-      justify-content: center;
-      gap: clamp(34px, 5.2svh, 48px);
-      min-height: 0;
-      padding-block: clamp(14px, 3svh, 28px);
-    }
-
-    .breathing__text {
-      font-size: 1.2rem;
-      line-height: 1.45;
-    }
-
-    #summary .summary-card {
-      margin-block-end: clamp(32px, 5.5svh, 52px);
-    }
-
-    #summary .closing-text {
-      margin-block-end: clamp(30px, 5.2svh, 48px);
-    }
-
-    @supports (height: 100dvh) {
-      body { min-height: 100dvh; }
-      .app-shell { height: 100dvh; min-height: 100dvh; }
-    }
-
-    @media (max-height: 760px) {
       .screen {
-        padding-block-start: calc(20px + env(safe-area-inset-top));
         padding-block-end: calc(16px + env(safe-area-inset-bottom));
       }
 
-      .home-spacer { flex-basis: clamp(18px, 4.4svh, 34px); }
-      .screen--home h1 { font-size: 2.58rem; margin-block-end: 24px; }
-      .home-main { font-size: 1.16rem; margin-block-end: 22px; }
-      .home-invitation,
-      .home-invitation p { font-size: 1.08rem; line-height: 1.32; }
-      .home-invitation { margin-block-end: 22px; }
+      h1 {
+        margin-block-end: 24px;
+        font-size: 2.58rem;
+      }
 
-      #event textarea,
-      #need textarea { min-height: clamp(170px, 30svh, 280px); }
-      #event .reveal-section.is-visible textarea,
-      #need .reveal-section.is-visible textarea { min-height: clamp(118px, 21svh, 210px); }
+      h2 {
+        font-size: 1.46rem;
+      }
+
+      p {
+        font-size: 1.04rem;
+        line-height: 1.5;
+      }
+
+      button, .feedback-link {
+        min-height: 44px;
+        padding: 12px;
+        font-size: 1.05rem;
+      }
+
+      textarea {
+        min-height: clamp(112px, 19svh, 150px);
+        max-height: clamp(130px, 22svh, 170px);
+        margin-block-end: 12px;
+        padding: 12px 14px;
+        font-size: 1.04rem;
+      }
+
+      .home-spacer {
+        flex-basis: clamp(28px, 5.8svh, 48px);
+      }
+
+      .home-main {
+        margin-block-end: 22px;
+        font-size: 1.16rem;
+        line-height: 1.42;
+      }
+
+      .home-invitation {
+        margin-block-end: 22px;
+      }
+
+      .home-invitation p {
+        margin-block-end: 4px;
+        font-size: 1.08rem;
+        line-height: 1.32;
+      }
+
+      .home-footer {
+        min-height: clamp(126px, 20svh, 170px);
+        font-size: .72rem;
+      }
+
+      .home-privacy {
+        margin-block-end: clamp(24px, 5.2svh, 42px);
+      }
+
+      .home-credit {
+        font-size: .7rem;
+        line-height: 1.22;
+      }
+
+      .field-label {
+        margin-block-start: 10px;
+        margin-block-end: 6px;
+        font-size: 1rem;
+      }
+
+      .helper-text {
+        margin-block-end: 8px;
+        font-size: .81rem;
+        line-height: 1.28;
+      }
+
+      .soft-divider {
+        margin: 14px 0 12px;
+      }
+
+      .button--secondary {
+        min-height: 42px;
+        padding: 10px;
+        font-size: .98rem;
+      }
 
       .breathing {
-        gap: 32px;
+        gap: 38px;
         padding-block: 10px;
       }
 
-      #summary .summary-card { margin-block-end: 26px; }
-      #summary .closing-text { margin-block-end: 24px; }
-    }
-
-    @media (max-height: 640px) {
-      .screen {
-        padding-block-start: calc(14px + env(safe-area-inset-top));
-        padding-block-end: calc(12px + env(safe-area-inset-bottom));
+      .breathing__circle {
+        width: 104px;
+        height: 104px;
       }
 
-      .home-spacer { flex-basis: 10px; }
-      .screen--home h1 { font-size: 2.28rem; margin-block-end: 15px; }
-      .home-main { font-size: 1.02rem; margin-block-end: 12px; }
-      .home-invitation,
-      .home-invitation p { font-size: 1rem; line-height: 1.2; }
-      .home-invitation { margin-block-end: 12px; }
-
-      #event textarea,
-      #need textarea { min-height: clamp(132px, 26svh, 220px); }
-      #event .reveal-section.is-visible textarea,
-      #need .reveal-section.is-visible textarea { min-height: clamp(92px, 18svh, 160px); }
-
-      .breathing {
-        gap: 30px;
-        padding-block: 8px;
+      .summary-card {
+        margin: 16px 0 26px;
+        padding: 16px;
       }
 
-      #summary .summary-card { margin-block-end: 20px; }
-      #summary .closing-text { margin-block-end: 18px; }
-    }
-
-    /* Button visibility safety fix: keep the final continue button reachable while preserving CSS-only layout */
-    #event,
-    #need {
-      overflow: hidden;
-    }
-
-    #event .content-card,
-    #need .content-card {
-      flex: 1 1 auto;
-      min-height: 0;
-      overflow: hidden;
-    }
-
-    #event textarea,
-    #need textarea {
-      min-height: 0;
-      flex: 1 1 0;
-    }
-
-    #event .reveal-section.is-visible,
-    #need .reveal-section.is-visible {
-      flex: 1 1 0;
-      min-height: 0;
-    }
-
-    #event > .button-stack,
-    #need > .button-stack {
-      flex: 0 0 auto;
-      margin-block-start: 12px;
-      padding-block-start: 0;
-      padding-block-end: env(safe-area-inset-bottom);
-    }
-
-    @media (max-height: 760px) {
-      #event .soft-divider,
-      #need .soft-divider { margin: 14px 0 12px; }
-
-      #event .field-label,
-      #need .field-label { margin-block-start: 8px; }
-
-      #event > .button-stack,
-      #need > .button-stack { margin-block-start: 10px; }
-    }
-
-  
-
-    /* Balance correction for steps 2-3: smaller, friendlier textareas and reachable button */
-    #event.is-active,
-    #need.is-active {
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-
-    #event .content-card,
-    #need .content-card {
-      flex: 1 1 auto;
-      overflow: visible;
-      justify-content: flex-start;
-    }
-
-    #event textarea,
-    #need textarea {
-      flex: 0 0 auto;
-      min-height: clamp(136px, 22svh, 190px);
-      max-height: clamp(170px, 26svh, 230px);
-      margin-block-end: 10px;
-    }
-
-    #event .reveal-section,
-    #need .reveal-section {
-      flex: 0 0 auto;
-    }
-
-    #event .reveal-section.is-visible,
-    #need .reveal-section.is-visible {
-      flex: 0 0 auto;
-      min-height: auto;
-    }
-
-    #event .reveal-section.is-visible textarea,
-    #need .reveal-section.is-visible textarea {
-      flex: 0 0 auto;
-      min-height: clamp(112px, 17svh, 160px);
-      max-height: clamp(132px, 20svh, 190px);
-    }
-
-    #event .soft-divider,
-    #need .soft-divider {
-      margin: clamp(18px, 3svh, 26px) 0 clamp(14px, 2.4svh, 20px);
-    }
-
-    #event > .button-stack,
-    #need > .button-stack {
-      flex: 0 0 auto;
-      margin-block-start: clamp(12px, 2.6svh, 22px);
-      padding-block-start: 0;
-      padding-block-end: calc(10px + env(safe-area-inset-bottom));
-    }
-
-    @media (max-height: 760px) {
-      #event textarea,
-      #need textarea {
-        min-height: clamp(112px, 19svh, 150px);
-        max-height: clamp(130px, 22svh, 170px);
+      .closing-text {
+        margin-block-end: 24px;
+        font-size: .98rem;
+        line-height: 1.38;
       }
 
-      #event .reveal-section.is-visible textarea,
-      #need .reveal-section.is-visible textarea {
-        min-height: clamp(84px, 14svh, 118px);
-        max-height: clamp(102px, 17svh, 142px);
+      .feedback-intro {
+        font-size: .98rem;
+        line-height: 1.38;
       }
 
-      #event .soft-divider,
-      #need .soft-divider { margin: 14px 0 12px; }
+      .quote-note {
+        min-height: 60px;
+        padding: 12px 14px;
+        font-size: .9rem;
+      }
 
-      #event > .button-stack,
-      #need > .button-stack {
+      #event > .button-stack, #need > .button-stack {
         margin-block-start: 10px;
         padding-block-end: calc(8px + env(safe-area-inset-bottom));
       }
+
+      #event .reveal-section.is-visible textarea, #need .reveal-section.is-visible textarea {
+        min-height: clamp(84px, 14svh, 118px);
+        max-height: clamp(102px, 17svh, 142px);
+      }
+    }
+
+    @media (max-width: 360px) {
+      :root {
+        --space-screen-inline: 18px;
+      }
+
+      .breathing {
+        gap: 36px;
+      }
+
+      .breathing__circle {
+        width: 100px;
+        height: 100px;
+      }
     }
 
     @media (max-height: 640px) {
-      #event textarea,
-      #need textarea {
+      :root {
+        --space-screen-block: 14px;
+        --space-screen-inline: 18px;
+      }
+
+      .screen {
+        padding-block-end: calc(12px + env(safe-area-inset-bottom));
+      }
+
+      h1 {
+        margin-block-end: 15px;
+        font-size: 2.28rem;
+      }
+
+      button {
+        min-height: 40px;
+        padding: 10px;
+        font-size: 1rem;
+      }
+
+      textarea {
         min-height: 92px;
         max-height: 112px;
       }
 
-      #event .reveal-section.is-visible textarea,
-      #need .reveal-section.is-visible textarea {
+      .home-spacer {
+        flex-basis: 18px;
+      }
+
+      .home-main {
+        margin-block-end: 12px;
+        font-size: 1.02rem;
+      }
+
+      .home-invitation {
+        margin-block-end: 12px;
+      }
+
+      .home-invitation p {
+        margin-block-end: 3px;
+        font-size: 1rem;
+        line-height: 1.2;
+      }
+
+      .home-footer {
+        min-height: 112px;
+        font-size: .66rem;
+      }
+
+      .home-privacy {
+        margin-block-end: 22px;
+      }
+
+      .home-credit {
+        font-size: .64rem;
+      }
+
+      .breathing {
+        gap: 34px;
+        padding-block: 8px;
+      }
+
+      .breathing__circle {
+        width: 92px;
+        height: 92px;
+      }
+
+      .summary-card {
+        margin-block-end: 20px;
+      }
+
+      .closing-text {
+        margin-block-end: 18px;
+      }
+
+      #event .reveal-section.is-visible textarea, #need .reveal-section.is-visible textarea {
         min-height: 70px;
         max-height: 92px;
       }
 
-      #event .soft-divider,
-      #need .soft-divider { margin: 10px 0 8px; }
-
-      #event > .button-stack,
-      #need > .button-stack { margin-block-start: 8px; }
-    }
-
-
-    /* Home screen balance correction: full-file version, CSS-only */
-    .screen--home .home-spacer {
-      flex: 0 0 clamp(36px, 7.5svh, 72px);
-      min-height: 0;
-    }
-
-    .screen--home .home-footer {
-      margin-block-start: auto;
-      min-height: clamp(138px, 21svh, 182px);
-      padding-block-start: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .screen--home .home-privacy {
-      margin-block-end: 0;
-    }
-
-    .screen--home .home-credit {
-      margin-block-start: 0;
-    }
-
-    @media (max-height: 760px) {
-      .screen--home .home-spacer {
-        flex-basis: clamp(22px, 5.2svh, 42px);
-      }
-
-      .screen--home .home-footer {
-        min-height: clamp(104px, 17svh, 138px);
+      #event > .button-stack, #need > .button-stack {
+        margin-block-start: 8px;
       }
     }
-
-    @media (max-height: 640px) {
-      .screen--home .home-spacer {
-        flex-basis: 14px;
-      }
-
-      .screen--home .home-footer {
-        min-height: 92px;
-      }
-    }
-
   </style>
 </head>
 
