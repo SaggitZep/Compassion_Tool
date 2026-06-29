@@ -255,7 +255,7 @@
     .home-invitation {
       width: 100%;
       max-width: 350px;
-      margin-block-end: clamp(66px, 10svh, 92px);
+      margin-block-end: clamp(88px, 12svh, 116px);
       color: var(--color-primary);
       font-size: 1.22rem;
       line-height: 1.42;
@@ -286,7 +286,7 @@
     }
 
     .home-privacy {
-      margin-block-end: clamp(52px, 8.8svh, 78px);
+      margin-block-end: clamp(70px, 10svh, 96px);
       color: #74716d;
     }
 
@@ -397,10 +397,19 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      gap: clamp(40px, 5.8svh, 54px);
+      gap: clamp(34px, 5.4svh, 50px);
       min-height: 0;
-      padding-block-start: clamp(4px, 1.4svh, 16px);
+      padding-block-start: clamp(2px, 1svh, 12px);
       padding-block-end: 12px;
+    }
+
+    .breathing__lead {
+      flex: 0 0 auto;
+      color: var(--color-text);
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.45;
+      text-align: center;
     }
 
     .breathing__circle {
@@ -432,7 +441,7 @@
     .breathing__circle.is-paused::after { animation: none; transform: scale(.85); opacity: .45; }
 
     .breathing__text {
-      min-height: 3.2em;
+      min-height: 1.45em;
       margin-block-start: 0;
       color: var(--color-text);
       font-size: 1.25rem;
@@ -479,7 +488,7 @@
     .closing-text {
       max-width: 340px;
       margin-inline: auto;
-      margin-block-end: clamp(56px, 9svh, 90px);
+      margin-block-end: clamp(76px, 11svh, 116px);
       font-size: 1.16rem;
       line-height: 1.5;
       text-align: center;
@@ -603,10 +612,10 @@
 
       .home-spacer { flex-basis: clamp(30px, 6svh, 54px); }
       .home-main { margin-block-end: 30px; font-size: 1.16rem; line-height: 1.42; }
-      .home-invitation { margin-block-end: clamp(48px, 8svh, 68px); }
+      .home-invitation { margin-block-end: clamp(58px, 9svh, 78px); }
       .home-invitation p { margin-block-end: 4px; font-size: 1.08rem; line-height: 1.32; }
       .home-footer { min-height: clamp(126px, 19svh, 170px); font-size: .72rem; }
-      .home-privacy { margin-block-end: clamp(36px, 7svh, 56px); }
+      .home-privacy { margin-block-end: clamp(46px, 8svh, 66px); }
       .home-credit { font-size: .7rem; line-height: 1.22; }
 
       .step-indicator { margin-block-end: 16px; }
@@ -615,12 +624,12 @@
       .soft-divider { margin: 12px 0 10px; }
       .button--secondary { min-height: 42px; padding: 10px; font-size: .98rem; }
 
-      .breathing { gap: 36px; padding-block-start: 6px; }
+      .breathing { gap: 30px; padding-block-start: 4px; }
       .breathing__circle { width: 118px; height: 118px; }
-      .breathing__text { font-size: 1.1rem; }
+      .breathing__lead, .breathing__text { font-size: 1.1rem; }
 
       .summary-card { margin: 16px 0 24px; padding: 16px; }
-      .closing-text { margin-block-end: 42px; font-size: 1rem; line-height: 1.38; }
+      .closing-text { margin-block-end: 56px; font-size: 1rem; line-height: 1.38; }
       .feedback-intro { font-size: 1rem; line-height: 1.38; }
       .quote-note { min-height: 60px; padding: 12px 14px; font-size: .94rem; }
 
@@ -638,7 +647,7 @@
 
     @media (max-width: 360px) {
       :root { --screen-inline: 18px; }
-      .breathing { gap: 32px; }
+      .breathing { gap: 30px; }
       .breathing__circle { width: 114px; height: 114px; }
     }
 
@@ -656,18 +665,18 @@
 
       .home-spacer { flex-basis: 20px; }
       .home-main { margin-block-end: 12px; font-size: 1.02rem; }
-      .home-invitation { margin-block-end: 34px; }
+      .home-invitation { margin-block-end: 42px; }
       .home-invitation p { margin-block-end: 3px; font-size: 1rem; line-height: 1.2; }
       .home-footer { min-height: 106px; font-size: .66rem; }
-      .home-privacy { margin-block-end: 30px; }
+      .home-privacy { margin-block-end: 38px; }
       .home-credit { font-size: .64rem; }
 
-      .breathing { gap: 32px; padding-block-start: 4px; }
+      .breathing { gap: 26px; padding-block-start: 2px; }
       .breathing__circle { width: 104px; height: 104px; }
-      .breathing__text { font-size: 1.02rem; }
+      .breathing__lead, .breathing__text { font-size: 1.02rem; }
 
       .summary-card { margin-block-end: 18px; }
-      .closing-text { margin-block-end: 32px; }
+      .closing-text { margin-block-end: 42px; }
 
       #event .reveal-section.is-visible textarea,
       #need .reveal-section.is-visible textarea {
@@ -720,11 +729,9 @@
       <h2 id="breathing-title">לפני שממשיכים, בואו ניקח רגע לנשום.</h2>
 
       <div class="breathing" aria-live="polite">
-        <div class="breathing__text">
-          <div>נשמו עם הכדור.</div>
-          <div data-breathing-text style="margin-top:4px;min-height:1.2em;"></div>
-        </div>
+        <div class="breathing__lead">נשמו עם הכדור.</div>
         <div class="breathing__circle" data-breathing-circle aria-hidden="true"></div>
+        <div class="breathing__text" data-breathing-text></div>
       </div>
 
       <div class="button-stack">
@@ -905,11 +912,6 @@
         dom.breathingText.textContent = "";
         dom.breathingCircle.classList.add("is-paused");
 
-        if (dom.breathingNextButton) {
-          dom.breathingNextButton.disabled = true;
-          dom.breathingNextButton.style.visibility = "hidden";
-        }
-
         const cycleDuration = 11000;
         const cycles = 3;
         const cues = [
@@ -936,10 +938,6 @@
         setTimeoutTracked(() => {
           if (state.activeScreen !== "breathing") return;
           dom.breathingText.textContent = "אפשר להמשיך.";
-          if (dom.breathingNextButton) {
-            dom.breathingNextButton.disabled = false;
-            dom.breathingNextButton.style.visibility = "visible";
-          }
         }, cycles * cycleDuration + 350);
       }
 
