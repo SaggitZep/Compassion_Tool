@@ -932,11 +932,9 @@
         state.breathingIntervalId=window.setInterval(()=>{
           cycle++;
           if(state.activeScreen!=="breathing") return;
-          if(cycle===3){
+          if(cycle>=3){
             dom.breathingText.textContent="אפשר להמשיך.";
-            setTimeoutTracked(()=>{
-              if(state.activeScreen==="breathing") scheduleCycle();
-            },1800);
+            // Keep the breathing animation running, but stop changing the guidance text.
           } else {
             scheduleCycle();
           }
