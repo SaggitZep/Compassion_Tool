@@ -689,6 +689,26 @@
       #event > .button-stack, #need > .button-stack { margin-block-start: 8px; }
     }
 
+
+    /* Keep the final step button visible above mobile browser chrome on writing screens. */
+    #event:has(#feelingsSection.is-visible),
+    #need:has(#supportSection.is-visible) {
+      padding-block-end: calc(104px + env(safe-area-inset-bottom));
+    }
+
+    #event:has(#feelingsSection.is-visible) > .button-stack,
+    #need:has(#supportSection.is-visible) > .button-stack {
+      position: fixed;
+      inset-inline: var(--screen-inline);
+      inset-block-end: calc(clamp(16px, 2.4svh, 24px) + env(safe-area-inset-bottom));
+      z-index: 30;
+      width: auto;
+      margin: 0;
+      padding-block-start: 18px;
+      padding-block-end: 0;
+      background: linear-gradient(to top, var(--color-surface) 0%, rgba(253, 252, 248, .94) 68%, rgba(253, 252, 248, 0) 100%);
+    }
+
   </style>
 </head>
 
