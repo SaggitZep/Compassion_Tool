@@ -828,6 +828,104 @@
       #need > .button-stack { margin-block-start: 10px; }
     }
 
+  
+
+    /* Balance correction for steps 2-3: smaller, friendlier textareas and reachable button */
+    #event.is-active,
+    #need.is-active {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    #event .content-card,
+    #need .content-card {
+      flex: 1 1 auto;
+      overflow: visible;
+      justify-content: flex-start;
+    }
+
+    #event textarea,
+    #need textarea {
+      flex: 0 0 auto;
+      min-height: clamp(136px, 22svh, 190px);
+      max-height: clamp(170px, 26svh, 230px);
+      margin-block-end: 10px;
+    }
+
+    #event .reveal-section,
+    #need .reveal-section {
+      flex: 0 0 auto;
+    }
+
+    #event .reveal-section.is-visible,
+    #need .reveal-section.is-visible {
+      flex: 0 0 auto;
+      min-height: auto;
+    }
+
+    #event .reveal-section.is-visible textarea,
+    #need .reveal-section.is-visible textarea {
+      flex: 0 0 auto;
+      min-height: clamp(112px, 17svh, 160px);
+      max-height: clamp(132px, 20svh, 190px);
+    }
+
+    #event .soft-divider,
+    #need .soft-divider {
+      margin: clamp(18px, 3svh, 26px) 0 clamp(14px, 2.4svh, 20px);
+    }
+
+    #event > .button-stack,
+    #need > .button-stack {
+      flex: 0 0 auto;
+      margin-block-start: clamp(12px, 2.6svh, 22px);
+      padding-block-start: 0;
+      padding-block-end: calc(10px + env(safe-area-inset-bottom));
+    }
+
+    @media (max-height: 760px) {
+      #event textarea,
+      #need textarea {
+        min-height: clamp(112px, 19svh, 150px);
+        max-height: clamp(130px, 22svh, 170px);
+      }
+
+      #event .reveal-section.is-visible textarea,
+      #need .reveal-section.is-visible textarea {
+        min-height: clamp(84px, 14svh, 118px);
+        max-height: clamp(102px, 17svh, 142px);
+      }
+
+      #event .soft-divider,
+      #need .soft-divider { margin: 14px 0 12px; }
+
+      #event > .button-stack,
+      #need > .button-stack {
+        margin-block-start: 10px;
+        padding-block-end: calc(8px + env(safe-area-inset-bottom));
+      }
+    }
+
+    @media (max-height: 640px) {
+      #event textarea,
+      #need textarea {
+        min-height: 92px;
+        max-height: 112px;
+      }
+
+      #event .reveal-section.is-visible textarea,
+      #need .reveal-section.is-visible textarea {
+        min-height: 70px;
+        max-height: 92px;
+      }
+
+      #event .soft-divider,
+      #need .soft-divider { margin: 10px 0 8px; }
+
+      #event > .button-stack,
+      #need > .button-stack { margin-block-start: 8px; }
+    }
+
   </style>
 </head>
 
