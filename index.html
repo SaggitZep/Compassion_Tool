@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-
     :root {
       color-scheme: light;
 
@@ -38,16 +37,14 @@
       --radius-field: 18px;
       --radius-pill: 999px;
 
-      --space-screen-block: clamp(26px, 4.4svh, 42px);
-      --space-screen-inline: clamp(22px, 5vw, 34px);
+      --screen-block: clamp(24px, 4.4svh, 40px);
+      --screen-inline: clamp(22px, 5vw, 34px);
 
       --ease-smooth: cubic-bezier(.2, .8, .2, 1);
       --ease-spring: cubic-bezier(.25, .8, .15, 1.15);
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
     * {
       margin: 0;
@@ -55,9 +52,7 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    html {
-      height: 100%;
-    }
+    html { height: 100%; }
 
     body {
       width: 100vw;
@@ -73,9 +68,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    button, textarea, a {
-      font: inherit;
-    }
+    button, textarea, a { font: inherit; }
 
     button {
       width: 100%;
@@ -93,29 +86,22 @@
       touch-action: manipulation;
     }
 
-    button:active {
-      transform: scale(.96);
-      box-shadow: 0 4px 10px rgba(95, 116, 109, .18);
-    }
-
-    button:focus-visible, textarea:focus-visible, a:focus-visible {
-      outline: 3px solid rgba(95, 116, 109, .28);
-      outline-offset: 3px;
-    }
+    button:active { transform: scale(.96); box-shadow: 0 4px 10px rgba(95, 116, 109, .18); }
+    button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 3px solid rgba(95, 116, 109, .28); outline-offset: 3px; }
 
     textarea {
       width: 100%;
       flex: 0 0 auto;
-      min-height: clamp(138px, 21svh, 188px);
-      max-height: clamp(162px, 25svh, 220px);
-      margin-block-end: 10px;
+      min-height: clamp(148px, 23svh, 198px);
+      max-height: clamp(176px, 27svh, 236px);
+      margin-block-end: 12px;
       padding: 16px;
       resize: none;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-field);
       background: var(--color-input);
       color: var(--color-text);
-      font-size: 1.25rem;
+      font-size: 1.24rem;
       line-height: 1.55;
       box-shadow: var(--shadow-inner);
       transition: border-color .3s ease, box-shadow .3s ease, background-color .3s ease;
@@ -128,12 +114,10 @@
       outline: none;
     }
 
-    textarea::placeholder {
-      color: #b0b0b0;
-    }
+    textarea::placeholder { color: #b0b0b0; }
 
     h1 {
-      margin-block-end: clamp(28px, 4.2svh, 40px);
+      margin-block-end: clamp(30px, 4.6svh, 42px);
       color: var(--color-primary-deep);
       font-size: clamp(2.78rem, 9.7vw, 3.38rem);
       font-weight: 800;
@@ -142,18 +126,18 @@
     }
 
     h2 {
-      margin-block-end: 14px;
+      margin-block-end: 15px;
       color: var(--color-primary);
       font-size: 1.7rem;
       font-weight: 800;
-      line-height: 1.24;
+      line-height: 1.25;
       letter-spacing: -.35px;
     }
 
     p {
-      margin-block-end: 16px;
-      font-size: 1.26rem;
-      line-height: 1.58;
+      margin-block-end: 17px;
+      font-size: 1.25rem;
+      line-height: 1.62;
     }
 
     .app-shell {
@@ -174,11 +158,7 @@
       box-shadow: none;
     }
 
-    .decor {
-      position: absolute;
-      pointer-events: none;
-      z-index: -1;
-    }
+    .decor { position: absolute; pointer-events: none; z-index: -1; }
 
     .decor--top {
       inset-block-start: -56px;
@@ -225,9 +205,7 @@
       transition: opacity .24s ease;
     }
 
-    .progress.is-visible {
-      opacity: 1;
-    }
+    .progress.is-visible { opacity: 1; }
 
     .progress__bar {
       width: 0;
@@ -245,20 +223,14 @@
       width: 100%;
       height: 100%;
       min-height: 0;
-      padding: calc(var(--space-screen-block) + env(safe-area-inset-top)) var(--space-screen-inline) calc(clamp(18px, 3svh, 28px) + env(safe-area-inset-bottom));
+      padding: calc(var(--screen-block) + env(safe-area-inset-top)) var(--screen-inline) calc(clamp(18px, 3svh, 28px) + env(safe-area-inset-bottom));
       overflow-x: hidden;
       overflow-y: auto;
       scrollbar-width: none;
     }
 
-    .screen::-webkit-scrollbar {
-      display: none;
-    }
-
-    .screen.is-active {
-      display: flex;
-      animation: fade-in-up .5s var(--ease-smooth) both;
-    }
+    .screen::-webkit-scrollbar { display: none; }
+    .screen.is-active { display: flex; animation: fade-in-up .5s var(--ease-smooth) both; }
 
     .screen--home {
       align-items: center;
@@ -268,13 +240,13 @@
     }
 
     .home-spacer {
-      flex: 0 0 clamp(42px, 8svh, 82px);
+      flex: 0 0 clamp(42px, 7.8svh, 82px);
       min-height: 0;
     }
 
     .home-main {
       max-width: 350px;
-      margin-block-end: clamp(26px, 4svh, 36px);
+      margin-block-end: clamp(26px, 4.2svh, 38px);
       font-size: 1.32rem;
       font-weight: 500;
       line-height: 1.52;
@@ -283,7 +255,7 @@
     .home-invitation {
       width: 100%;
       max-width: 350px;
-      margin-block-end: clamp(28px, 4.4svh, 40px);
+      margin-block-end: clamp(44px, 7svh, 68px);
       color: var(--color-primary);
       font-size: 1.22rem;
       line-height: 1.42;
@@ -297,26 +269,24 @@
       line-height: 1.42;
     }
 
-    .home-invitation strong {
-      font-weight: 800;
-    }
+    .home-invitation strong { font-weight: 800; }
 
     .home-footer {
       width: 100%;
-      min-height: clamp(142px, 21svh, 210px);
+      min-height: clamp(132px, 19svh, 202px);
       margin-block-start: auto;
       padding-block-start: 0;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       color: var(--color-muted);
-      font-size: .82rem;
+      font-size: .8rem;
       line-height: 1.35;
       text-align: center;
     }
 
     .home-privacy {
-      margin-block-end: clamp(30px, 6.4svh, 58px);
+      margin-block-end: clamp(34px, 6.4svh, 60px);
       color: #74716d;
     }
 
@@ -325,12 +295,12 @@
       padding-block-start: 8px;
       border-block-start: 1px solid rgba(0, 0, 0, .06);
       color: rgba(133, 130, 125, .86);
-      font-size: .76rem;
+      font-size: .75rem;
       line-height: 1.28;
     }
 
     .step-indicator {
-      margin-block-end: 18px;
+      margin-block-end: 20px;
       color: #999;
       font-size: 1.06rem;
       font-weight: 600;
@@ -338,16 +308,16 @@
     }
 
     .intro-note {
-      margin: 2px 0 8px;
+      margin: 4px 0 10px;
       color: var(--color-muted);
-      font-size: 1.24rem;
+      font-size: 1.26rem;
       font-weight: 500;
       line-height: 1.42;
     }
 
     .content-card {
       width: 100%;
-      flex: 0 0 auto;
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
       min-height: 0;
@@ -362,9 +332,9 @@
     }
 
     .field-label {
-      margin: 14px 0 8px;
+      margin: 16px 0 8px;
       color: var(--color-primary);
-      font-size: 1.24rem;
+      font-size: 1.22rem;
       font-weight: 800;
       line-height: 1.35;
     }
@@ -398,9 +368,7 @@
       font-size: 1.05rem;
     }
 
-    .button--secondary.is-hidden {
-      display: none;
-    }
+    .button--secondary.is-hidden { display: none; }
 
     .reveal-section {
       display: none;
@@ -419,30 +387,31 @@
     .soft-divider {
       width: 100%;
       height: 1px;
-      margin: clamp(14px, 2.2svh, 20px) 0 clamp(12px, 2svh, 16px);
+      margin: clamp(14px, 2.4svh, 20px) 0 clamp(12px, 2svh, 18px);
       background: linear-gradient(to left, transparent, rgba(95, 116, 109, .24), transparent);
     }
 
     .breathing {
-      flex: 0 0 auto;
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      gap: clamp(38px, 6svh, 54px);
+      gap: clamp(38px, 6svh, 56px);
       min-height: 0;
-      padding-block: 0;
-      margin-block-start: clamp(22px, 4.2svh, 42px);
-      margin-block-end: auto;
+      padding-block-start: clamp(20px, 4svh, 38px);
+      padding-block-end: 12px;
     }
 
     .breathing__circle {
       position: relative;
       width: 120px;
       height: 120px;
+      flex: 0 0 auto;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%, #a7bbb2 0%, #8da19a 100%);
       box-shadow: 0 10px 30px rgba(95, 116, 109, .22), inset 0 -4px 12px rgba(0, 0, 0, .05);
+      transform: scale(.85);
       animation: breathe 11s infinite ease-in-out;
     }
 
@@ -453,29 +422,20 @@
       z-index: -1;
       border-radius: inherit;
       background: radial-gradient(circle, rgba(141, 161, 154, .18), rgba(141, 161, 154, 0) 68%);
+      transform: scale(.85);
+      opacity: .45;
       animation: breathe-halo 11s infinite ease-in-out;
     }
 
-    .breathing__circle.is-guided {
-      animation: breathe 11s ease-in-out 4 forwards;
-    }
-
-    .breathing__circle.is-paused {
-      animation: none;
-      transform: scale(.85);
-    }
-
-    .breathing__circle.is-paused::after {
-      animation: none;
-      transform: scale(.85);
-      opacity: .45;
-    }
+    .breathing__circle.is-guided { animation: breathe 11s ease-in-out 3 forwards; }
+    .breathing__circle.is-paused { animation: none; transform: scale(.85); }
+    .breathing__circle.is-paused::after { animation: none; transform: scale(.85); opacity: .45; }
 
     .breathing__text {
-      min-height: 24px;
+      min-height: 3.2em;
       margin-block-start: 0;
       color: var(--color-text);
-      font-size: 1.26rem;
+      font-size: 1.25rem;
       font-weight: 600;
       line-height: 1.45;
       text-align: center;
@@ -483,7 +443,7 @@
 
     .summary-card {
       width: 100%;
-      margin: clamp(18px, 3svh, 26px) 0 clamp(24px, 4.4svh, 40px);
+      margin: clamp(22px, 3.8svh, 34px) 0 clamp(28px, 4.8svh, 44px);
       padding: 20px;
       border: 1px solid rgba(255, 255, 255, .75);
       border-radius: 20px;
@@ -495,7 +455,7 @@
     .summary-card__title {
       margin-block-end: 8px;
       color: var(--color-primary);
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       font-weight: 800;
     }
 
@@ -506,27 +466,21 @@
       border-radius: 14px;
       background: #fff;
       color: var(--color-text);
-      font-size: 1.04rem;
+      font-size: 1.05rem;
       line-height: 1.45;
       text-align: start;
       white-space: pre-wrap;
       box-shadow: 0 4px 12px rgba(0, 0, 0, .018);
     }
 
-    .quote-note:empty::before {
-      content: "המילים שכתבתם יופיעו כאן.";
-      color: var(--color-placeholder);
-    }
-
-    .center {
-      text-align: center;
-    }
+    .quote-note:empty::before { content: "המילים שכתבתם יופיעו כאן."; color: var(--color-placeholder); }
+    .center { text-align: center; }
 
     .closing-text {
       max-width: 340px;
       margin-inline: auto;
-      margin-block-end: clamp(24px, 4.6svh, 42px);
-      font-size: 1.18rem;
+      margin-block-end: clamp(42px, 7svh, 72px);
+      font-size: 1.16rem;
       line-height: 1.5;
       text-align: center;
     }
@@ -535,7 +489,7 @@
       max-width: 340px;
       margin: 0 auto 12px;
       color: var(--color-muted);
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       line-height: 1.42;
       text-align: center;
     }
@@ -556,84 +510,47 @@
       transition: transform .3s var(--ease-spring);
     }
 
-    .feedback-link:active {
-      transform: scale(.97);
-    }
+    .feedback-link:active { transform: scale(.97); }
 
     #breathing {
       justify-content: flex-start;
       overflow: hidden;
     }
 
-    #breathing h2 {
-      margin-block-end: 0;
-    }
-
-    #breathing > .button-stack {
-      margin-block-start: auto;
-      padding-block-start: 0;
-    }
+    #breathing h2 { margin-block-end: 0; }
+    #breathing .button-stack { margin-block-start: auto; }
 
     #event, #need {
       overflow-y: auto;
       overflow-x: hidden;
-      justify-content: flex-start;
     }
 
     #event > .button-stack, #need > .button-stack {
       display: none;
-      margin-block-start: clamp(10px, 2svh, 18px);
+      margin-block-start: clamp(12px, 2.6svh, 22px);
       padding-block-start: 0;
       padding-block-end: calc(10px + env(safe-area-inset-bottom));
     }
 
-    #event:has(#feelingsSection.is-visible) > .button-stack, #need:has(#supportSection.is-visible) > .button-stack {
+    #event:has(#feelingsSection.is-visible) > .button-stack,
+    #need:has(#supportSection.is-visible) > .button-stack {
       display: flex;
     }
 
-    #event .reveal-section.is-visible textarea, #need .reveal-section.is-visible textarea {
-      min-height: clamp(110px, 16svh, 150px);
-      max-height: clamp(128px, 19svh, 180px);
-    }
-
-    #summary {
-      justify-content: flex-start;
-    }
-
-    #summary .step-indicator {
-      margin-block-end: 16px;
-    }
-
-    #summary .helper-text {
-      margin-block-end: 8px;
-    }
-
-    #summary .feedback-link {
-      margin-block-end: env(safe-area-inset-bottom);
+    #event .reveal-section.is-visible textarea,
+    #need .reveal-section.is-visible textarea {
+      min-height: clamp(112px, 17svh, 160px);
+      max-height: clamp(132px, 20svh, 190px);
     }
 
     @keyframes fade-in-up {
-      from {
-        opacity: 0;
-        transform: translateY(16px) scale(.99);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity: 0; transform: translateY(16px) scale(.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     @keyframes reveal-in {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes breathe {
@@ -651,14 +568,8 @@
     }
 
     @supports (height: 100dvh) {
-      body {
-        min-height: 100dvh;
-      }
-
-      .app-shell {
-        height: 100dvh;
-        min-height: 100dvh;
-      }
+      body { min-height: 100dvh; }
+      .app-shell { height: 100dvh; min-height: 100dvh; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -672,275 +583,99 @@
 
     @media (max-height: 760px) {
       :root {
-        --space-screen-block: 20px;
-        --space-screen-inline: 22px;
+        --screen-block: 20px;
+        --screen-inline: 22px;
       }
 
-      .screen {
-        padding-block-end: calc(16px + env(safe-area-inset-bottom));
-      }
-
-      h1 {
-        margin-block-end: 24px;
-        font-size: 2.58rem;
-      }
-
-      h2 {
-        font-size: 1.52rem;
-      }
-
-      p {
-        font-size: 1.1rem;
-        line-height: 1.5;
-      }
-
-      button, .feedback-link {
-        min-height: 44px;
-        padding: 12px;
-        font-size: 1.05rem;
-      }
+      .screen { padding-block-end: calc(16px + env(safe-area-inset-bottom)); }
+      h1 { margin-block-end: 24px; font-size: 2.58rem; }
+      h2 { font-size: 1.52rem; }
+      p { font-size: 1.08rem; line-height: 1.5; }
+      button, .feedback-link { min-height: 44px; padding: 12px; font-size: 1.05rem; }
 
       textarea {
-        min-height: clamp(112px, 18svh, 148px);
-        max-height: clamp(128px, 21svh, 166px);
-        margin-block-end: 10px;
+        min-height: clamp(116px, 19svh, 154px);
+        max-height: clamp(134px, 22svh, 174px);
+        margin-block-end: 12px;
         padding: 12px 14px;
-        font-size: 1.1rem;
-      }
-
-      .home-spacer {
-        flex-basis: clamp(30px, 6svh, 50px);
-      }
-
-      .home-main {
-        margin-block-end: 22px;
-        font-size: 1.16rem;
-        line-height: 1.42;
-      }
-
-      .home-invitation {
-        margin-block-end: 22px;
-      }
-
-      .home-invitation p {
-        margin-block-end: 4px;
-        font-size: 1.08rem;
-        line-height: 1.32;
-      }
-
-      .home-footer {
-        min-height: clamp(122px, 19svh, 162px);
-        font-size: .72rem;
-      }
-
-      .home-privacy {
-        margin-block-end: clamp(22px, 4.8svh, 38px);
-      }
-
-      .home-credit {
-        font-size: .7rem;
-        line-height: 1.22;
-      }
-
-      .step-indicator {
-        margin-block-end: 14px;
-      }
-
-      .field-label {
-        margin-block-start: 10px;
-        margin-block-end: 6px;
         font-size: 1.08rem;
       }
 
-      .helper-text {
-        margin-block-end: 8px;
-        font-size: .9rem;
-        line-height: 1.3;
-      }
+      .home-spacer { flex-basis: clamp(30px, 6svh, 54px); }
+      .home-main { margin-block-end: 22px; font-size: 1.16rem; line-height: 1.42; }
+      .home-invitation { margin-block-end: clamp(30px, 5.8svh, 48px); }
+      .home-invitation p { margin-block-end: 4px; font-size: 1.08rem; line-height: 1.32; }
+      .home-footer { min-height: clamp(126px, 19svh, 170px); font-size: .72rem; }
+      .home-privacy { margin-block-end: clamp(24px, 5.2svh, 42px); }
+      .home-credit { font-size: .7rem; line-height: 1.22; }
 
-      .soft-divider {
-        margin: 12px 0 10px;
-      }
+      .step-indicator { margin-block-end: 16px; }
+      .field-label { margin-block-start: 10px; margin-block-end: 6px; font-size: 1.04rem; }
+      .helper-text { margin-block-end: 8px; font-size: .86rem; line-height: 1.28; }
+      .soft-divider { margin: 12px 0 10px; }
+      .button--secondary { min-height: 42px; padding: 10px; font-size: .98rem; }
 
-      .button--secondary {
-        min-height: 42px;
-        padding: 10px;
-        font-size: .98rem;
-      }
+      .breathing { gap: 34px; padding-block-start: 14px; }
+      .breathing__circle { width: 104px; height: 104px; }
+      .breathing__text { font-size: 1.1rem; }
 
-      .breathing {
-        gap: 34px;
-        margin-block-start: 18px;
-      }
-
-      .breathing__circle {
-        width: 104px;
-        height: 104px;
-      }
-
-      .breathing__text {
-        font-size: 1.12rem;
-      }
-
-      .summary-card {
-        margin: 14px 0 22px;
-        padding: 16px;
-      }
-
-      .closing-text {
-        margin-block-end: 22px;
-        font-size: 1.04rem;
-        line-height: 1.38;
-      }
-
-      .feedback-intro {
-        font-size: 1rem;
-        line-height: 1.38;
-      }
-
-      .quote-note {
-        min-height: 58px;
-        padding: 12px 14px;
-        font-size: .94rem;
-      }
+      .summary-card { margin: 16px 0 24px; padding: 16px; }
+      .closing-text { margin-block-end: 30px; font-size: 1rem; line-height: 1.38; }
+      .feedback-intro { font-size: 1rem; line-height: 1.38; }
+      .quote-note { min-height: 60px; padding: 12px 14px; font-size: .94rem; }
 
       #event > .button-stack, #need > .button-stack {
-        margin-block-start: 8px;
+        margin-block-start: 10px;
         padding-block-end: calc(8px + env(safe-area-inset-bottom));
       }
 
-      #event .reveal-section.is-visible textarea, #need .reveal-section.is-visible textarea {
-        min-height: clamp(82px, 13svh, 112px);
-        max-height: clamp(98px, 16svh, 136px);
+      #event .reveal-section.is-visible textarea,
+      #need .reveal-section.is-visible textarea {
+        min-height: clamp(84px, 14svh, 118px);
+        max-height: clamp(102px, 17svh, 142px);
       }
     }
 
     @media (max-width: 360px) {
-      :root {
-        --space-screen-inline: 18px;
-      }
-
-      .breathing {
-        gap: 32px;
-      }
-
-      .breathing__circle {
-        width: 100px;
-        height: 100px;
-      }
+      :root { --screen-inline: 18px; }
+      .breathing { gap: 32px; }
+      .breathing__circle { width: 100px; height: 100px; }
     }
 
     @media (max-height: 640px) {
       :root {
-        --space-screen-block: 14px;
-        --space-screen-inline: 18px;
+        --screen-block: 14px;
+        --screen-inline: 18px;
       }
 
-      .screen {
-        padding-block-end: calc(12px + env(safe-area-inset-bottom));
+      .screen { padding-block-end: calc(12px + env(safe-area-inset-bottom)); }
+      h1 { margin-block-end: 15px; font-size: 2.28rem; }
+      h2 { font-size: 1.36rem; }
+      button { min-height: 40px; padding: 10px; font-size: 1rem; }
+      textarea { min-height: 92px; max-height: 112px; }
+
+      .home-spacer { flex-basis: 20px; }
+      .home-main { margin-block-end: 12px; font-size: 1.02rem; }
+      .home-invitation { margin-block-end: 22px; }
+      .home-invitation p { margin-block-end: 3px; font-size: 1rem; line-height: 1.2; }
+      .home-footer { min-height: 106px; font-size: .66rem; }
+      .home-privacy { margin-block-end: 20px; }
+      .home-credit { font-size: .64rem; }
+
+      .breathing { gap: 30px; padding-block-start: 8px; }
+      .breathing__circle { width: 92px; height: 92px; }
+      .breathing__text { font-size: 1.02rem; }
+
+      .summary-card { margin-block-end: 18px; }
+      .closing-text { margin-block-end: 22px; }
+
+      #event .reveal-section.is-visible textarea,
+      #need .reveal-section.is-visible textarea {
+        min-height: 70px;
+        max-height: 92px;
       }
 
-      h1 {
-        margin-block-end: 15px;
-        font-size: 2.28rem;
-      }
-
-      h2 {
-        font-size: 1.36rem;
-      }
-
-      button {
-        min-height: 40px;
-        padding: 10px;
-        font-size: 1rem;
-      }
-
-      textarea {
-        min-height: 88px;
-        max-height: 108px;
-        font-size: 1rem;
-      }
-
-      .home-spacer {
-        flex-basis: 18px;
-      }
-
-      .home-main {
-        margin-block-end: 12px;
-        font-size: 1.02rem;
-      }
-
-      .home-invitation {
-        margin-block-end: 12px;
-      }
-
-      .home-invitation p {
-        margin-block-end: 3px;
-        font-size: 1rem;
-        line-height: 1.2;
-      }
-
-      .home-footer {
-        min-height: 106px;
-        font-size: .66rem;
-      }
-
-      .home-privacy {
-        margin-block-end: 20px;
-      }
-
-      .home-credit {
-        font-size: .64rem;
-      }
-
-      .step-indicator {
-        margin-block-end: 10px;
-        font-size: .95rem;
-      }
-
-      .intro-note {
-        margin-block-end: 6px;
-        font-size: 1.02rem;
-      }
-
-      .field-label {
-        font-size: 1rem;
-      }
-
-      .helper-text {
-        font-size: .82rem;
-      }
-
-      .breathing {
-        gap: 30px;
-        margin-block-start: 14px;
-      }
-
-      .breathing__circle {
-        width: 92px;
-        height: 92px;
-      }
-
-      .breathing__text {
-        font-size: 1rem;
-      }
-
-      .summary-card {
-        margin-block-end: 18px;
-      }
-
-      .closing-text {
-        margin-block-end: 16px;
-      }
-
-      #event .reveal-section.is-visible textarea, #need .reveal-section.is-visible textarea {
-        min-height: 68px;
-        max-height: 88px;
-      }
-
-      #event > .button-stack, #need > .button-stack {
-        margin-block-start: 6px;
-      }
+      #event > .button-stack, #need > .button-stack { margin-block-start: 8px; }
     }
 
   </style>
@@ -1001,7 +736,7 @@
       <div class="content-card">
         <div class="step-indicator">שלב 2 מתוך 4</div>
         <h2 id="event-title">בואו נחזור לרגע אחד מהיום.</h2>
-        <p>חשבו על סיטואציה שלא הייתה פשוטה עבורכם.</p>
+        <p>חשבו על רגע אחד מהיום שלא היה פשוט עבורכם.</p>
 
         <label class="field-label" for="challengeText">מה קרה?</label>
         <p class="helper-text" id="challengeHelp">כתבו רק מה קרה בפועל, בלי לנתח או לשפוט.</p>
@@ -1027,7 +762,7 @@
       <div class="content-card">
         <div class="step-indicator">שלב 3 מתוך 4</div>
         <h2 id="need-title">מה הייתם צריכים באותו רגע?</h2>
-        <label class="field-label" for="needText">מה היה חסר לכם באותו רגע?</label>
+        <label class="field-label" for="needText">מה היה יכול לעזור לכם באותו רגע?</label>
         <p class="helper-text" id="needHelp">אפשר לכתוב מילה טובה, עידוד, הבנה, תמיכה או כל משפט שהיה נותן לכם קצת אוויר.</p>
         <textarea id="needText" aria-describedby="needHelp" placeholder="כתבו כאן..."></textarea>
 
@@ -1036,7 +771,7 @@
         <div class="reveal-section" id="supportSection" data-reveal-section>
           <div class="soft-divider" aria-hidden="true"></div>
           <h2>אם אדם קרוב היה לצדכם...</h2>
-          <label class="field-label" for="supportText">אילו מילים הייתם רוצים לשמוע באותו רגע?</label>
+          <label class="field-label" for="supportText">אילו מילים חומלות הייתם רוצים לשמוע באותו רגע?</label>
           
           <textarea id="supportText" placeholder="כתבו כאן את המילים שהייתם רוצים לשמוע..."></textarea>
         </div>
@@ -1082,7 +817,8 @@
         breathingCircle: document.querySelector("[data-breathing-circle]"),
         breathingText: document.querySelector("[data-breathing-text]"),
         supportText: document.querySelector("#supportText"),
-        supportReview: document.querySelector("[data-support-review]")
+        supportReview: document.querySelector("[data-support-review]"),
+        breathingNextButton: document.querySelector('#breathing [data-next="event"]')
       };
 
       const activeClass = "is-active";
@@ -1169,12 +905,42 @@
         dom.breathingText.textContent = "";
         dom.breathingCircle.classList.add("is-paused");
 
+        if (dom.breathingNextButton) {
+          dom.breathingNextButton.disabled = true;
+          dom.breathingNextButton.style.visibility = "hidden";
+        }
+
+        const cycleDuration = 11000;
+        const cycles = 3;
+        const cues = [
+          { text: "שאיפה", offset: 250 },
+          { text: "החזיקו", offset: 4200 },
+          { text: "נשיפה", offset: 6200 }
+        ];
+
         setTimeoutTracked(() => {
           if (state.activeScreen !== "breathing") return;
           dom.breathingCircle.classList.remove("is-paused");
           dom.breathingCircle.classList.add("is-guided");
         }, 250);
 
+        for (let cycle = 0; cycle < cycles; cycle += 1) {
+          cues.forEach(cue => {
+            setTimeoutTracked(() => {
+              if (state.activeScreen !== "breathing") return;
+              dom.breathingText.textContent = cue.text;
+            }, cycle * cycleDuration + cue.offset);
+          });
+        }
+
+        setTimeoutTracked(() => {
+          if (state.activeScreen !== "breathing") return;
+          dom.breathingText.textContent = "אפשר להמשיך.";
+          if (dom.breathingNextButton) {
+            dom.breathingNextButton.disabled = false;
+            dom.breathingNextButton.style.visibility = "visible";
+          }
+        }, cycles * cycleDuration + 350);
       }
 
       function revealSection(button) {
