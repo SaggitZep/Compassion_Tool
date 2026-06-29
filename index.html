@@ -783,6 +783,51 @@
       #summary .summary-card { margin-block-end: 20px; }
       #summary .closing-text { margin-block-end: 18px; }
     }
+
+    /* Button visibility safety fix: keep the final continue button reachable while preserving CSS-only layout */
+    #event,
+    #need {
+      overflow: hidden;
+    }
+
+    #event .content-card,
+    #need .content-card {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    #event textarea,
+    #need textarea {
+      min-height: 0;
+      flex: 1 1 0;
+    }
+
+    #event .reveal-section.is-visible,
+    #need .reveal-section.is-visible {
+      flex: 1 1 0;
+      min-height: 0;
+    }
+
+    #event > .button-stack,
+    #need > .button-stack {
+      flex: 0 0 auto;
+      margin-block-start: 12px;
+      padding-block-start: 0;
+      padding-block-end: env(safe-area-inset-bottom);
+    }
+
+    @media (max-height: 760px) {
+      #event .soft-divider,
+      #need .soft-divider { margin: 14px 0 12px; }
+
+      #event .field-label,
+      #need .field-label { margin-block-start: 8px; }
+
+      #event > .button-stack,
+      #need > .button-stack { margin-block-start: 10px; }
+    }
+
   </style>
 </head>
 
